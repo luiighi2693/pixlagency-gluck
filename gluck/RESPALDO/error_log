@@ -1,0 +1,5 @@
+[12-Aug-2020 02:24:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/tendkdxmxad4/public_html/matches/control/conex.php:3
+Stack trace:
+#0 /home/tendkdxmxad4/public_html/matches/lista-servicios.php(76): include()
+#1 {main}
+  thrown in /home/tendkdxmxad4/public_html/matches/control/conex.php on line 3

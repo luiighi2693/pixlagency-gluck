@@ -1,0 +1,68 @@
+.parallax-video .content_video iframe {
+    border: 15px solid #ffff !important;
+}
+
+#footer{
+	background-color: #000000 !important;
+}
+
+@media only screen and (max-width: 767px)
+{
+  #Top_bar, #Action_bar{
+  background-color: #000000 !important;
+  }
+}
+
+@font-face
+{
+   font-family: "Robotoblack";
+   src: url("fonts/Roboto-BlackItalic.ttf");
+}
+
+@font-face
+{
+   font-family: "Robotoblacklight";
+   src: url("fonts/RobotoCondensed-Light.ttf");
+}
+
+@font-face
+{
+   font-family: "semibold";
+   src: url("fonts/MontserratAlternates-Medium.ttf");
+}
+
+.semibold{
+  font-family: semibold !important;
+}
+
+.about {
+	font-family: "Robotoblacklight" !important;
+}
+
+ul.list_mixed li{
+    padding-top: 5px !important;
+}
+
+@media only screen and (max-width: 768px){
+
+.pp_pic_holder, .pp_default{
+     width: 350px !important;
+}
+
+.pp_content{
+ width: 300px !important;}
+}
+
+}
+
+.centrado{
+	text-align: center !important;
+
+     padding-left: 50%;
+}
+
+#Footer .footer_copy .copyright {
+	text-align: center;	
+
+     padding-left: 38%;
+}

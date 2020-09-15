@@ -1,0 +1,14 @@
+[07-Sep-2020 17:30:56 UTC] PHP Notice:  Undefined index: fk_team in /home/tendkdxmxad4/public_html/matches/external/actions.php on line 8
+[07-Sep-2020 17:30:56 UTC] PHP Notice:  Undefined index: type in /home/tendkdxmxad4/public_html/matches/external/actions.php on line 9
+[07-Sep-2020 17:36:54 UTC] PHP Notice:  Undefined index: fk_team in /home/tendkdxmxad4/public_html/matches/external/actions.php on line 8
+[07-Sep-2020 17:36:54 UTC] PHP Notice:  Undefined index: type in /home/tendkdxmxad4/public_html/matches/external/actions.php on line 9
+[08-Sep-2020 13:41:03 UTC] PHP Notice:  Undefined index: fk_team in /home/tendkdxmxad4/public_html/matches/external/actions.php on line 8
+[08-Sep-2020 13:41:03 UTC] PHP Notice:  Undefined index: type in /home/tendkdxmxad4/public_html/matches/external/actions.php on line 9
+[08-Sep-2020 13:47:54 UTC] PHP Notice:  Undefined index: fk_team in /home/tendkdxmxad4/public_html/matches/external/actions.php on line 8
+[08-Sep-2020 13:47:54 UTC] PHP Notice:  Undefined index: type in /home/tendkdxmxad4/public_html/matches/external/actions.php on line 9
+[08-Sep-2020 15:10:40 UTC] PHP Notice:  Undefined index: fk_team in /home/tendkdxmxad4/public_html/matches/external/actions.php on line 8
+[08-Sep-2020 15:10:40 UTC] PHP Notice:  Undefined index: type in /home/tendkdxmxad4/public_html/matches/external/actions.php on line 9
+[09-Sep-2020 16:48:54 UTC] PHP Notice:  Undefined index: fk_team in /home/tendkdxmxad4/public_html/matches/external/actions.php on line 8
+[09-Sep-2020 16:48:54 UTC] PHP Notice:  Undefined index: type in /home/tendkdxmxad4/public_html/matches/external/actions.php on line 9
+[10-Sep-2020 02:32:26 UTC] PHP Notice:  Undefined index: fk_team in /home/tendkdxmxad4/public_html/matches/external/actions.php on line 8
+[10-Sep-2020 02:32:26 UTC] PHP Notice:  Undefined index: type in /home/tendkdxmxad4/public_html/matches/external/actions.php on line 9
