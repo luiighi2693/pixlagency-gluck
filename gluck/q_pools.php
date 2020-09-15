@@ -306,7 +306,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                                   <div class="box-body">
                                     <div class="form-group">
                                         <div class="input-group">
-                                        <select class="form-control select2" style="width: 100%;" name="penalty" onchange="javascript:mostrarInput()">
+                                        <select id="penaltySelect" class="form-control select2" style="width: 100%;" name="penalty" onchange="javascript:mostrarInput()">
                                           <option value="0" <?php if($array['penalty']==0){?>selected="selected"<?php }?>>No</option>
                                           <option value="1" <?php if($array['penalty']==1){?>selected="selected"<?php }?>>Si</option>
                                         </select>
@@ -362,20 +362,32 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                                       </div>
 
 
-                                      <div class="col-md-2" id="div_penalty"> 
+                                      <div class="col-md-2 penalty_class">
                                         <input type="text" style="border-color: black;" id="result_team_1_penales_<?php echo $i;?>" class="form-control" name="result_team_1_penales_<?php echo $array_details['number_pools'];?>" value="" title='Penales'>
                                       </div>
                                       <script>
                                       function mostrarInput() {
-                                        elemento = document.getElementById("div_penalty");
-                                        penalty = document.getElementById("penalty");
 
-                                        if (penalty==1) {
-                                          elemento.style.display='block';
-                                        }
-                                        else {
-                                          elemento.style.display='none';
-                                        }
+                                          var e = document.getElementById("penaltySelect");
+                                          var valorSelect = e.options[e.selectedIndex].value;
+
+                                          console.log(valorSelect);
+
+                                          var penaltyInputs = document.getElementsByClassName('penalty_class');
+
+                                          for (var i = 0; i < penaltyInputs.length; i ++) {
+                                              penaltyInputs[i].style.display = (valorSelect === "1") ? 'block' : 'none';
+                                          }
+
+                                        // elemento = document.getElementById("div_penalty");
+                                        // // penalty = document.getElementById("penalty");
+                                        //
+                                        // if (valorSelect === 1) {
+                                        //   elemento.style.display='block';
+                                        // }
+                                        // else {
+                                        //   elemento.style.display='none';
+                                        // }
                                       }
                                       </script>
                                     </div>
@@ -396,7 +408,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                                       <div class="col-md-2">
                                         <input type="text" class="form-control" name="result_team_2_<?php echo $array_details['number_pools'];?>" value="<?=$array_details['result_team_2'];?>">
                                       </div>
-                                      <div class="col-md-2" id="div_penalty">
+                                      <div class="col-md-2 penalty_class">
                                         <input type="text" style="border-color: black;" id="result_team_2_penales_<?php echo $array_details['number_pools'];?>" class="form-control" name="result_team_2_penales_<?php echo $array_details['number_pools'];?>" value="" title='Penales'>
                                       </div>
 
@@ -671,6 +683,9 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                   }
               });
             });
+
+            mostrarInput();
+
         });
 
         //Datemask dd/mm/yyyy

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="quinieladb_testing@192.168.31.222" uuid="b5d282b1-a9e6-4e1d-ae91-81ac5310284a">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://192.168.31.222:3306/quinieladb_testing</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="quinieladb_testing@pixlagency.com" uuid="b580c7bb-43d7-4579-b0bd-918b3e0e3298">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://pixlagency.com:3306/quinieladb_testing</jdbc-url>
+    </data-source>
+  </component>
+</project>
