@@ -684,7 +684,11 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
               });
             });
 
-            mostrarInput();
+            var penaltyInputs = document.getElementsByClassName('penalty_class');
+
+            for (var i = 0; i < penaltyInputs.length; i ++) {
+                penaltyInputs[i].style.display = 'none';
+            }
 
         });
 
