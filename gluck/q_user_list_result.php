@@ -4,6 +4,38 @@
 require('Connections/Connections.php');
 require('include/redirect.php');
 require('include/security.php');
+
+if($query = mysqli_query($connect,"SELECT * FROM q_pools WHERE rowid = '".$_REQUEST['rowid']."'")) {
+    $array = mysqli_fetch_array($query);
+
+    $puntaje_empate = $array['puntaje_empate'];
+    $puntaje_ganar = $array['puntaje_ganar'];
+    $puntaje_perder = $array['puntaje_perder'];
+    $puntaje_resultado = $array['puntaje_resultado'];
+}
+
+//validamos el score en base a los resultados
+function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2) {
+    $scoreTotal = 0;
+    global $puntaje_resultado;
+    global $puntaje_empate;
+    global $puntaje_ganar;
+    global $puntaje_perder;
+
+    //verificamos si es el resultado exacto
+    if ($resultUser1 == $resultAdmin1 && $resultUser2 == $resultAdmin2)
+        $scoreTotal += $puntaje_resultado;
+    //verificamos si hay empate
+    if ($resultUser1 == $resultUser2 && $resultAdmin1 == $resultAdmin2)
+        $scoreTotal += $puntaje_empate;
+    //verificamos si gano el equipo uno gano o perdio
+    $scoreTotal += ($resultUser1 > $resultUser2 && $resultAdmin1 > $resultAdmin2) ? $puntaje_ganar : $puntaje_perder;;
+    //verificamos si gano el equipo dos gano o perdio
+    $scoreTotal += ($resultUser1 < $resultUser2 && $resultAdmin1 < $resultAdmin2) ? $puntaje_ganar : $puntaje_perder;
+
+    return $scoreTotal;
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -83,15 +115,28 @@ require('include/security.php');
                       <?php 
                       $fk_q_pools=$_REQUEST['rowid'];
                       //if($query = mysqli_query($connect,"SELECT DISTINCT u.name, u.email,u.phone,u.ranking,u.date_Access, u.rowid as rowid_user, r.fk_q_pools as result FROM q_user u, q_result_pools r WHERE u.rowid=r.fk_q_user AND r.fk_q_pools = ".$fk_q_pools." GROUP BY r.fk_q_pools ORDER BY r.rowid  DESC")){
-                        if($query = mysqli_query($connect,"SELECT DISTINCT u.name, u.email,u.phone,(SELECT sum(qrp.hits) FROM q_result_pools qrp where qrp.fk_q_user=u.rowid and qrp.fk_q_pools=r.fk_q_pools) ranking,u.date_Access, u.rowid as rowid_user, r.fk_q_pools as result FROM q_user u, q_result_pools r WHERE u.rowid=r.fk_q_user AND r.fk_q_pools = ".$fk_q_pools."  ORDER BY r.rowid DESC")){
+                        if($query = mysqli_query($connect,"SELECT DISTINCT u.rowid as userId, u.name, u.email,u.phone,(SELECT sum(qrp.hits) FROM q_result_pools qrp where qrp.fk_q_user=u.rowid and qrp.fk_q_pools=r.fk_q_pools) ranking,u.date_Access, u.rowid as rowid_user, r.fk_q_pools as result FROM q_user u, q_result_pools r WHERE u.rowid=r.fk_q_user AND r.fk_q_pools = ".$fk_q_pools."  ORDER BY r.rowid DESC")){
                         //if($query = mysqli_query($connect,"SELECT DISTINCT u.name, u.email,u.phone,(SELECT sum(qrp.hits) FROM q_result_pools qrp where qrp.fk_q_user=u.rowid and qrp.fk_q_pools=r.fk_q_pools) ranking,u.date_Access, u.rowid as rowid_user, r.fk_q_pools as result FROM q_user u, q_result_pools r WHERE r.fk_q_pools = ".$fk_q_pools."  ORDER BY r.rowid DESC")){
                         while ($array=mysqli_fetch_array($query)) {
+
+//                            echo "\n";
+//                            echo "SELECT qrp.rowid, qrp.fk_q_user,qrp.fk_q_pools,qrp.fk_team_1,qrp.team__result_1,qrp.team__result_1_admin,qrp.fk_team_2,qrp.team__result_2,qrp.team__result_2_admin,qrp.status,qrp.comment,qrp.result_admin,qrp.date_Sport,qrp.hour, qrp.hits,qrp.close,qrp.date_Create , (select name from q_sport where qrp.fk_q_user=rowid) as sport FROM q_result_pools qrp WHERE qrp.fk_q_pools = '".$fk_q_pools."' AND qrp.fk_q_user = '".$array['userId']."'";
+//                            echo "\n\n";
+                            $query_result_points = mysqli_query($connect,"SELECT qrp.rowid, qrp.fk_q_user,qrp.fk_q_pools,qrp.fk_team_1,qrp.team__result_1,qrp.team__result_1_admin,qrp.fk_team_2,qrp.team__result_2,qrp.team__result_2_admin,qrp.status,qrp.comment,qrp.result_admin,qrp.date_Sport,qrp.hour, qrp.hits,qrp.close,qrp.date_Create , (select name from q_sport where qrp.fk_q_user=rowid) as sport FROM q_result_pools qrp WHERE qrp.fk_q_pools = '".$fk_q_pools."' AND qrp.fk_q_user = '".$array['userId']."'");
+                            $resFinal=0;
+                            $sumResFinal=0;
+
+                            while($item_result=mysqli_fetch_array($query_result_points)) {
+                                $resFinal = getResult($item_result['team__result_1'], $item_result['team__result_2'], $item_result['team__result_1_admin'], $item_result['team__result_2_admin']);
+                                $sumResFinal += $resFinal;
+                            }
+
                       ?>
                       <tr>
                         <td><?=$array['name'];?></td>
                         <td><?=$array['email'];?></td>
                         <td><?=$array['phone'];?></td>
-                        <td><?=$array['ranking'];?></td>
+                        <td><?=$sumResFinal;?></td>
                         <td><?=date('d-m-Y',strtotime($array['date_Access']));?></td>
                         <td style="text-align: center;">
                           <a href="result_teams.php?rowid=<?=$array['result'];?>&rowid_user=<?=$array['rowid_user'];?>"><i class="fa fa-fw fa-edit"></i></a>
