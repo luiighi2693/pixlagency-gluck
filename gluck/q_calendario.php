@@ -80,7 +80,7 @@ require('include/redirect.php');
         <div class="pull-right hidden-xs">
           <b>Version</b> 2.3.0
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+        <strong>2020 <a href="http://pixlagency.com">Pixl Agency</a>.</strong> All rights reserved.
       </footer>
 
 
@@ -166,10 +166,12 @@ require('include/redirect.php');
               $and=' AND p.rowid IN ( '.$result.' )';
             }
 
-            if($query = mysqli_query($connect,"SELECT p.rowid,p.name,d.date_Sport,p.fk_sport,p.color,p.quantity FROM q_pools p, q_pools_details d  WHERE p.rowid=d.fk_pools AND p.status=1 ".$and." ORDER BY d.date_Sport DESC ")){
+            if($query = mysqli_query($connect,"SELECT p.rowid,p.name,d.date_Sport,p.fk_sport,p.color,p.quantity,label FROM q_pools p, q_pools_details d  WHERE p.rowid=d.fk_pools AND p.status=2 ".$and." ORDER BY d.date_Sport DESC ")){
               while ($array=mysqli_fetch_array($query)) {
                 $your_date = strtotime($array['date_Sport']);
                $your_date =  date("Y,m,d", strtotime("-1 month", $your_date));
+               $label = $_REQUEST['label'];
+
 
                 $y=date("Y",$your_date);
                 $m=date("m",$your_date);
@@ -183,7 +185,7 @@ require('include/redirect.php');
           ?>
 
             {
-              title: '<?=$array['name'];?>',
+              title: '<?=$array['name'].$array['label'];?>',
               start: new Date(<?=$your_date;?>),
               end: new Date(<?=$your_date;?>),
               url: '<?=$url;?>',
