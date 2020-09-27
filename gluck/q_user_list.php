@@ -4,6 +4,10 @@
 require('Connections/Connections.php');
 require('include/redirect.php');
 require('include/security.php');
+
+if (isset($_REQUEST['rowid']) and isset($_REQUEST['param'])) {
+  mysqli_query($connect,"DELETE FROM q_user WHERE rowid = ".$_REQUEST['rowid']);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,6 +16,7 @@ require('include/security.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Admin | Listado de Clientes</title>
     <!-- Tell the browser to be responsive to screen width -->
+    <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -19,7 +24,6 @@ require('include/security.php');
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
     <!-- Theme style -->
@@ -27,6 +31,7 @@ require('include/security.php');
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="Css/style.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -71,6 +76,7 @@ require('include/security.php');
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
+                        <th>Usuario</th>
                         <th>Nombre</th>
                         <th>Email</th>
                         <th>Tel&eacute;fono</th>
@@ -90,6 +96,7 @@ require('include/security.php');
                         while ($array=mysqli_fetch_array($query)) {
                       ?>
                       <tr>
+                        <td><?=$array['username'];?></td>
                         <td><?=$array['name'];?></td>
                         <td><?=$array['email'];?></td>
                         <td><?=$array['phone'];?></td>
@@ -98,8 +105,33 @@ require('include/security.php');
                         <td><?=date('d-m-Y',strtotime($array['date_Access']));?></td>
                         <td style="text-align: center;">
                           <a href="q_user.php?rowid=<?=$array['rowid'];?>&param=edit"><i class="fa fa-fw fa-edit"></i></a>
+                          <a href="#" data-toggle="modal" data-target="#Modal<?=$array['rowid'];?>">
+                                  <a href="#" data-toggle="modal" data-target="#Modal<?=$array['rowid'];?>"><i title="delete" class="fa fa-eraser"></i></a>
                         </td>
                       </tr>
+
+                      <div id="Modal<?=$array['rowid'];?>" class="modal fade" role="dialog">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header" style="color:white;  background-color: #3c8dbc">
+                                <h5 class="modal-title">Eliminar Usuario</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <p><?=$array['name'];?> <?=$array['lastname'];?></p>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-danger">
+                                  <a href="q_user_list.php?rowid=<?=$array['rowid'];?>&param=delete" style="color: white;">Eliminar</a>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
                       <?php 
                                               }
                       }
@@ -107,6 +139,7 @@ require('include/security.php');
                     </tbody>
                     <tfoot>
                       <tr>
+                        <th>Usuario</th>
                         <th>Nombre</th>
                         <th>Email</th>
                         <th>Tel&eacute;fono</th>
@@ -123,13 +156,6 @@ require('include/security.php');
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
-      <?php include("side-bar.php");  ?> 
-
-
-      <!-- Control Sidebar -->
-            <!-- Add the sidebar's background. This div must be placed
-           immediately after the control sidebar -->
-      <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->

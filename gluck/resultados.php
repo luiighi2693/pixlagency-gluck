@@ -31,9 +31,11 @@ if(isset($_REQUEST['rowid']) and $_REQUEST['submit']!=''){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Admin | Resultados</title>
     <!-- Tell the browser to be responsive to screen width -->
+       
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -43,6 +45,21 @@ if(isset($_REQUEST['rowid']) and $_REQUEST['submit']!=''){
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="plugins/morris/morris.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+     <link rel="stylesheet" href="Css/style.css">
+    
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -166,7 +183,6 @@ if(isset($_REQUEST['rowid']) and $_REQUEST['submit']!=''){
                               </div>
                               <div class="col-md-2">
                                   <select class="form-control select2" name="result_<?php echo $i;?>" style="width: 100%;">
-                                    <option value="T" <?=team_pools_result_total_select($_SESSION['user']['rowid'], $connect, $array_content['rowid'],  $array_content['fk_team_1'] , $array_content['fk_team_2'],'T');?> > Penales </option>
                                     <option value="E" <?=team_pools_result_total_select($_SESSION['user']['rowid'], $connect, $array_content['rowid'],  $array_content['fk_team_1'] , $array_content['fk_team_2'],'E');?> > Empate </option>
                                     <option value="F" <?=team_pools_result_total_select($_SESSION['user']['rowid'], $connect, $array_content['rowid'],  $array_content['fk_team_1'] , $array_content['fk_team_2'],'F');?> > Finalizado </option>
                                   </select>

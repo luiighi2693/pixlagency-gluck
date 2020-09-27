@@ -28,6 +28,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
     if($query = mysqli_query($connect,"SELECT * FROM q_user WHERE rowid = '".$rowid."'")){
       $array=mysqli_fetch_array($query);
       if(isset($_REQUEST["submit"])){
+        $username     = $_REQUEST['username'];
         $name     = $_REQUEST['name'];
         $lastname     = $_REQUEST['lastname'];
         $email    = $_REQUEST['email'];
@@ -52,7 +53,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
         $sql = "";
         if($password!=''){ $sql=" , password = '".$password."' ";}
 
-        if($query = mysqli_query($connect,"UPDATE q_user SET name = '".$name."', lastname = '".$lastname."', email = '".$email."', phone = '".$phone."', address = '".$address."', state = '".$state."', city = '".$city."', code = '".$code."', fk_sport = '".$fkSport."', status = '1' ".$sql." WHERE rowid = '".$rowid."'")){
+        if($query = mysqli_query($connect,"UPDATE q_user SET username = '".$username."', name = '".$name."', lastname = '".$lastname."', email = '".$email."', phone = '".$phone."', address = '".$address."', state = '".$state."', city = '".$city."', code = '".$code."', fk_sport = '".$fkSport."', status = '1' ".$sql." WHERE rowid = '".$rowid."'")){
           $errors = []; // Store errors here
 
           $fileExtensionsAllowed = ['jpeg','jpg','png']; // These will be the only file extensions allowed 
@@ -108,6 +109,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
     if($query = mysqli_query($connect,"SELECT * FROM q_user WHERE rowid = '".$rowid."'")){
       $array=mysqli_fetch_array($query);
       if(isset($_REQUEST["submit"])){
+        $username     = $_REQUEST['username'];
         $name     = $_REQUEST['name'];
         $lastname     = $_REQUEST['lastname'];
         $email    = $_REQUEST['email'];
@@ -127,7 +129,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
         $fkSport=substr($fkSport,0, -1);
         $status   = $_REQUEST['status'];
         $sql = "";
-        if($query = mysqli_query($connect,"INSERT INTO q_user (name, lastname, email, phone, address,state,city,code, fk_sport, status, password) VALUES ( '".$name."','".$lastname."','".$email."', '".$phone."', '".$address."','".$state."','".$city."','".$code."', '".$fkSport."', '1' , '".$password."')")){
+        if($query = mysqli_query($connect,"INSERT INTO q_user (username, name, lastname, email, phone, address,state,city,code, fk_sport, status, password) VALUES ( '".$username."','".$name."','".$lastname."','".$email."', '".$phone."', '".$address."','".$state."','".$city."','".$code."', '".$fkSport."', '1' , '".$password."')")){
           $errors = []; // Store errors here
           $rowid=mysqli_insert_id($connect);
           for ($i=0;$i<count($fk_sport);$i++)    
@@ -236,6 +238,18 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
       <div class="d-flex justify-content-center form_container">
                  <form role="form" method="post" enctype="multipart/form-data">
+
+
+                  <div class="col-xs-6">
+                    <div class="input-group-append">
+                          <label for="exampleInputEmail1">Usuario</label>
+                            
+                    </div>
+                          <?php $readonly='  '; if($_SESSION['user']['type']==1) { 
+                                $readonly=' readonly="readonly" '; 
+                             } ?>
+                             <input type="text" class="form-control" placeholder="Usuario" name="username" required="required">
+                   </div>
 
                   <div class="col-xs-6">
                     <div class="input-group-append">

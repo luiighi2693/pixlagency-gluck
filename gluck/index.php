@@ -7,18 +7,17 @@ function encryptIt( $q ) {
     return( $qEncoded );
 }
 
-
+$aviso = "";
 
 if ( @$_REQUEST['param']=='exit' ) {
 
 	@session_start();
 
 	session_destroy();
-
-	header("location: index.php");
+	
+		header("location: index.php");
 
 }
-
 
 
 if(isset($_POST['username']) and isset($_POST['password'])){
@@ -28,28 +27,51 @@ $username = $_POST['username'];
 $password = encryptIt($_POST['password']);
 
 
-
-
-
 if(isset($_POST["submit"])){
 
 	if($query = mysqli_query($connect,"SELECT * FROM q_user WHERE email = '".$username."' AND password = '".$password."' AND status = 1")){
-
+			
+		
 		if($row=mysqli_num_rows($query)>0){
 
 			$array=mysqli_fetch_array($query);
 
-			mysqli_query($connect,"UPDATE q_user  SET date_Access = '".date('Y-m-d')."' WHERE email = '".$username."' AND password = '".$password."' AND status = 1");
+
+			mysqli_query($connect,"UPDATE q_user  SET date_Access = '".date('Y-m-d')."', contador = '".$contador."' WHERE email = '".$username."' AND password = '".$password."' AND status = 1");
 
 			$_SESSION['user_id'] = $array['email'];
 
 			$_SESSION['loggedin_time'] = time();		
 
 			$_SESSION['user'] = $array;
+			function contador()
+				   	 {
+				        $archivo = "contador.txt"; //el archivo que contiene en numero
+				        $f = fopen($archivo, "r"); //abrimos el archivo en modo de lectura
+				        if($f)
+				        {
+				            $contador = fread($f, filesize($archivo)); //leemos el archivo
+				            $contador = $contador + 1; //sumamos +1 al contador
+				            fclose($f);
+				        }
+				        $f = fopen($archivo, "w+");
+				        if($f)
+				        {
+				            fwrite($f, $contador);
+				            fclose($f);
+				        }
+				        return $contador;
+				    }
+							
 
 			header("location: home.php");
 
 		}
+		 $aviso = '<div class="callout callout-success">
+                        <h4>Actualizaci&oacute;n Exitosa!</h4>
+                        <p>Su proceso fue realizado exitosamente.</p>
+                      </div>';
+                      header( "refresh:3;url=q_user_list.php" );
 
 
 
@@ -58,6 +80,10 @@ if(isset($_POST["submit"])){
 		echo "Failure" . mysql_error();
 
 	}
+	 $aviso = '<div class="callout callout-success">
+                        <h4>Usuario o contraseña incorrectos.</h4>
+                      </div>';
+                      header( "refresh:3;url=q_user_list.php" );
 
 }
 
@@ -230,8 +256,6 @@ if(isset($_POST["submit"])){
 
 </style>
 
-
-
 </head>
 
 <!--Coded with love by Mutiullah Samim-->
@@ -247,7 +271,6 @@ if(isset($_POST["submit"])){
 				<div class="d-flex justify-content-center">
 
 					<div class="brand_logo_container">
-
 						<img src="images/gluck.png" class="brand_logo" alt="Logo">
 
 					</div>
@@ -258,6 +281,7 @@ if(isset($_POST["submit"])){
 
 					<form method='post'>
 
+						
 						<div class="input-group mb-3">
 
 							<div class="input-group-append" style="background: #000;">
@@ -265,7 +289,6 @@ if(isset($_POST["submit"])){
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 
 							</div>
-
 							<input type="text" name="username" class="form-control input_user" value="" placeholder="Usuario">
 
 						</div>
@@ -293,10 +316,12 @@ if(isset($_POST["submit"])){
 				</div>
 					<div class="d-flex justify-content-center mt-3 login_container">
 
-				 			<a href="registro.php"><button class="btn login_btn"><button class="btn login_btn">Registrar</button></a>
+				 			<a href="registro.php"><button class="btn login_btn">Registrar</button></a>
 
 				  		</div>
-			</div>
+
+				  					<h2 style="text-align: center;"><?=$aviso;?></h2> 
+					</div>
 
 		</div>
 

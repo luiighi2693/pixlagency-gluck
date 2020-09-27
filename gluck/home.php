@@ -4,7 +4,7 @@ require('Connections/Connections.php');
 require('include/security.php');
 require('include/functions.php');
 require('include/redirect.php');
-
+   
 if(isset($_REQUEST['submit']) )
 { 
 
@@ -80,7 +80,7 @@ $result=mail($varible, $subject, $message, $cabeceras);
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
-     <link rel="stylesheet" href="Ccs/style.css">
+     <link rel="stylesheet" href="Css/style.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -91,7 +91,7 @@ $result=mail($varible, $subject, $message, $cabeceras);
     <!-- FONT AWESOME-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   </head>
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition skin-black sidebar-mini">
     <div class="wrapper">
 
       <header class="main-header">
@@ -122,13 +122,22 @@ $result=mail($varible, $subject, $message, $cabeceras);
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3><?=quiniela_home( $connect );?></h3>
+                  <h3><?=quinielas_activas( $connect );?></h3>
+                  <?php
+                if ($_SESSION['user']['type']==1) {
+                ?>
+                  <p>Quinielas Disponibles para entrar</p> 
+                  <?php } ?>
+                  <?php
+                if ($_SESSION['user']['type']==0) {
+                ?>
                   <p>Quinielas Activas</p> 
+                  <?php } ?>
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                   <a href="quiniela.php" class="small-box-footer">Detalles <i class="fa fa-arrow-circle-right"></i></a>
+                   <a href="quiniela.php" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
             <?php if ($_SESSION['user']['type']==0) { ?>
@@ -152,12 +161,12 @@ $result=mail($varible, $subject, $message, $cabeceras);
               <div class="small-box bg-green">
                 <div class="inner">
                   <h3><?=ranking( $connect , $_SESSION['user']['rowid']);?></h3>
-                  <p>Ranking</p>
+                  <p>Resultados (Quinielas Cerradas)</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
                 </div>
-                   <a href="q_user_list.php" class="small-box-footer">Detalles <i class="fa fa-arrow-circle-right"></i></a>
+                   <a href="q_pools_list_result.php" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
 
@@ -211,7 +220,7 @@ $result=mail($varible, $subject, $message, $cabeceras);
               <div class="box box-primary">
                 <div class="box-header">
                   <i class="ion ion-clipboard"></i>
-                  <h3 class="box-title">Mis Quinielas</h3>
+                  <h3 class="box-title">Quinielas en proceso</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
 
@@ -371,6 +380,7 @@ $result=mail($varible, $subject, $message, $cabeceras);
                       }
                       ?>
               <!-- Map box -->
+               <?php if ($_SESSION['user']['type']==0) { ?>
               <div class="box box-solid bg-light-blue-gradient">
                 <div class="box-header">
                   <!-- tools box -->
@@ -404,37 +414,11 @@ $result=mail($varible, $subject, $message, $cabeceras);
                   </div><!-- /.row -->
                 </div>
               </div>
+               <?php }?>
               <!-- /.box -->
 
               <!-- solid sales graph -->
             
-              <!-- Calendar -->
-              <div class="box box-solid bg-green-gradient">
-                <div class="box-header">
-                  <i class="fa fa-calendar"></i>
-                  <h3 class="box-title">Calendario</h3>
-                  <!-- tools box -->
-                  <div class="pull-right box-tools">
-                    <!-- button with a dropdown -->
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></button>
-
-                      <ul class="dropdown-menu pull-right" role="menu">
-                        <li><a href="q_pools.php?rowid=0&param=insert">Agregar Quiniela</a></li>
-                        <li class="divider"></li>
-                        <li><a href="q_calendario.php">Ver Calendario</a></li>
-                      </ul>
-
-                    </div>
-                   
-                  </div><!-- /. tools -->
-                </div><!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <!--The calendar -->
-                  <div id="calendar" style="width: 100%"></div>
-                </div><!-- /.box-body -->
-      
-              </div><!-- /.box -->
 
             </section><!-- right col -->
           </div><!-- /.row (main row) -->
@@ -443,11 +427,7 @@ $result=mail($varible, $subject, $message, $cabeceras);
       </div><!-- /.content-wrapper -->
 
 
-      <!-- Control Sidebar -->
-        <?php include("side-bar.php");  ?> 
-      <!-- Add the sidebar's background. This div must be placed
-           immediately after the control sidebar -->
-      <div class="control-sidebar-bg"></div>
+     
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
@@ -462,8 +442,7 @@ $result=mail($varible, $subject, $message, $cabeceras);
     <!-- Bootstrap 3.3.5 -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <!-- Morris.js charts -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="plugins/morris/morris.min.js"></script>        
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>       
 
     <!-- Sparkline -->
     <script src="plugins/sparkline/jquery.sparkline.min.js"></script>

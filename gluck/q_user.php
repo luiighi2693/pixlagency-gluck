@@ -30,6 +30,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
     if($query = mysqli_query($connect,"SELECT * FROM q_user WHERE rowid = '".$rowid."'")){
       $array=mysqli_fetch_array($query);
       if(isset($_REQUEST["submit"])){
+        $username     = $_REQUEST['username'];
         $name     = $_REQUEST['name'];
         $lastname     = $_REQUEST['lastname'];
         $email    = $_REQUEST['email'];
@@ -54,7 +55,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
         $sql = "";
         if($password!=''){ $sql=" , password = '".$password."' ";}
 
-        if($query = mysqli_query($connect,"UPDATE q_user SET name = '".$name."', lastname = '".$lastname."', email = '".$email."', phone = '".$phone."', address = '".$address."', state = '".$state."', city = '".$city."', code = '".$code."', fk_sport = '".$fkSport."', status = '".$status."' ".$sql." WHERE rowid = '".$rowid."'")){
+        if($query = mysqli_query($connect,"UPDATE q_user SET username = '".$username."', name = '".$name."', lastname = '".$lastname."', email = '".$email."', phone = '".$phone."', address = '".$address."', state = '".$state."', city = '".$city."', code = '".$code."', fk_sport = '".$fkSport."', status = '".$status."' ".$sql." WHERE rowid = '".$rowid."'")){
           $errors = []; // Store errors here
 
           $fileExtensionsAllowed = ['jpeg','jpg','png']; // These will be the only file extensions allowed 
@@ -110,6 +111,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
     if($query = mysqli_query($connect,"SELECT * FROM q_user WHERE rowid = '".$rowid."'")){
       $array=mysqli_fetch_array($query);
       if(isset($_REQUEST["submit"])){
+        $username     = $_REQUEST['username'];
         $name     = $_REQUEST['name'];
         $lastname     = $_REQUEST['lastname'];
         $email    = $_REQUEST['email'];
@@ -128,7 +130,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
         $fkSport=substr($fkSport,0, -1);
         $status   = $_REQUEST['status'];
         $sql = "";
-        if($query = mysqli_query($connect,"INSERT INTO q_user (name, lastname, email, phone, address,state,city,code, fk_sport, status, password) VALUES ( '".$name."','".$lastname."', '".$email."', '".$phone."', '".$address."','".$state."','".$city."','".$code."', '".$fkSport."', '".$status."' , '".$password."')")){
+        if($query = mysqli_query($connect,"INSERT INTO q_user (username, name, lastname, email, phone, address,state,city,code, fk_sport, status, password) VALUES ( '".$usernamename."','".$name."','".$lastname."', '".$email."', '".$phone."', '".$address."','".$state."','".$city."','".$code."', '".$fkSport."', '".$status."' , '".$password."')")){
           $errors = []; // Store errors here
           $rowid=mysqli_insert_id($connect);
           for ($i=0;$i<count($fk_sport);$i++)    
@@ -257,6 +259,11 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                   <div class="box-body">
                     <div class="form-group">
 
+                      <label for="exampleInputEmail1">Usuario</label>
+                      <input type="text" class="form-control" placeholder="Nombre" name="username" required="required" value="<?=$array['username'];?>">
+                    </div>
+                    <div class="form-group">
+
                       <label for="exampleInputEmail1">Nombre</label>
                       <input type="text" class="form-control" placeholder="Nombre" name="name" required="required" value="<?=$array['name'];?>">
                     </div>
@@ -273,8 +280,14 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                 
                     <div class="form-group">
                       <label for="exampleInputPassword1">Password</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1"  placeholder="Password" name="password" required="required" value="<?= decryptIt($array['password']); ?>">
+                      <input type="password" class="form-control" id="exampleInputPassword1" name="password" required="required" value="<?php 
+                      if(empty($array['password'])){
+                        echo "password";
+                      }else{
+                        echo decryptIt($array['password']);
+                      } ?>">
                     </div>
+
                     <div class="form-group">
                       <label>Tel&eacute;fono:</label>
                       <div class="input-group">

@@ -80,7 +80,9 @@ if (isset($_REQUEST['rowid']) and isset($_REQUEST['param'])) {
                       <tr>
                         <th style="width: 100%">Nombre</th>
                         <th>Deporte</th>
+                        <?php if ($_SESSION['user']['type']==0) { ?>
                         <th>Estatus</th>
+                      <?php } ?>
                         <th>-</th>
                       </tr>
                     </thead>
@@ -107,14 +109,17 @@ if (isset($_REQUEST['rowid']) and isset($_REQUEST['param'])) {
                       <tr>
                         <td><?=$array['name'];?></td>
                         <td><a href="q_pools_list_result.php?fk_sport=<?=$array['fk_sport'];?>"><?=sport($array['fk_sport'], $connect, 1);?></a></td>
-                        <td><small style="color:white;  background-color: <?=$array['color'];?>">  FINALIZADO  </small></td>
-                        <td style="text-align: center;">
+                        <?php if ($_SESSION['user']['type']==0) { ?> 
+                          <td><small style="color:white;  background-color: <?=$array['color'];?>">  FINALIZADO  </small></td>
+                        <?php } ?>
+
                           <?php if($_SESSION['user']['type']==0) {  ?>
+                        <td style="text-align: center;">
                               <a href="q_pools.php?rowid=<?=$array['rowid'];?>&param=edit"><i title="Editar" class="fa fa-fw fa-edit"></i></a>
-                               <?php }else{ ?>
-                              Entrar</i></a>
-                          <?php } ?>
+                               
+                              
                         </td>
+                        <?php } ?>
                         <td style="text-align: center;">
                           <?php if ($_SESSION['user']['type']==1) { ?>
                               <a href="q_user_list_result.php?rowid=<?=$array['rowid'];?>&name=<?=urlencode($array['name']);?>&param=2"><i title="Entrar" class="fas fa-sign-in-alt"></i></a>
@@ -134,7 +139,9 @@ if (isset($_REQUEST['rowid']) and isset($_REQUEST['param'])) {
                       <tr>
                         <th style="width: 60%">Nombre</th>
                         <th>Deporte</th>
+                        <?php if ($_SESSION['user']['type']==0) { ?>
                         <th>Estatus</th>
+                      <?php } ?>
                         <th>-</th>
                       </tr>
                     </tfoot>

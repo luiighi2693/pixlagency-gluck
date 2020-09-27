@@ -103,7 +103,7 @@ if (isset($_REQUEST['rowid']) and isset($_REQUEST['param'])) {
                           <img width="30%" src="images/team/<?=$images;?>" class="img-circle" alt="User Image">
                         </td>
                         <td><?=$array['name'];?></td>
-                        <td><a href="q_team_list.php?fk_sport=<?=$array['fk_sport'];?>"><?=sport($array['fk_sport'], $connect, 1);?></a></td>
+                        <td><a href="q_team_list.php?fk_sport=<?=$array['fk_sport'];?>"> <img width="30%" src="images/team/<?=$images;?>" class="img-circle" alt="User Image"><?=sport($array['fk_sport'], $connect, 1);?></a></td>
                         <td><?=($array['status']==1)?'<small class="label label-success">Activo</small>':'<small class="label label-danger">Inactivo</small>';?></td>
                         <td style="text-align: center;"><?=date('d-m-Y',strtotime($array['date_Create']));?></td>
                         <td style="text-align: center;">

@@ -29,6 +29,8 @@ require('include/redirect.php');
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
 
+     <link rel="stylesheet" href="Css/style.css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -78,7 +80,6 @@ require('include/redirect.php');
 
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 2.3.0
         </div>
         <strong>2020 <a href="http://pixlagency.com">Pixl Agency</a>.</strong> All rights reserved.
       </footer>
@@ -166,16 +167,22 @@ require('include/redirect.php');
               $and=' AND p.rowid IN ( '.$result.' )';
             }
 
-            if($query = mysqli_query($connect,"SELECT p.rowid,p.name,d.date_Sport,p.fk_sport,p.color,p.quantity,label FROM q_pools p, q_pools_details d  WHERE p.rowid=d.fk_pools AND p.status=2 ".$and." ORDER BY d.date_Sport DESC ")){
+            if($query = mysqli_query($connect,"SELECT p.rowid,p.name,d.date_Sport,p.fk_sport,p.color,p.quantity,hour,label FROM q_pools p, q_pools_details d  WHERE p.rowid=d.fk_pools AND p.status=2 ".$and." ORDER BY d.date_Sport DESC ")){
               while ($array=mysqli_fetch_array($query)) {
                 $your_date = strtotime($array['date_Sport']);
-               $your_date =  date("Y,m,d", strtotime("-1 month", $your_date));
-               $label = $_REQUEST['label'];
 
+               $your_date =  date("Y,m,d", strtotime("-1 month", $your_date));
+               $label =$_REQUEST['label'];
+               $hour = $_REQUEST['hour'];
 
                 $y=date("Y",$your_date);
                 $m=date("m",$your_date);
                 $d=date("d",$your_date);
+
+              $dateTime = explode(":", $array['hour']);
+              $hour = $dateTime[0];
+              $min = $dateTime[1];
+              $second = $dateTime[2];
 
                 if ($_SESSION['user']['type']==0) {
                   $url="q_pools.php?rowid=".$array['rowid']."&param=edit";
@@ -185,9 +192,10 @@ require('include/redirect.php');
           ?>
 
             {
-              title: '<?=$array['name'].$array['label'];?>',
-              start: new Date(<?=$your_date;?>),
-              end: new Date(<?=$your_date;?>),
+
+              title: '<?=$array['hour'].$array['name'].$array['label'];?>',
+              start: new Date(<?=$your_date.','.$hour.','.$min.','.$second;?>),
+              end: new Date(<?=$your_date.','.$hour.','.$min.','.$second;?>),
               url: '<?=$url;?>',
               backgroundColor: '<?=$array['color'];?>', //Primary (light-blue)
               borderColor: "#00000" //Primary (light-blue)

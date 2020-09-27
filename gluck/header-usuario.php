@@ -3,9 +3,8 @@
 require('include/redirect.php');
 ?>        <a href="home.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b><?=($_SESSION['user']['type']==1)?'Cliente':'Inicio';?></b></span>
+          <img src="images/G_NeonY.png" width="50%">
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b><?=($_SESSION['user']['type']==1)?'Cliente':'Inicio';?></b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">

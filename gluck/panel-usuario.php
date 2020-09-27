@@ -19,16 +19,28 @@ require('include/redirect.php');
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header">Menu</li>
+            <li class="header"><h5 style="text-align: center;">Menu</h5></li>
+              <?php if($_SESSION['user']['type']==1){?>
+           <a href="q_user.php?rowid=<?=$_SESSION['user']['rowid'];?>&param=edit">
+                
+                <li>
+                 <i class="fa fa-user"></i> <span>Editar Perfil</span>
+               </a>
+             </li>
+               <?php }?>
+            <?php if($_SESSION['user']['type']==0){?>
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-user"></i> <span>Clientes</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
+               <?php }?>
               <ul class="treeview-menu">
                 <?php if($_SESSION['user']['type']==0){?>
                 <li class="active"><a href="q_user.php?rowid=0&param=insert"><i class="fa fa-user-plus"></i> Registrar Cliente</a></li>
                 <?php }?>
+                <?php if($_SESSION['user']['type']==0){?>
                 <li><a href="q_user_list.php"><i class="fa fa-users"></i> Lista de Clientes</a></li>
+                <?php }?>
               </ul>
             </li>
             <?php if($_SESSION['user']['type']==0){?>
@@ -79,77 +91,21 @@ require('include/redirect.php');
               </ul>
             </li>
                 <?php }?>
-            <!--
-            <li>
-              <a href="pages/widgets.html">
-                <i class="fa fa-th"></i> <span>Widgets</span> <small class="label pull-right bg-green">new</small>
-              </a>
-            </li>
-            -->
-            <!--
             <li class="treeview">
-              <a href="#">
-                <i class="fa fa-pie-chart"></i>
-                <span>Charts</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-                <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-                <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-                <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
-              </ul>
-            </li>
-            -->
-            <!--
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-laptop"></i>
-                <span>UI Elements</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-                <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-                <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-                <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
-              </ul>
-            </li>
-            -->
-            <!--
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-edit"></i> <span>Forms</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-                <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-                <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-              </ul>
-            </li>
-
-            <!--  
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-table"></i> <span>Tables</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-                <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
-              </ul>
-            </li>
-             -->
-            <li>
               <a href="q_calendario.php">
                 <i class="fa fa-calendar"></i> <span>Calendario</span>
                 <!--small class="label pull-right bg-red">3</small-->
               </a>
             </li>
-
+            <?php if($_SESSION['user']['type']==1){?>
+              <li>
+              <a href="#">
+                <img src="images/logo-whatsapp.png" width="20%">
+                <span>¡Contactanos!</span>
+                <!--small class="label pull-right bg-red">3</small-->
+              </a>
+            </li>
+            <?php }?> 
             
       
         

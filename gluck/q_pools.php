@@ -323,7 +323,6 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Admin | Mantenimiento de Quinielas</title>
-
     <!-- Tell the browser to be responsive to screen width -->
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, pools-scalable=no" name="viewport">
@@ -372,6 +371,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
 
+    <link rel="stylesheet" href="Css/style.css">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -952,7 +952,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
                                               <option value="C" <?=($array_details['result']=="C")?'selected="selected"':'';?>>Sin Comenzar</option>
 
-                                              <option value="F" <?=($array_details['result']=="F")?'selected="selected"':'';?>>Finalizado</option>
+                                              <option value="F" <?=($array_details['result']=="F")?'selected="selected"':'';?>>Resultado Final</option>
 
                                               <option value="S" <?=($array_details['result']=="S")?'selected="selected"':'';?>>Suspendido</option>
 
@@ -1026,6 +1026,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
 
 
+                <div class="box-body">
                           <div class="box-body table-responsive no-padding">
 
                             <table id="example1" class="table table-bordered table-striped">
@@ -1109,6 +1110,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
 
                             </table>
+                          </div>
 
                           </div>
 
@@ -1296,25 +1298,19 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
     <script src="dist/js/demo.js"></script>
 
-    <!-- Page script -->
 
+    <!-- Page script -->
     <script>
 
       $(function () {
-
-      
-
-
 
         //Initialize Select2 Elements
 
         $(".select2").select2();
 
-
-
         $( document ).ready(function() {
 
- $("#example1").DataTable();
+          $("#example1").DataTable();
 
         $('#example2').DataTable({
 
@@ -1328,9 +1324,10 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
           "info": true,
 
-          "autoWidth": false
+          "autoWidth": true
 
         });
+
 
 
 

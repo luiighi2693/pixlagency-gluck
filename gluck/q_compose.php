@@ -76,6 +76,8 @@ $result=mail($varible, $subject, $message, $cabeceras);
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
+     <link rel="stylesheet" href="Css/style.css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -159,7 +161,6 @@ $result=mail($varible, $subject, $message, $cabeceras);
                             <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Limpiar</button>
                           </div><!-- /.box-footer -->
                     </form>
-                }
 
               </div><!-- /. box -->
             </div><!-- /.col -->
@@ -168,9 +169,7 @@ $result=mail($varible, $subject, $message, $cabeceras);
       </div><!-- /.content-wrapper -->
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 2.3.0
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
       </footer>
 
 

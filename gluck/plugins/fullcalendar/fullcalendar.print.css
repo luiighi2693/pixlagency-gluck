@@ -99,6 +99,7 @@ tbody,
 /* undo the min-height 100% trick used to fill the container's height */
 .fc-time-grid {
 	min-height: 0 !important;
+	display: none !important;
 }
 
 /* don't display the side axis at all ("all-day" and time cells) */

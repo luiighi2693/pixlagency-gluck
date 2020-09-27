@@ -6798,3 +6798,58 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+
+
+.content-wrapper{
+    background-color: #000 !important;
+}
+
+.content-header {
+    color: #ffff !important;
+}
+
+.content-header>.breadcrumb>li>a {
+    color: #fff !important;
+}
+
+
+.content-header>.breadcrumb>.active {
+    color: #fff !important;
+}
+.content-header>h1>small {
+color: #fff !important;
+}
+
+.skin-blue-light .wrapper, .skin-blue-light .main-sidebar, .skin-blue-light .left-side {
+    background-color: #9e9e9e9e !important;
+    color: #000 !important;
+}
+.skin-blue-light .sidebar-menu>li:hover>a, .skin-blue-light .sidebar-menu>li.active>a {
+    color: #000;
+    background: #ffff09 !important;
+}
+
+.skin-blue-light .sidebar a {
+    color: #000 !important;
+}
+
+.skin-blue-light .sidebar-menu>li.header {
+    color: #000;
+    background: #ffff09 !important;
+}
+
+.skin-blue-light .main-header .navbar {
+    background: #9e9e9e9e !important;
+    color: #000 !important;
+}
+
+.skin-blue-light .main-header li.user-header {
+    background-color: #9e9e9e9e !important;
+}
+
+.skin-blue-light .main-header .logo {
+    color: #000;
+    background: #000 !important;
+    border-bottom: 0 solid transparent;
+}

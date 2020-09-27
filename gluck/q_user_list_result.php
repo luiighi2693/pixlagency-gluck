@@ -59,6 +59,7 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2) {
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="Css/style.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -97,25 +98,38 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2) {
             <div class="col-xs-12">
                  <div class="box">
                 <div class="box-header">
+                  <?php if ($_SESSION['user']['type']==1) { ?>
+                  <h3 class="box-title">Listado de Participantes</h3>
+                  <?php }?>
+                  <?php if ($_SESSION['user']['type']==0) { ?>
                   <h3 class="box-title">Listado de Clientes</h3>
+                  <?php }?>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="example1" class="table">
                     <thead>
                       <tr>
-                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <?php if ($_SESSION['user']['type']==0) { ?>
                         <th>Email</th>
+                         <?php }?>
+                         <?php if ($_SESSION['user']['type']==0) { ?>
                         <th>Tel&eacute;fono</th>
+                        <?php }?>
                         <th>Puntuaci&oacute;n</th>
+                        <?php if ($_SESSION['user']['type']==0) { ?>
                         <th>Ultimo Acceso</th>
+                        <?php }?>
+                        <?php if ($_SESSION['user']['type']==0) { ?>
                         <th>-</th>
+                        <?php }?>
                       </tr>
                     </thead>
                     <tbody>
                       <?php 
                       $fk_q_pools=$_REQUEST['rowid'];
                       //if($query = mysqli_query($connect,"SELECT DISTINCT u.name, u.email,u.phone,u.ranking,u.date_Access, u.rowid as rowid_user, r.fk_q_pools as result FROM q_user u, q_result_pools r WHERE u.rowid=r.fk_q_user AND r.fk_q_pools = ".$fk_q_pools." GROUP BY r.fk_q_pools ORDER BY r.rowid  DESC")){
-                        if($query = mysqli_query($connect,"SELECT DISTINCT u.rowid as userId, u.name, u.email,u.phone,(SELECT sum(qrp.hits) FROM q_result_pools qrp where qrp.fk_q_user=u.rowid and qrp.fk_q_pools=r.fk_q_pools) ranking,u.date_Access, u.rowid as rowid_user, r.fk_q_pools as result FROM q_user u, q_result_pools r WHERE u.rowid=r.fk_q_user AND r.fk_q_pools = ".$fk_q_pools."  ORDER BY r.rowid DESC")){
+                        if($query = mysqli_query($connect,"SELECT DISTINCT u.rowid as userId, u.name,u.lastname,u.email,u.phone,(SELECT sum(qrp.hits) FROM q_result_pools qrp where qrp.fk_q_user=u.rowid and qrp.fk_q_pools=r.fk_q_pools) ranking,u.date_Access, u.rowid as rowid_user, r.fk_q_pools as result FROM q_user u, q_result_pools r WHERE u.rowid=r.fk_q_user AND r.fk_q_pools = ".$fk_q_pools."  ORDER BY r.rowid DESC")){
                         //if($query = mysqli_query($connect,"SELECT DISTINCT u.name, u.email,u.phone,(SELECT sum(qrp.hits) FROM q_result_pools qrp where qrp.fk_q_user=u.rowid and qrp.fk_q_pools=r.fk_q_pools) ranking,u.date_Access, u.rowid as rowid_user, r.fk_q_pools as result FROM q_user u, q_result_pools r WHERE r.fk_q_pools = ".$fk_q_pools."  ORDER BY r.rowid DESC")){
                         while ($array=mysqli_fetch_array($query)) {
 
@@ -133,11 +147,17 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2) {
 
                       ?>
                       <tr>
-                        <td><?=$array['name'];?></td>
+                        <td><?=$array['name']?> <?=$array['lastname']?></td>
+                        <?php if ($_SESSION['user']['type']==0) { ?>
                         <td><?=$array['email'];?></td>
+                        <?php }?>
+                         <?php if ($_SESSION['user']['type']==0) { ?>
                         <td><?=$array['phone'];?></td>
+                         <?php }?>
                         <td><?=$sumResFinal;?></td>
+                        <?php if ($_SESSION['user']['type']==0) { ?>
                         <td><?=date('d-m-Y',strtotime($array['date_Access']));?></td>
+                        <?php }?>
                         <td style="text-align: center;">
                           <a href="result_teams.php?rowid=<?=$array['result'];?>&rowid_user=<?=$array['rowid_user'];?>"><i class="fa fa-fw fa-edit"></i></a>
                         </td>
@@ -149,11 +169,17 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2) {
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <?php if ($_SESSION['user']['type']==0) { ?>
                         <th>Email</th>
+                        <?php }?>
+                        <?php if ($_SESSION['user']['type']==0) { ?>
                         <th>Tel&eacute;fono</th>
+                        <?php }?>
                         <th>Puntuaci&oacute;n</th>
+                        <?php if ($_SESSION['user']['type']==0) { ?>
                         <th>Ultimo Acceso</th>
+                        <?php }?>
                         <th>-</th>
                       </tr>
                     </tfoot>
@@ -164,13 +190,11 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2) {
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
-      <?php include("side-bar.php");  ?> 
 
 
       <!-- Control Sidebar -->
         <!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->
-      <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
