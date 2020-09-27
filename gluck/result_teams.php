@@ -28,7 +28,7 @@ if($query = mysqli_query($connect,"SELECT * FROM q_pools WHERE rowid = '".$rowid
 
 
     //$query_result = mysqli_query($connect,"SELECT * FROM q_result_pools WHERE fk_q_pools = '".$rowid."' AND fk_q_user = '".$user."'");
-    $query_result = mysqli_query($connect,"SELECT qrp.rowid, qrp.fk_q_user,qrp.fk_q_pools,qrp.fk_team_1,qrp.team__result_1,qrp.team__result_1_admin,qrp.fk_team_2,qrp.team__result_2,qrp.team__result_2_admin,qrp.status,qrp.comment,qrp.result_admin,qrp.date_Sport,qrp.hour, qrp.hits,qrp.close,qrp.date_Create , (select name from q_sport where qrp.fk_q_user=rowid) as sport FROM q_result_pools qrp WHERE qrp.fk_q_pools = '".$rowid."' AND qrp.fk_q_user = '".$user."'");
+    $query_result = mysqli_query($connect,"SELECT qrp.rowid, qrp.fk_q_user,qrp.fk_q_pools,qrp.fk_team_1,qrp.team__result_1,qrp.team__result_1_admin,qrp.fk_team_2,qrp.team__result_2,qrp.team__result_2_admin,qrp.status,qrp.comment,qrp.result_admin,qrp.date_Sport,qrp.hour, qrp.hits,qrp.close,qrp.date_Create , (select name from q_sport where qrp.fk_q_user=rowid) as sport, (select img from q_team where qrp.fk_team_1 = rowid) as image1,(select img from q_team where qrp.fk_team_2 = rowid) as image2 FROM q_result_pools qrp WHERE qrp.fk_q_pools = '".$rowid."' AND qrp.fk_q_user = '".$user."'");
     //$query_result = mysqli_query($connect,"SELECT qrp.rowid, qrp.fk_q_user,qrp.fk_q_pools,qrp.fk_team_1,qrp.team__result_1,qrp.team__result_1_admin,qrp.fk_team_2,qrp.team__result_2,qrp.team__result_2_admin,qrp.status,qrp.comment,qrp.result_admin,qrp.date_Sport,qrp.hour, qrp.hits,qrp.close,qrp.date_Create , (select name from q_sport where qrp.fk_q_user=rowid) as sport FROM q_result_pools qrp WHERE qrp.fk_q_pools = '".$rowid."'");
 
     $query_result_label = mysqli_query($connect,"SELECT qpd.rowid, qpd.fk_pools,qpd.fk_team_1,qpd.fk_team_2, concat( qpd.label ,' ', qpd.date_Sport,' ',qpd.hour) as sportLabel FROM q_pools_details qpd where qpd.fk_pools='".$rowid."'");
@@ -243,14 +243,30 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2) {
                             ?>
                             <tr>
                                 <td><?=$item_result['sportLabel']?></td>
-                                <td><?=team_pools_result(0, $connect, 1, $item_result['fk_team_1']);?></td>
+                                <td>
+                                    <?php $images=($item_result['image1']!='')?$item_result['image1']:'logo.png';?>
+                                    <img width="30px" src="images/team/<?=$images;?>" class="img-circle" alt="User Image">
+                                    <?=team_pools_result(0, $connect, 1, $item_result['fk_team_1']);?>
+                                </td>
                                 <td style="text-align: center;"><?=$item_result['team__result_1'];?></td>
                                 <td style="text-align: center;"><?=$item_result['team__result_2'];?></td>
-                                <td><?=team_pools_result(0, $connect, 1, $item_result['fk_team_2']);?></td>
-                                <td><?=team_pools_result(0, $connect, 1, $item_result['fk_team_1']);?></td>
+                                <td>
+                                    <?php $images=($item_result['image2']!='')?$item_result['image2']:'logo.png';?>
+                                    <img width="30px" src="images/team/<?=$images;?>" class="img-circle" alt="User Image">
+                                    <?=team_pools_result(0, $connect, 1, $item_result['fk_team_2']);?>
+                                </td>
+                                <td>
+                                    <?php $images=($item_result['image1']!='')?$item_result['image1']:'logo.png';?>
+                                    <img width="30px" src="images/team/<?=$images;?>" class="img-circle" alt="User Image">
+                                    <?=team_pools_result(0, $connect, 1, $item_result['fk_team_1']);?>
+                                </td>
                                 <td style="text-align: center;"><?=$item_result['team__result_1_admin'];?></td>
                                 <td style="text-align: center;"><?=$item_result['team__result_2_admin'];?></td>
-                                <td><?=team_pools_result(0, $connect, 1, $item_result['fk_team_2']);?></td>
+                                <td>
+                                    <?php $images=($item_result['image2']!='')?$item_result['image2']:'logo.png';?>
+                                    <img width="30px" src="images/team/<?=$images;?>" class="img-circle" alt="User Image">
+                                    <?=team_pools_result(0, $connect, 1, $item_result['fk_team_2']);?>
+                                </td>
                                 <td style="text-align: center;"> <?=$resFinal;?></td>
                             </tr>
                             <?php

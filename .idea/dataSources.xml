@@ -7,7 +7,7 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://192.168.31.222:3306/quinieladb_testing</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="quinieladb_testing@pixlagency.com" uuid="b580c7bb-43d7-4579-b0bd-918b3e0e3298">
+    <data-source source="LOCAL" name="MySQL - quinieladb_testing@pixlagency.com" uuid="b580c7bb-43d7-4579-b0bd-918b3e0e3298">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
