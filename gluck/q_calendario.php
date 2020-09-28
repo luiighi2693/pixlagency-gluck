@@ -193,7 +193,7 @@ require('include/redirect.php');
 
             {
 
-              title: '<?=$array['hour'].$array['name'].$array['label'];?>',
+              title: '<?=$hour.':'.$min.'  '.$array['name'].$array['label'];?>',
               start: new Date(<?=$your_date.','.$hour.','.$min.','.$second;?>),
               end: new Date(<?=$your_date.','.$hour.','.$min.','.$second;?>),
               url: '<?=$url;?>',

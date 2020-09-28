@@ -4627,9 +4627,9 @@ DayGrid.mixin({
 		classes.unshift('fc-day-grid-event');
 
 		// Only display a timed events time if it is the starting segment
-		if (!event.allDay && seg.isStart) {
-			timeHtml = '<span class="fc-time">' + htmlEscape(this.getEventTimeText(event)) + '</span>';
-		}
+		// if (!event.allDay && seg.isStart) {
+		// 	timeHtml = '<span class="fc-time">' + htmlEscape(this.getEventTimeText(event)) + '</span>';
+		// }
 
 		titleHtml =
 			'<span class="fc-title">' +
@@ -5829,15 +5829,15 @@ TimeGrid.mixin({
 				) +
 			'>' +
 				'<div class="fc-content">' +
-					(timeText ?
-						'<div class="fc-time"' +
-						' data-start="' + htmlEscape(startTimeText) + '"' +
-						' data-full="' + htmlEscape(fullTimeText) + '"' +
-						'>' +
-							'<span>' + htmlEscape(timeText) + '</span>' +
-						'</div>' :
-						''
-						) +
+					// (timeText ?
+					// 	'<div class="fc-time"' +
+					// 	' data-start="' + htmlEscape(startTimeText) + '"' +
+					// 	' data-full="' + htmlEscape(fullTimeText) + '"' +
+					// 	'>' +
+					// 		'<span>' + htmlEscape(timeText) + '</span>' +
+					// 	'</div>' :
+					// 	''
+					// 	) +
 					(event.title ?
 						'<div class="fc-title">' +
 							htmlEscape(event.title) +
