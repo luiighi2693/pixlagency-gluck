@@ -143,7 +143,7 @@ if(isset($_REQUEST['rowid']) and $_REQUEST['submit']!=''){
                         $and=' AND p.rowid IN ( '.$result.' )';
                       }
 
-						$query = mysqli_query($connect,"SELECT p.rowid,p.name,p.date_Create,p.fk_sport,p.color,p.quantity,d.fk_team_1, d.fk_team_2 , p.fk_sport,d.date_Sport,d.hour,d.status FROM q_pools p, q_pools_details d  WHERE p.rowid=d.fk_pools AND p.status=1 ".$and."  ORDER BY p.date_Create DESC ");
+						$query = mysqli_query($connect,"SELECT p.rowid,p.name,p.date_Create,p.fk_sport,p.color,p.quantity,d.fk_team_1, d.fk_team_2 , p.fk_sport,d.date_Sport,d.hour,d.status, (select img from q_team where d.fk_team_1 = rowid) as image1, (select img from q_team where d.fk_team_2 = rowid) as image2 FROM q_pools p, q_pools_details d  WHERE p.rowid=d.fk_pools AND p.status=1 ".$and."  ORDER BY p.date_Create DESC ");
 						 $row=mysqli_num_rows($query);
 
                       if($query){
@@ -165,7 +165,9 @@ if(isset($_REQUEST['rowid']) and $_REQUEST['submit']!=''){
                                <br>
                               <div class="col-md-5">
                                 <div class="col-md-4">
-                                  <?=team_pools_result($array_content['fk_sport'], $connect,1,$array_content['fk_team_1']);?>
+                                    <?php $images=($array_content['image1']!='')?$array_content['image1']:'logo.png';?>
+                                    <img width="30px" src="images/team/<?=$images;?>" class="img-circle" alt="User Image">
+                                    <?=team_pools_result($array_content['fk_sport'], $connect,1,$array_content['fk_team_1']);?>
                                    <input type="hidden" class="form-control" name="fk_team_1_<?php echo $i;?>" value="<?php echo $array_content['fk_team_1'];?>">
                                 </div>
                                 <div class="col-md-2"> 
@@ -174,6 +176,8 @@ if(isset($_REQUEST['rowid']) and $_REQUEST['submit']!=''){
                               </div>
                               <div class="col-md-5">
                                 <div class="col-md-4">
+                                    <?php $images=($array_content['image2']!='')?$array_content['image2']:'logo.png';?>
+                                    <img width="30px" src="images/team/<?=$images;?>" class="img-circle" alt="User Image">
                                   <?=team_pools_result($array_content['fk_sport'], $connect,1,$array_content['fk_team_2']);?>
                                    <input type="hidden" class="form-control" name="fk_team_2_<?php echo $i;?>" value="<?php echo $array_content['fk_team_2'];?>">
                                 </div>
