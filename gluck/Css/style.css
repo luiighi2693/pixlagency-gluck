@@ -233,3 +233,7 @@ tfoot{
 tr{
 	letter-spacing: 1px !important;
 }
+
+.login {
+    margin-top: 20%;
+}
