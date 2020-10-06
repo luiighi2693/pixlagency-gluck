@@ -29,7 +29,7 @@ $password = encryptIt($_POST['password']);
 
 if(isset($_POST["submit"])){
 
-	if($query = mysqli_query($connect,"SELECT * FROM q_user WHERE email = '".$username."' AND password = '".$password."' AND status = 1")){
+	if($query = mysqli_query($connect,"SELECT * FROM q_user WHERE username = '".$username."' AND password = '".$password."' AND status = 1")){
 			
 		
 		if($row=mysqli_num_rows($query)>0){
@@ -37,7 +37,7 @@ if(isset($_POST["submit"])){
 			$array=mysqli_fetch_array($query);
 
 
-			mysqli_query($connect,"UPDATE q_user  SET date_Access = '".date('Y-m-d')."', contador = '".$contador."' WHERE email = '".$username."' AND password = '".$password."' AND status = 1");
+			mysqli_query($connect,"UPDATE q_user  SET date_Access = '".date('Y-m-d')."', contador = '".$contador."' WHERE username = '".$username."' AND password = '".$password."' AND status = 1");
 
 			$_SESSION['user_id'] = $array['email'];
 
@@ -113,6 +113,24 @@ if(isset($_POST["submit"])){
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
+
+    <link rel="stylesheet" href="Css/style.css">
+
 
 <style>
 
@@ -254,17 +272,18 @@ if(isset($_POST["submit"])){
 
 		}
 
+
 </style>
 
 </head>
 
 <!--Coded with love by Mutiullah Samim-->
 
-<body>
+<body class="hold-transition skin-black sidebar-mini" style="background: url(images/banner-index.jpg) !important;">
+<div class="wrapper">
+	<div class="container login">
 
-	<div class="container h-100">
-
-		<div class="d-flex justify-content-center h-100">
+		<div class="d-flex justify-content-center">
 
 			<div class="user_card">
 
@@ -293,9 +312,9 @@ if(isset($_POST["submit"])){
 
 						</div>
 
-						<div class="input-group mb-2">
+						<div class="input-group mb-3">
 
-							<div class="input-group-append">
+							<div class="input-group-append" style="background: #000;">
 
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 
@@ -326,7 +345,7 @@ if(isset($_POST["submit"])){
 		</div>
 
 	</div>
-
+</div>
 </body>
 
 </html>

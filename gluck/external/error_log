@@ -114,3 +114,5 @@
 [19-Sep-2020 01:19:15 UTC] PHP Notice:  Undefined index: type in /home/tendkdxmxad4/public_html/gluck/external/actions.php on line 9
 [24-Sep-2020 00:35:39 UTC] PHP Notice:  Undefined index: fk_team in /home/tendkdxmxad4/public_html/gluck/external/actions.php on line 8
 [24-Sep-2020 00:35:39 UTC] PHP Notice:  Undefined index: type in /home/tendkdxmxad4/public_html/gluck/external/actions.php on line 9
+[30-Sep-2020 20:37:43 UTC] PHP Notice:  Undefined index: fk_team in /home/tendkdxmxad4/public_html/gluck/external/actions.php on line 8
+[30-Sep-2020 20:37:43 UTC] PHP Notice:  Undefined index: type in /home/tendkdxmxad4/public_html/gluck/external/actions.php on line 9
