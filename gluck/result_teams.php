@@ -53,7 +53,7 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $re
     //verificamos si gano el equipo dos gano o perdio
     $scoreTotal += ($resultUser1 < $resultUser2 && $resultAdmin1 < $resultAdmin2) ? $puntaje_ganar : $puntaje_perder;
 
-    if ($result == "C")
+    if ($result == "C" || $result == "S")
         $scoreTotal = 0;
 
     return $scoreTotal;
@@ -246,7 +246,7 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $re
                        mysqli_query($connect,$query_update)
                             ?>
                             <tr>
-                                <td><?=$item_result['sportLabel']?><?=$item_result['result'] == "C" ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sin Comenzar" : "" ?></td>
+                                <td><?=$item_result['sportLabel']?><?=$item_result['result'] == "C" ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sin Comenzar" : "" ?><?=$item_result['result'] == "S" ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suspendido" : "" ?></td>
                                 <td>
                                     <?php $images=($item_result['image1']!='')?$item_result['image1']:'logo.png';?>
                                     <img width="30px" src="images/team/<?=$images;?>" class="img-circle" alt="User Image">
