@@ -8,11 +8,11 @@ require('include/functions.php');
 
 $rowid=$_REQUEST['rowid'];
 
-if ($_SESSION['user']['type']==1) {
-    $user=$_SESSION['user']['rowid'];
-}else{
+//if ($_SESSION['user']['type']==1) {
+//    $user=$_SESSION['user']['rowid'];
+//}else{
     $user=$_REQUEST['rowid_user'];
-}
+//}
 
 if($query = mysqli_query($connect,"SELECT * FROM q_pools WHERE rowid = '".$rowid."'")){
     $array=mysqli_fetch_array($query);
@@ -242,7 +242,7 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $re
 //                        $resFinal=  $resResultadoPerdedor;
 //                       }
 //                       $sumResFinal=$sumResFinal+$resFinal;
-                       $query_update="UPDATE q_result_pools SET hits=".$resFinal."  WHERE rowid = '".$item_result['rowid']."'";
+                       $query_update="UPDATE q_result_pools SET hits=".$sumResFinal."  WHERE rowid = '".$item_result['rowid']."'";
                        mysqli_query($connect,$query_update)
                             ?>
                             <tr>
