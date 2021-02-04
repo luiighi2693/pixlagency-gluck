@@ -93,7 +93,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                         <h4>Actualizaci&oacute;n Exitosa!</h4>
                         <p>Su proceso fue realizado exitosamente.</p>
                       </div>';
-                      header( "refresh:3;url=q_user_list.php" );
+                      header( "refresh:3;url=index.php" );
         }else{
           $result = '<div class="callout callout-danger">
                         <h4>Fallo al Actualizar!</h4>
@@ -178,7 +178,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                         <h4>Actualizaci&oacute;n Exitosa!</h4>
                         <p>Su proceso fue realizado exitosamente.</p>
                       </div>';
-                      header( "refresh:3;url=q_user_list.php" );
+                      header( "refresh:3;url=index.php" );
         }else{
           $result = '<div class="callout callout-danger">
                         <h4>Fallo al Actualizar!</h4>
@@ -209,6 +209,29 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
+
+    <link rel="stylesheet" href="Css/style.css">
+
+    <style type="text/css">
+      .form_container{
+        padding-top: 0% !important;
+      }
+    </style>
 
 
 
@@ -220,14 +243,13 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
 <body>
 
-   <body class="hold-transition skin-blue sidebar-mini">
-    <div class="wrapper">
+   <body class="skin-black">
+    <div class="wrapper"  style="padding-top: 5%;">
 
-      <div class="user_card">
 
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center paddinsito">
 
-          <div class="brand_logo_container">
+          <div class="brand_logo_container" style="position: relative;">
 
             <img src="images/gluck.png" class="brand_logo" alt="Logo">
 
@@ -236,11 +258,11 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
         </div>
 
 
-      <div class="d-flex justify-content-center form_container">
-                 <form role="form" method="post" enctype="multipart/form-data">
+      <div class="d-flex justify-content-center" style="padding-top: 0% !important;" >
+                 <form role="form" class="blanco" method="post" enctype="multipart/form-data">
 
 
-                  <div class="col-xs-6">
+                  <div class="col-md-6 col-xs-12">
                     <div class="input-group-append">
                           <label for="exampleInputEmail1">Usuario</label>
                             
@@ -251,7 +273,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                              <input type="text" class="form-control" placeholder="Usuario" name="username" required="required">
                    </div>
 
-                  <div class="col-xs-6">
+                  <div class="col-md-6 col-xs-12">
                     <div class="input-group-append">
                           <label for="exampleInputEmail1">Nombre</label>
                             
@@ -262,7 +284,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                              <input type="text" class="form-control" placeholder="Nombre" name="name" required="required">
                    </div>
 
-                    <div class="col-xs-6">
+                    <div class="col-md-6 col-xs-12">
                     <div class="input-group-append">
                           <label for="exampleInputEmail1">Apellido</label>
                             
@@ -272,7 +294,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                    </div>
 
 
-                   <div class="col-xs-6">
+                   <div class="col-md-6 col-xs-12">
                     <div class="input-group-append">
                       <label for="exampleInputEmail1">Email</label>
                     </div>
@@ -281,7 +303,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
 
 
-                    <div class="col-xs-6">
+                    <div class="col-md-6 col-xs-12">
                       <div class="input-group-append">
                         <label for="exampleInputPassword1">Password</label>
                       </div>
@@ -289,25 +311,25 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                     </div>
 
 
-                     <div class="col-xs-6">
+                     <div class="col-md-6 col-xs-12">
                       <label>Tel&eacute;fono:</label>
-                      <div class="input-group-append">
+                      <div class="input-group">
                         <div class="input-group-addon">
-                          <i class="fa fa-phone"></i>
+                          <i class="fas fa-phone"></i>
                         </div>
                         <input type="text" class="form-control" required="required" data-inputmask='"mask": "(999) 999-9999"' data-mask name="phone">
                       </div>
                     </div>
 
 
-                    <div class="col-xs-6">
+                    <div class="col-md-6 col-xs-12">
                         <h3 class="box-title">Direcci&oacute;n</h3>
                       <div class="box-body pad">
                           <textarea class="textarea" name="address" required="required" placeholder="Direcci&oacute;n" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><?=$array['address'];?></textarea>
                       </div>
                     </div>
 
-                     <div class="col-xs-4">
+                     <div class="col-md-6 col-xs-12">
                       <label>Estado:</label>
                       <div class="input-group">
                         <div class="input-group-addon">
@@ -317,7 +339,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                       </div>
                     </div>
 
-                     <div class="col-xs-4">
+                     <div class="col-md-6 col-xs-12">
                       <label>Ciudad:</label>
                       <div class="input-group">
                         <div class="input-group-addon">
@@ -327,7 +349,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                       </div>
                     </div>
 
-                     <div class="col-xs-2"> 
+                     <div class="col-md-6 col-xs-12"> 
                       <label>Código Postal:</label>
                       <div class="input-group">
                         <div class="input-group-addon">
@@ -337,7 +359,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                       </div>
                     </div>  
 
-                     <div class="col-xs-2"> 
+                     <div class="col-md-6 col-xs-12"> 
                       <label>Deporte Favorito</label>
                       <?php $disabled='  '; if($_SESSION['user']['type']==1) { 
                           $disabled=' disabled="disabled" '; 
@@ -351,7 +373,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                     <?php } ?>
                   </div><!-- /.box-body -->
 
-                  <div class="box-footer botonregistro">
+                  <div class="box-footer botonregistro" style="border-top: 0px solid #f4f4f4; background-color: transparent;">
                     <button type="submit" name="submit" class="btn btn-primary">Enviar</button>
                     <input type="hidden" name="rowid" value="<?=$array['rowid'];?>">
                     <input type="hidden" name="param" value="<?=$array['param'];?>">
@@ -369,7 +391,6 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 </div>
 </div>
 </div>
-    </div>
 
   </div>
 
@@ -377,17 +398,21 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
     <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <!-- DataTables -->
-    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-    <!-- SlimScroll -->
-    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
     <script src="plugins/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
     <script src="dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
+    <script src="plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>    
+    <script>
+      $(function () {
+
+        $("[data-mask]").inputmask();
+      });
+    </script>
     <!-- page script -->
 </body>
 

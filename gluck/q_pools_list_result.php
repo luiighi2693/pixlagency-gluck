@@ -42,7 +42,7 @@ if (isset($_REQUEST['rowid']) and isset($_REQUEST['param'])) {
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition skin-black sidebar-mini">
     <div class="wrapper">
 
       <header class="main-header">
@@ -74,8 +74,8 @@ if (isset($_REQUEST['rowid']) and isset($_REQUEST['param'])) {
                 <div class="box-header">
                   <h3 class="box-title">Listado de Quinelas Finalizadas</h3>
                 </div><!-- /.box-header -->
-                <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
+                <div class="box-body table-responsive">
+                  <table id="example1" class="table table-responsive table-bordered table-striped">
                     <thead>
                       <tr>
                         <th style="width: 100%">Nombre</th>

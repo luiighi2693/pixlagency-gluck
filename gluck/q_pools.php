@@ -388,7 +388,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
   </head>
 
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition skin-black sidebar-mini">
 
     <div class="wrapper">
 
@@ -532,7 +532,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
                             <div class="col-md-4">
 
-                              <div class="box box-danger">
+                              <div class="box box-info">
 
                                   <div class="box-header">
 
@@ -558,7 +558,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
                               <div class="col-md-2">
 
-                                <div class="box box-success">
+                                <div class="box box-info">
 
                                   <div class="box-header">
 
@@ -598,7 +598,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
                               <div class="col-md-2">
 
-                                <div class="box box-success">
+                                <div class="box box-info">
 
                                   <div class="box-header">
 

@@ -8,11 +8,11 @@ require('include/functions.php');
 
 $rowid=$_REQUEST['rowid'];
 
-if ($_SESSION['user']['type']==1) {
-    $user=$_SESSION['user']['rowid'];
-}else{
+//if ($_SESSION['user']['type']==1) {
+//    $user=$_SESSION['user']['rowid'];
+//}else{
     $user=$_REQUEST['rowid_user'];
-}
+//}
 
 if($query = mysqli_query($connect,"SELECT * FROM q_pools WHERE rowid = '".$rowid."'")){
     $array=mysqli_fetch_array($query);
@@ -28,14 +28,14 @@ if($query = mysqli_query($connect,"SELECT * FROM q_pools WHERE rowid = '".$rowid
 
 
     //$query_result = mysqli_query($connect,"SELECT * FROM q_result_pools WHERE fk_q_pools = '".$rowid."' AND fk_q_user = '".$user."'");
-    $query_result = mysqli_query($connect,"SELECT qrp.rowid, qrp.fk_q_user,qrp.fk_q_pools,qrp.fk_team_1,qrp.team__result_1,qrp.team__result_1_admin,qrp.fk_team_2,qrp.team__result_2,qrp.team__result_2_admin,qrp.status,qrp.comment,qrp.result_admin,qrp.date_Sport,qrp.hour, qrp.hits,qrp.close,qrp.date_Create , (select name from q_sport where qrp.fk_q_user=rowid) as sport, (select img from q_team where qrp.fk_team_1 = rowid) as image1,(select img from q_team where qrp.fk_team_2 = rowid) as image2 FROM q_result_pools qrp WHERE qrp.fk_q_pools = '".$rowid."' AND qrp.fk_q_user = '".$user."'");
+    $query_result = mysqli_query($connect,"SELECT qrp.rowid, qrp.fk_q_user,qrp.fk_q_pools,qrp.fk_team_1,qrp.team__result_1,qrp.team__result_1_admin,qrp.fk_team_2,qrp.team__result_2,qrp.team__result_2_admin,qrp.status,qrp.comment,qrp.result_admin,qrp.date_Sport,qrp.hour, qrp.hits,qrp.close,qrp.date_Create , (select name from q_sport where qrp.fk_q_user=rowid) as sport, (select img from q_team where qrp.fk_team_1 = rowid) as image1,(select img from q_team where qrp.fk_team_2 = rowid) as image2,(SELECT result FROM q_pools_details WHERE fk_pools = '".$rowid."' AND fk_team_1 = qrp.fk_team_1 AND fk_team_2 = qrp.fk_team_2) as result FROM q_result_pools qrp WHERE qrp.fk_q_pools = '".$rowid."' AND qrp.fk_q_user = '".$user."'");
     //$query_result = mysqli_query($connect,"SELECT qrp.rowid, qrp.fk_q_user,qrp.fk_q_pools,qrp.fk_team_1,qrp.team__result_1,qrp.team__result_1_admin,qrp.fk_team_2,qrp.team__result_2,qrp.team__result_2_admin,qrp.status,qrp.comment,qrp.result_admin,qrp.date_Sport,qrp.hour, qrp.hits,qrp.close,qrp.date_Create , (select name from q_sport where qrp.fk_q_user=rowid) as sport FROM q_result_pools qrp WHERE qrp.fk_q_pools = '".$rowid."'");
 
     $query_result_label = mysqli_query($connect,"SELECT qpd.rowid, qpd.fk_pools,qpd.fk_team_1,qpd.fk_team_2, concat( qpd.label ,' ', qpd.date_Sport,' ',qpd.hour) as sportLabel FROM q_pools_details qpd where qpd.fk_pools='".$rowid."'");
 }
 
 //validamos el score en base a los resultados
-function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2) {
+function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $result) {
     $scoreTotal = 0;
     global $puntaje_resultado;
     global $puntaje_empate;
@@ -52,6 +52,9 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2) {
     $scoreTotal += ($resultUser1 > $resultUser2 && $resultAdmin1 > $resultAdmin2) ? $puntaje_ganar : $puntaje_perder;;
     //verificamos si gano el equipo dos gano o perdio
     $scoreTotal += ($resultUser1 < $resultUser2 && $resultAdmin1 < $resultAdmin2) ? $puntaje_ganar : $puntaje_perder;
+
+    if ($result == "C" || $result == "S")
+        $scoreTotal = 0;
 
     return $scoreTotal;
 }
@@ -77,6 +80,7 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2) {
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="Css/style.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -86,7 +90,7 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2) {
     <![endif]-->
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-black sidebar-mini">
 <div class="wrapper">
 
     <header class="main-header">
@@ -189,7 +193,7 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2) {
 
                         while($item_result=mysqli_fetch_array($query_result)){
 
-                          $resFinal = getResult($item_result['team__result_1'], $item_result['team__result_2'], $item_result['team__result_1_admin'], $item_result['team__result_2_admin']);
+                          $resFinal = getResult($item_result['team__result_1'], $item_result['team__result_2'], $item_result['team__result_1_admin'], $item_result['team__result_2_admin'], $item_result['result']);
                             $sumResFinal+= $resFinal;
 //                        $teamGanador=0;
 //                        $teamGanadorAdmin=0;
@@ -238,11 +242,11 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2) {
 //                        $resFinal=  $resResultadoPerdedor;
 //                       }
 //                       $sumResFinal=$sumResFinal+$resFinal;
-                       $query_update="UPDATE q_result_pools SET hits=".$resFinal."  WHERE rowid = '".$item_result['rowid']."'";
+                       $query_update="UPDATE q_result_pools SET hits=".$sumResFinal."  WHERE rowid = '".$item_result['rowid']."'";
                        mysqli_query($connect,$query_update)
                             ?>
                             <tr>
-                                <td><?=$item_result['sportLabel']?></td>
+                                <td><?=$item_result['sportLabel']?><?=$item_result['result'] == "C" ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sin Comenzar" : "" ?><?=$item_result['result'] == "S" ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suspendido" : "" ?></td>
                                 <td>
                                     <?php $images=($item_result['image1']!='')?$item_result['image1']:'logo.png';?>
                                     <img width="30px" src="images/team/<?=$images;?>" class="img-circle" alt="User Image">
@@ -281,7 +285,7 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2) {
                             <td></td>
                             <td style="text-align: center;"></td>
                             <td style="text-align: center;"></td>
-                            <td></td>
+                            <td style="text-align: right;"> Total:</td>
                             <td style="text-align: center;"> <?=$sumResFinal;?></td>
                         </tr>
                         </tbody>
@@ -292,13 +296,6 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2) {
         </section><!-- /.content -->
         <div class="clearfix"></div>
     </div><!-- /.content-wrapper -->
-    <?php include("side-bar.php");  ?>
-
-    <!-- Control Sidebar -->
-
-    <!-- Add the sidebar's background. This div must be placed
-         immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
 </div><!-- ./wrapper -->
 
 <!-- jQuery 2.1.4 -->

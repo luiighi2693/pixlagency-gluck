@@ -85,7 +85,7 @@ $result=mail($varible, $subject, $message, $cabeceras);
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition skin-black sidebar-mini">
     <div class="wrapper">
 
       <header class="main-header">

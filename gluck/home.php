@@ -120,7 +120,7 @@ $result=mail($varible, $subject, $message, $cabeceras);
           <div class="row">
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-aqua">
+              <div class="small-box bg-amarillo">
                 <div class="inner">
                   <h3><?=quinielas_activas( $connect );?></h3>
                   <?php
@@ -134,22 +134,16 @@ $result=mail($varible, $subject, $message, $cabeceras);
                   <p>Quinielas Activas</p> 
                   <?php } ?>
                 </div>
-                <div class="icon">
-                  <i class="ion ion-bag"></i>
-                </div>
                    <a href="quiniela.php" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
             <?php if ($_SESSION['user']['type']==0) { ?>
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-green">
+              <div class="small-box bg-gris">
                 <div class="inner">
                   <h3><?=user_home( $connect );?></h3>
                   <p>Usuarios Activos</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
                 </div>
                    <a href="q_user_list.php" class="small-box-footer">Detalles <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -158,14 +152,12 @@ $result=mail($varible, $subject, $message, $cabeceras);
 
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-green">
+              <div class="small-box bg-gris">
                 <div class="inner">
                   <h3><?=ranking( $connect , $_SESSION['user']['rowid']);?></h3>
                   <p>Resultados (Quinielas Cerradas)</p>
                 </div>
-                <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
-                </div>
+                
                    <a href="q_pools_list_result.php" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
@@ -174,14 +166,12 @@ $result=mail($varible, $subject, $message, $cabeceras);
 
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-yellow">
+              <div class="small-box bg-amarilloos">
                 <div class="inner">
                   <h3><?=team_home( $connect );?></h3>
                   <p>Partidos Activos</p>
                 </div>
-                <div class="icon">
-                  <i class="ion ion-person-add"></i>
-                </div>
+                
                 <?php if ($_SESSION['user']['type']==0) { ?>
                    <a href="q_pools_list.php" class="small-box-footer">Detalles <i class="fa fa-arrow-circle-right"></i></a>
                 <?php }else{?>
@@ -191,14 +181,12 @@ $result=mail($varible, $subject, $message, $cabeceras);
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-red">
+              <div class="small-box bg-grisos">
                 <div class="inner">
                   <h3><?=sport_home( $connect );?></h3>
                   <p>Deportes Activos</p>
                 </div>
-                <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
-                </div>
+                
                 <?php if ($_SESSION['user']['type']==0) { ?>
                    <a href="q_sport_list.php" class="small-box-footer">Detalles <i class="fa fa-arrow-circle-right"></i></a>
                 <?php }else{?>

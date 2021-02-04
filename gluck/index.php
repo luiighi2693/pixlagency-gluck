@@ -272,6 +272,44 @@ if(isset($_POST["submit"])){
 
 		}
 
+		body {
+  /* Location of the image */
+  background-image: url(images/banner-index.jpg) !important;
+  
+  /* Background image is centered vertically and horizontally at all times */
+  background-position: center center;
+  
+  /* Background image doesn't tile */
+  background-repeat: no-repeat;
+  
+  /* Background image is fixed in the viewport so that it doesn't move when 
+     the content's height is greater than the image's height */
+  background-attachment: fixed;
+  
+  /* This is what makes the background image rescale based
+     on the container's size */
+  background-size: cover;
+  
+  /* Set a background color that will be displayed
+     while the background image is loading */
+  background-color: #464646;
+}
+
+@media only screen and (max-width: 1300px) {
+  body {
+    /* The file size of this background image is 93% smaller
+       to improve page load speed on mobile internet connections */
+    background-image: url(images/banner-index-2.png) !important;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  body {
+    /* The file size of this background image is 93% smaller
+       to improve page load speed on mobile internet connections */
+    background-image: url(images/banner-index-3.png) !important;
+  }
+}
 
 </style>
 
@@ -279,7 +317,7 @@ if(isset($_POST["submit"])){
 
 <!--Coded with love by Mutiullah Samim-->
 
-<body class="hold-transition skin-black sidebar-mini" style="background: url(images/banner-index.jpg) !important;">
+<body class="hold-transition sidebar-mini">
 <div class="wrapper">
 	<div class="container login">
 

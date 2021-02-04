@@ -221,7 +221,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition skin-black sidebar-mini">
     <div class="wrapper">
 
       <header class="main-header">
@@ -386,8 +386,6 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
           </div>   <!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
-      <?php include("side-bar.php");  ?> 
-      <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->

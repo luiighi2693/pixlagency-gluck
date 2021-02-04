@@ -19,22 +19,56 @@ if (isset($_REQUEST['rowid']) and isset($_REQUEST['param'])) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Admin | Listado de Clientes</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, pools-scalable=no" name="viewport">
+
     <!-- Bootstrap 3.3.5 -->
+
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
     <!-- Font Awesome -->
+
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
     <!-- Ionicons -->
+
     <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- DataTables -->
+
     <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+
+    <!-- iCheck for checkboxes and radio inputs -->
+
+    <link rel="stylesheet" href="plugins/iCheck/all.css">
+
+    <!-- Bootstrap Color Picker -->
+
+    <link rel="stylesheet" href="plugins/colorpicker/bootstrap-colorpicker.min.css">
+
+    <!-- Bootstrap time Picker -->
+
+    <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
+
+    <!-- Select2 -->
+
+    <link rel="stylesheet" href="plugins/select2/select2.min.css">
+
+    <!-- Theme style -->
+
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+
+         folder instead of downloading all of them to reduce the load. -->
+
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+    <link rel="stylesheet" href="Css/style.css">
+
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,7 +77,7 @@ if (isset($_REQUEST['rowid']) and isset($_REQUEST['param'])) {
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition skin-black sidebar-mini">
     <div class="wrapper">
 
       <header class="main-header">
@@ -75,8 +109,8 @@ if (isset($_REQUEST['rowid']) and isset($_REQUEST['param'])) {
                 <div class="box-header">
                   <h3 class="box-title">Listado de Equipos</h3>
                 </div><!-- /.box-header -->
-                <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
+                <div class="box-body table-responsive ">
+                  <table id="example1" class="table table-responsive  table-bordered table-striped">
                     <thead>
                       <tr>
                         <th>Escudo</th>
@@ -103,7 +137,7 @@ if (isset($_REQUEST['rowid']) and isset($_REQUEST['param'])) {
                           <img width="30%" src="images/team/<?=$images;?>" class="img-circle" alt="User Image">
                         </td>
                         <td><?=$array['name'];?></td>
-                        <td><a href="q_team_list.php?fk_sport=<?=$array['fk_sport'];?>"> <img width="30%" src="images/team/<?=$images;?>" class="img-circle" alt="User Image"><?=sport($array['fk_sport'], $connect, 1);?></a></td>
+                        <td><a href="q_team_list.php?fk_sport=<?=$array['fk_sport'];?>"><?=sport($array['fk_sport'], $connect, 1);?></a></td>
                         <td><?=($array['status']==1)?'<small class="label label-success">Activo</small>':'<small class="label label-danger">Inactivo</small>';?></td>
                         <td style="text-align: center;"><?=date('d-m-Y',strtotime($array['date_Create']));?></td>
                         <td style="text-align: center;">
@@ -164,19 +198,56 @@ if (isset($_REQUEST['rowid']) and isset($_REQUEST['param'])) {
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+ <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+
     <!-- Bootstrap 3.3.5 -->
+
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <!-- DataTables -->
+
     <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-    <!-- SlimScroll -->
+
+    <script src="plugins/select2/select2.full.min.js"></script>
+
+    <!-- InputMask -->
+
+    <script src="plugins/input-mask/jquery.inputmask.js"></script>
+
+    <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+
+    <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
+
+    <!-- date-range-picker -->
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+
+    <script src="plugins/daterangepicker/daterangepicker.js"></script>
+
+    <!-- bootstrap color picker -->
+
+    <script src="plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
+    <!-- bootstrap time picker -->
+
+    <script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
+
+    <!-- SlimScroll 1.3.0 -->
+
     <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+
+    <!-- iCheck 1.0.1 -->
+
+    <script src="plugins/iCheck/icheck.min.js"></script>
+
     <!-- FastClick -->
+
     <script src="plugins/fastclick/fastclick.min.js"></script>
+
     <!-- AdminLTE App -->
+
     <script src="dist/js/app.min.js"></script>
+
     <!-- AdminLTE for demo purposes -->
+
     <script src="dist/js/demo.js"></script>
     <!-- page script -->
     <script>

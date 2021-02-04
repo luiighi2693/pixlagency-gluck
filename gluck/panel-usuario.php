@@ -19,7 +19,7 @@ require('include/redirect.php');
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header"><h5 style="text-align: center;">Menu</h5></li>
+           <li class="header"><a href="home.php" style="color: #000;"><h5 style="text-align: center; font-weight: bold;">Menu</h5></a></li> 
               <?php if($_SESSION['user']['type']==1){?>
            <a href="q_user.php?rowid=<?=$_SESSION['user']['rowid'];?>&param=edit">
                 
