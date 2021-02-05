@@ -195,6 +195,17 @@ function count_user($fk_sport_pools, $connect){
 }
 
 
+function getUsersInPool($rowid, $connect){
+
+	$query = @mysqli_query($connect,"SELECT * FROM q_user_pools qup left join q_user qu on qup.fk_q_user = qu.rowid WHERE fk_q_pools = ".$rowid);
+
+	$cantidad=@mysqli_num_rows ($query);
+
+	return ($cantidad>0)?$cantidad:0;
+
+}
+
+
 
 
 

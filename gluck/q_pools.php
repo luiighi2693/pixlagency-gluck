@@ -19,9 +19,6 @@ require('include/functions.php');
 $result = "";
 
 $box = array("box box-danger", "box box-primary", "box box-success", "box box-info");
-
-
-
  
 
 if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
@@ -50,6 +47,8 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
         $quantity = $_REQUEST['quantity'];
 
+        $limit_user = $_REQUEST['limit_user'];
+
         $penalty = $_REQUEST['penalty'];
 
         $status   = $_REQUEST['status'];
@@ -64,57 +63,61 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
         $puntaje_resultado= $_REQUEST['puntaje_resultado'];
 
-        $label ='';   
+        $label ='';
 
-         $quantity.'$quantity';
-
-        if($query_i = mysqli_query($connect,"UPDATE q_pools SET name = '".$name."', fk_sport = '".$fk_sport."', color = '".$color."' , status = '".$status."', quantity = '".$quantity."', penalty = '".$penalty."', puntaje_empate = '".$puntaje_empate."', puntaje_ganar = '".$puntaje_ganar."', puntaje_perder = '".$puntaje_perder."', puntaje_resultado = '".$puntaje_resultado."' WHERE rowid = '".$rowid."'")){
-
-
-
-          mysqli_query($connect,"UPDATE q_pools_details SET penalty = '".$penalty."', label='". $label."', puntaje_empate = '".$puntaje_empate."' WHERE fk_pools = '".$rowid."'");
-
-
-
-          for ($i=1; $i <= $quantity; $i++) { 
-
-              $label = $_REQUEST['label'.$i]; 
-
-              $updateLabelQuery="UPDATE q_pools_details SET label='". $label."' WHERE fk_pools = '".$rowid."' AND fk_team_1 = '".$_REQUEST['fk_team_1_'.$i]."' AND fk_team_2 = '".$_REQUEST['fk_team_2_'.$i]."' AND date_Sport = '".$_REQUEST['date_Sport_'.$i]."' AND hour = '".date('h:i:s',strtotime($_REQUEST['hour_'.$i]))."'";
-
-              
-
-              mysqli_query($connect,$updateLabelQuery);
+          $limit_user = $limit_user == null ? 0 : $limit_user;
+          $countUsers = @$_REQUEST['user'] != null ? count(@$_REQUEST['user']) : 0;
+          if ($countUsers > $limit_user) {
+              phpAlert("No puede ingresar mas de $limit_user usuarios");
+              phpRedirect("http://getgluck.com/q_pools.php?rowid=$rowid&param=edit");
+          } else {
+              if($query_i = mysqli_query($connect,"UPDATE q_pools SET name = '".$name."', fk_sport = '".$fk_sport."', color = '".$color."' , status = '".$status."', quantity = '".$quantity."', limit_user = '".$limit_user."', penalty = '".$penalty."', puntaje_empate = '".$puntaje_empate."', puntaje_ganar = '".$puntaje_ganar."', puntaje_perder = '".$puntaje_perder."', puntaje_resultado = '".$puntaje_resultado."' WHERE rowid = '".$rowid."'")){
 
 
 
-      	        $queryCount = mysqli_query($connect,"SELECT * FROM q_result_pools WHERE fk_q_pools = '".$rowid."' AND fk_team_1 = '".$_REQUEST['fk_team_1_'.$i]."' AND fk_team_2 = '".$_REQUEST['fk_team_2_'.$i]."' AND date_Sport = '".$_REQUEST['date_Sport_'.$i]."' AND hour = '".date('h:i:s',strtotime($_REQUEST['hour_'.$i]))."'");
+                  mysqli_query($connect,"UPDATE q_pools_details SET penalty = '".$penalty."', label='". $label."', puntaje_empate = '".$puntaje_empate."' WHERE fk_pools = '".$rowid."'");
+
+
+
+                  for ($i=1; $i <= $quantity; $i++) {
+
+                      $label = $_REQUEST['label'.$i];
+
+                      $updateLabelQuery="UPDATE q_pools_details SET label='". $label."' WHERE fk_pools = '".$rowid."' AND fk_team_1 = '".$_REQUEST['fk_team_1_'.$i]."' AND fk_team_2 = '".$_REQUEST['fk_team_2_'.$i]."' AND date_Sport = '".$_REQUEST['date_Sport_'.$i]."' AND hour = '".date('h:i:s',strtotime($_REQUEST['hour_'.$i]))."'";
+
+
+
+                      mysqli_query($connect,$updateLabelQuery);
+
+
+
+                      $queryCount = mysqli_query($connect,"SELECT * FROM q_result_pools WHERE fk_q_pools = '".$rowid."' AND fk_team_1 = '".$_REQUEST['fk_team_1_'.$i]."' AND fk_team_2 = '".$_REQUEST['fk_team_2_'.$i]."' AND date_Sport = '".$_REQUEST['date_Sport_'.$i]."' AND hour = '".date('h:i:s',strtotime($_REQUEST['hour_'.$i]))."'");
 
 
 
 
 
-                $arrayCount=mysqli_fetch_array($queryCount);
+                      $arrayCount=mysqli_fetch_array($queryCount);
 
-      	        $rowcount=mysqli_num_rows($queryCount);
+                      $rowcount=mysqli_num_rows($queryCount);
 
-      	        $sql= "";
+                      $sql= "";
 
-               if($rowcount==0){
+                      if($rowcount==0){
 
-                  $sql.= " , fk_team_1 = '".$_REQUEST['fk_team_1_'.$i]."' , ";
+                          $sql.= " , fk_team_1 = '".$_REQUEST['fk_team_1_'.$i]."' , ";
 
-                  $sql.= "fk_team_2 = '".$_REQUEST['fk_team_2_'.$i]."' , ";
+                          $sql.= "fk_team_2 = '".$_REQUEST['fk_team_2_'.$i]."' , ";
 
-                  $sql.= "date_Sport = '".$_REQUEST['date_Sport_'.$i]."' , ";
+                          $sql.= "date_Sport = '".$_REQUEST['date_Sport_'.$i]."' , ";
 
-                  $sql.= "hour = '".$_REQUEST['hour_'.$i]."'";
+                          $sql.= "hour = '".$_REQUEST['hour_'.$i]."'";
 
-               }
+                      }
 
 
 
-               mysqli_query($connect,"UPDATE q_pools_details SET  
+                      mysqli_query($connect,"UPDATE q_pools_details SET  
 
                  status = '".$_REQUEST['status_sport_'.$i]."' , 
 
@@ -126,75 +129,75 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
                  ".$sql."
 
-                 WHERE fk_pools = '".$rowid."' AND number_pools = ".$i);                                      
+                 WHERE fk_pools = '".$rowid."' AND number_pools = ".$i);
 
 //E Empate
 
-//T 
+//T
 
 //F Finalizado
 
-            if($_REQUEST['result_'.$i]=='E' OR $_REQUEST['result_'.$i]=='T' OR $_REQUEST['result_'.$i]=='F'){
+                      if($_REQUEST['result_'.$i]=='E' OR $_REQUEST['result_'.$i]=='T' OR $_REQUEST['result_'.$i]=='F'){
 
 
 
-            	$sql = mysqli_query($connect," SELECT * FROM q_result_pools WHERE fk_q_pools = '".$rowid."' AND fk_team_1 = '".$_REQUEST['fk_team_1_'.$i]."' AND fk_team_2 = '".$_REQUEST['fk_team_2_'.$i]."'");
+                          $sql = mysqli_query($connect," SELECT * FROM q_result_pools WHERE fk_q_pools = '".$rowid."' AND fk_team_1 = '".$_REQUEST['fk_team_1_'.$i]."' AND fk_team_2 = '".$_REQUEST['fk_team_2_'.$i]."'");
 
-              $K=0;
+                          $K=0;
 
-            	while ($array=mysqli_fetch_array($sql)) {
-
-
-
-                if ($array['team__result_1']==$_REQUEST['result_team_1_'.$i] AND $array['team__result_2']==$_REQUEST['result_team_2_'.$i] AND $array['result_admin']==$_REQUEST['result_'.$i]) {
-
-                  $K=$K+1;
-
-                }else{
-
-                  $K=0;
-
-                }
-
-            	}
+                          while ($array=mysqli_fetch_array($sql)) {
 
 
 
-              	$query_i = mysqli_query($connect,"UPDATE  q_result_pools SET team__result_1_admin = '".$_REQUEST['result_team_1_'.$i]."', team__result_2_admin = '".$_REQUEST['result_team_2_'.$i]."', result_admin = '".$_REQUEST['result_'.$i]."', hits = '".$K."', close = '".$status."'  WHERE fk_q_pools = '".$rowid."' AND fk_team_1 = '".$_REQUEST['fk_team_1_'.$i]."' AND fk_team_2 = '".$_REQUEST['fk_team_2_'.$i]."'");
+                              if ($array['team__result_1']==$_REQUEST['result_team_1_'.$i] AND $array['team__result_2']==$_REQUEST['result_team_2_'.$i] AND $array['result_admin']==$_REQUEST['result_'.$i]) {
 
-              $query_i = mysqli_query($connect,"UPDATE  q_user SET ranking = ranking + ".$K." WHERE rowid = '".$arrayCount['fk_q_user']."'");
+                                  $K=$K+1;
 
+                              }else{
 
+                                  $K=0;
 
+                              }
 
-
-            }
-
-           
-
-          }
+                          }
 
 
 
-          $user = @$_REQUEST['user'];
+                          $query_i = mysqli_query($connect,"UPDATE  q_result_pools SET team__result_1_admin = '".$_REQUEST['result_team_1_'.$i]."', team__result_2_admin = '".$_REQUEST['result_team_2_'.$i]."', result_admin = '".$_REQUEST['result_'.$i]."', hits = '".$K."', close = '".$status."'  WHERE fk_q_pools = '".$rowid."' AND fk_team_1 = '".$_REQUEST['fk_team_1_'.$i]."' AND fk_team_2 = '".$_REQUEST['fk_team_2_'.$i]."'");
 
-          if (isset($user)) {
-
-                  mysqli_query($connect,"DELETE FROM q_user_pools WHERE fk_q_pools = ".$rowid);
-
-              foreach($user as $operacion){
-
-                  $var=explode('-', $operacion);
-
-                  mysqli_query($connect,"INSERT INTO q_user_pools (fk_q_user, fk_q_pools) VALUES ('".$var[0]."','".$var[1]."') ");
-
-              }
-
-          }
+                          $query_i = mysqli_query($connect,"UPDATE  q_user SET ranking = ranking + ".$K." WHERE rowid = '".$arrayCount['fk_q_user']."'");
 
 
 
-          $result = '<div class="callout callout-success">
+
+
+                      }
+
+
+
+                  }
+
+
+
+                  $user = @$_REQUEST['user'];
+
+                  if (isset($user)) {
+
+                      mysqli_query($connect,"DELETE FROM q_user_pools WHERE fk_q_pools = ".$rowid);
+
+                      foreach($user as $operacion){
+
+                          $var=explode('-', $operacion);
+
+                          mysqli_query($connect,"INSERT INTO q_user_pools (fk_q_user, fk_q_pools) VALUES ('".$var[0]."','".$var[1]."') ");
+
+                      }
+
+                  }
+
+
+
+                  $result = '<div class="callout callout-success">
 
                         <h4>Actualizaci&oacute;n Exitosa!</h4>
 
@@ -202,11 +205,11 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
                       </div>';
 
-                      header( trim("refresh:1;url=q_pools.php?rowid=".$rowid."&param=".$_REQUEST['param']));
+                  header( trim("refresh:1;url=q_pools.php?rowid=".$rowid."&param=".$_REQUEST['param']));
 
-        }else{
+              }else{
 
-          $result = '<div class="callout callout-danger">
+                  $result = '<div class="callout callout-danger">
 
                         <h4>Fallo al Actualizar!</h4>
 
@@ -214,7 +217,8 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
                       </div>';
 
-        }
+              }
+          }
 
       }
 
@@ -240,6 +244,8 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
         $quantity = $_REQUEST['quantity'];
 
+        $limit_user = $_REQUEST['limit_user'];
+
         $status   = $_REQUEST['status'];
 
         $name   = $_REQUEST['name'];
@@ -256,29 +262,33 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
         $label = $_REQUEST['label'];
 
-        
+          $limit_user = $limit_user == null ? 0 : $limit_user;
+          $countUsers = @$_REQUEST['user'] != null ? count(@$_REQUEST['user']) : 0;
+          if ($countUsers > $limit_user) {
+              phpAlert("No puede ingresar mas de $limit_user usuarios");
+              phpRedirect("http://getgluck.com/q_pools.php?rowid=$rowid&param=edit");
+          } else {
+              if($query_i = mysqli_query($connect,"INSERT INTO q_pools (name,fk_sport, quantity, limit_user, color, status,penalty, puntaje_empate, puntaje_ganar, puntaje_perder, puntaje_resultado) VALUES ( '".$name."', '".$fk_sport."', '".$quantity."', '".$limit_user."', '".$color."' , '".$status."' , '".$penalty."', '".$puntaje_empate."', '".$puntaje_ganar."', '".$puntaje_perder."', '".$puntaje_resultado."')")){
 
-        if($query_i = mysqli_query($connect,"INSERT INTO q_pools (name,fk_sport, quantity, color, status,penalty, puntaje_empate, puntaje_ganar, puntaje_perder, puntaje_resultado) VALUES ( '".$name."', '".$fk_sport."', '".$quantity."', '".$color."' , '".$status."' , '".$penalty."', '".$puntaje_empate."', '".$puntaje_ganar."', '".$puntaje_perder."', '".$puntaje_resultado."')")){
-
-          $rowid=mysqli_insert_id($connect);
-
-
-
-
-
-          for ($i=1; $i <= $quantity; $i++) {
-
-            $label = $_REQUEST['label'.$i]; 
-
-             mysqli_query($connect,"INSERT INTO q_pools_details (fk_pools, status, result, number_pools, result_team_1, result_team_2,penalty, label) VALUES ( '".$rowid."', '1', 'C','".$i."', '0', '0','".$penalty."','".$label."')");
-
-          }
+                  $rowid=mysqli_insert_id($connect);
 
 
 
 
 
-          $result = '<div class="callout callout-success">
+                  for ($i=1; $i <= $quantity; $i++) {
+
+                      $label = $_REQUEST['label'.$i];
+
+                      mysqli_query($connect,"INSERT INTO q_pools_details (fk_pools, status, result, number_pools, result_team_1, result_team_2,penalty, label) VALUES ( '".$rowid."', '1', 'C','".$i."', '0', '0','".$penalty."','".$label."')");
+
+                  }
+
+
+
+
+
+                  $result = '<div class="callout callout-success">
 
                         <h4>Actualizaci&oacute;n Exitosa!</h4>
 
@@ -286,11 +296,11 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
                       </div>';
 
-                      header( trim("refresh:1;url=q_pools.php?rowid=".$rowid."&param=edit"));
+                  header( trim("refresh:1;url=q_pools.php?rowid=".$rowid."&param=edit"));
 
-        }else{
+              }else{
 
-          $result = '<div class="callout callout-danger">
+                  $result = '<div class="callout callout-danger">
 
                         <h4>Fallo al Actualizar!</h4>
 
@@ -298,8 +308,9 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
                       </div>';
 
-        }
-
+              }
+          }
+        
       }
 
     }
@@ -310,6 +321,18 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
 
 
+?>
+
+<?php
+function phpAlert($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+}
+?>
+
+<?php
+function phpRedirect($msg) {
+    echo '<script type="text/javascript">window.location.href = "' . $msg . '";</script>';
+}
 ?>
 
 <!DOCTYPE html>
@@ -421,7 +444,6 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
             Mantenimientos de Quiniela
 
             <small>Vista</small>
-
           </h1>
 
           <ol class="breadcrumb">
@@ -530,7 +552,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-2">
 
                               <div class="box box-info">
 
@@ -545,6 +567,30 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                                     <div class="form-group">
 
                                         <input type="number" name="quantity" min="1" value="<?=$array['quantity'];?>" class="form-control">
+
+                                    </div>
+
+                                  </div>
+
+                                </div>
+
+                              </div>
+
+ <div class="col-md-2">
+
+                              <div class="box box-info">
+
+                                  <div class="box-header">
+
+                                    <h3 class="box-title">Limite de Usuarios</h3>
+
+                                  </div>
+
+                                  <div class="box-body">
+
+                                    <div class="form-group">
+
+                                        <input type="number" name="limit_user" min="1" value="<?=$array['limit_user'];?>" class="form-control">
 
                                     </div>
 
@@ -1013,6 +1059,8 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                         <div class="box-header">
 
                           <h3 class="box-title">Seleccione Participantes de la Quiniela</h3>
+                            <br>
+                          <h6>Participantes en la quiniela: <?=getUsersInPool($rowid, $connect);?></h6>
 
                           <div class="box-tools">
 

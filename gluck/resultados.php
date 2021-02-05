@@ -442,6 +442,49 @@ if(isset($_REQUEST['rowid']) and $_REQUEST['submit']!=''){
 
             </div>
 
+            <div class="col-md-12">
+
+                <div class="box-header with-border">
+
+                    <h2 class="box-title">Usuarios</h2>
+
+                </div>
+
+              <div class="box box-solid">
+
+                <ul>
+                  <?php
+
+                        $rowid=$_REQUEST['rowid'];
+
+
+
+						$query = mysqli_query($connect,"SELECT qu.username FROM q_user_pools qup left join q_user qu on qup.fk_q_user = qu.rowid WHERE fk_q_pools = ".$rowid);
+
+                      if($query){
+
+                        $i=1;$j=1;
+
+                        while ($array_content=mysqli_fetch_array($query)) {
+
+                    ?>
+
+                        <li class="box-title"><?=$array_content['username'];?></li>
+
+                      <?php
+
+                         $i++; }
+
+                      }
+
+                      ?>
+                </ul>
+
+
+              </div><!-- /.box -->
+
+            </div>
+
           </div><!-- /.row -->
 
 

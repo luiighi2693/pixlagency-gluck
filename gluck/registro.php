@@ -94,7 +94,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                         <p>Su proceso fue realizado exitosamente.</p>
                       </div>';
 
-            phpAlert('Actualización Exitosa!');
+            phpAlert('Registro exitoso!');
             phpRedirect('http://getgluck.com/');
         }else{
           $result = '<div class="callout callout-danger">
@@ -181,7 +181,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                         <p>Su proceso fue realizado exitosamente.</p>
                       </div>';
 
-          phpAlert('Actualización Exitosa!');
+          phpAlert('Registro exitoso!');
             phpRedirect('http://getgluck.com/');
         }else{
           $result = '<div class="callout callout-danger">

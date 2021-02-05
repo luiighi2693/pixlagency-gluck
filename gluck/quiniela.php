@@ -74,6 +74,13 @@ require('include/redirect.php');
             Quinielas
             <small>Listado</small>
           </h1>
+            <?php
+            $result='';
+            $query_POO = mysqli_query($connect,"SELECT p.rowid FROM q_user_pools u, q_pools p WHERE p.rowid=u.fk_q_pools AND u.fk_q_user = ".$_SESSION['user']['rowid']);
+            while ($array_POO=mysqli_fetch_array($query_POO)) {
+                $result.= $array_POO['rowid'].',';
+            }
+            ?>
           <ol class="breadcrumb">
             <li><a href="home.php"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Quinielas</li>
@@ -95,75 +102,77 @@ require('include/redirect.php');
                          }
                         $result=substr($result, 0,-1);
                         $and=' AND p.rowid IN ( '.$result.' )';
-                      }
 
-                      if($query = mysqli_query($connect,"SELECT p.rowid,p.name,p.date_Create,p.fk_sport,p.color,p.quantity FROM q_pools p, q_pools_details d  WHERE p.rowid=d.fk_pools AND p.status=1 ".$and." GROUP BY d.fk_pools ORDER BY p.date_Create DESC ")){
-                        $row=mysqli_num_rows($query);
-                        if($row>0){
-                           while ($array=mysqli_fetch_array($query)) {
-                          $now = time(); // or your date as well
-                          $your_date = strtotime($array['date_Create']);
-                          $datediff = $now - $your_date;
-                    ?>
-                      <div class="col-lg-6 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box" style="color: #ffffff; background-color: <?=$array['color'];?>">
-                              <div class="inner">
-                                <h4><?=$array['name'];?></h4>
-                                <p><?=sport($array['fk_sport'], $connect, 1);?></p>
-                                <p><?=$array['quantity'];?> (Partidos)</p>
-                              </div>
-                              <div class="icon">
-                                <i class="fa fa-calendar"></i>
-                              </div>
-                              <a href="resultados.php?rowid=<?=$array['rowid'];?>&param=1" class="small-box-footer">
-                                Editar Resultados &nbsp;<i class="fa fa-arrow-circle-right"></i>
-                              </a>
-                            </div>
-                          </div><!-- ./col -->
-                      <?php 
+
+                          if($query = mysqli_query($connect,"SELECT p.rowid,p.name,p.date_Create,p.fk_sport,p.color,p.quantity FROM q_pools p, q_pools_details d  WHERE p.rowid=d.fk_pools AND p.status=1 ".$and." GROUP BY d.fk_pools ORDER BY p.date_Create DESC ")){
+                            $row=mysqli_num_rows($query);
+                            if($row>0){
+                               while ($array=mysqli_fetch_array($query)) {
+                              $now = time(); // or your date as well
+                              $your_date = strtotime($array['date_Create']);
+                              $datediff = $now - $your_date;
+                        ?>
+                          <div class="col-lg-6 col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box" style="color: #ffffff; background-color: <?=$array['color'];?>">
+                                  <div class="inner">
+                                    <h4><?=$array['name'];?></h4>
+                                    <p><?=sport($array['fk_sport'], $connect, 1);?></p>
+                                    <p><?=$array['quantity'];?> (Partidos)</p>
+                                  </div>
+                                  <div class="icon">
+                                    <i class="fa fa-calendar"></i>
+                                  </div>
+                                  <a href="resultados.php?rowid=<?=$array['rowid'];?>&param=1" class="small-box-footer">
+                                    Editar Resultados &nbsp;<i class="fa fa-arrow-circle-right"></i>
+                                  </a>
+                                </div>
+                              </div><!-- ./col -->
+                          <?php
+                              }
+                              }else{
+                            }
                           }
-                          }else{
-                        }
                       }
                       ?>
                       <?php 
                         $and='';
                       if ($_SESSION['user']['type']==0) {
-                        $result='';
-                        $query_POO = mysqli_query($connect,"SELECT p.rowid FROM q_user_pools u, q_pools p WHERE p.rowid=u.fk_q_pools AND u.fk_q_user = ".$_SESSION['user']['rowid']);
-                         while ($array_POO=mysqli_fetch_array($query_POO)) {
-                            $result.= $array_POO['rowid'].',';
-                         }
-                        $result=substr($result, 0,-1);
-                        $and=' AND p.rowid IN ( '.$result.' )';
-                      }
+//                        $result='';
+//                        $query_POO = mysqli_query($connect,"SELECT p.rowid FROM q_user_pools u, q_pools p WHERE p.rowid=u.fk_q_pools AND u.fk_q_user = ".$_SESSION['user']['rowid']);
+//                         while ($array_POO=mysqli_fetch_array($query_POO)) {
+//                            $result.= $array_POO['rowid'].',';
+//                         }
+//                        $result=substr($result, 0,-1);
+//                        $and=' AND p.rowid IN ( '.$result.' )';
 
-                      if($query = mysqli_query($connect,"SELECT p.rowid,p.name,p.date_Create,p.fk_sport,p.color,p.quantity FROM q_pools p, q_pools_details d  WHERE p.rowid=d.fk_pools AND p.status=1 ".$and." GROUP BY d.fk_pools ORDER BY p.date_Create DESC ")){
-                        $row=mysqli_num_rows($query);
-                        if($row>0){
-                           while ($array=mysqli_fetch_array($query)) {
-                          $now = time(); // or your date as well
-                          $your_date = strtotime($array['date_Create']);
-                          $datediff = $now - $your_date;
-                    ?>
-                      <div class="col-lg-6 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box" style="color: #ffffff; background-color: <?=$array['color'];?>">
-                              <div class="inner">
-                                <h4><?=$array['name'];?></h4>
-                                <p><?=sport($array['fk_sport'], $connect, 1);?></p>
-                                <p><?=$array['quantity'];?> (Partidos)</p>
-                              </div>
-                              <div class="icon">
-                                <i class="fa fa-calendar"></i>
-                              </div>
-                            </div>
-                          </div><!-- ./col -->
-                      <?php 
+
+                          if($query = mysqli_query($connect,"SELECT p.rowid,p.name,p.date_Create,p.fk_sport,p.color,p.quantity FROM q_pools p, q_pools_details d  WHERE p.rowid=d.fk_pools AND p.status=1 GROUP BY d.fk_pools ORDER BY p.date_Create DESC ")){
+                            $row=mysqli_num_rows($query);
+                            if($row>0){
+                               while ($array=mysqli_fetch_array($query)) {
+                              $now = time(); // or your date as well
+                              $your_date = strtotime($array['date_Create']);
+                              $datediff = $now - $your_date;
+                        ?>
+                          <div class="col-lg-6 col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box" style="color: #ffffff; background-color: <?=$array['color'];?>">
+                                  <div class="inner">
+                                    <h4><?=$array['name'];?></h4>
+                                    <p><?=sport($array['fk_sport'], $connect, 1);?></p>
+                                    <p><?=$array['quantity'];?> (Partidos)</p>
+                                  </div>
+                                  <div class="icon">
+                                    <i class="fa fa-calendar"></i>
+                                  </div>
+                                </div>
+                              </div><!-- ./col -->
+                          <?php
+                              }
+                              }else{
+                            }
                           }
-                          }else{
-                        }
                       }
                       ?>
               </div><!-- /.row -->
