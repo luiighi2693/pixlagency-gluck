@@ -32,6 +32,7 @@ if($query = mysqli_query($connect,"SELECT * FROM q_pools WHERE rowid = '".$rowid
     //$query_result = mysqli_query($connect,"SELECT qrp.rowid, qrp.fk_q_user,qrp.fk_q_pools,qrp.fk_team_1,qrp.team__result_1,qrp.team__result_1_admin,qrp.fk_team_2,qrp.team__result_2,qrp.team__result_2_admin,qrp.status,qrp.comment,qrp.result_admin,qrp.date_Sport,qrp.hour, qrp.hits,qrp.close,qrp.date_Create , (select name from q_sport where qrp.fk_q_user=rowid) as sport FROM q_result_pools qrp WHERE qrp.fk_q_pools = '".$rowid."'");
 
     $query_result_label = mysqli_query($connect,"SELECT qpd.rowid, qpd.fk_pools,qpd.fk_team_1,qpd.fk_team_2, concat( qpd.label ,' ', qpd.date_Sport,' ',qpd.hour) as sportLabel FROM q_pools_details qpd where qpd.fk_pools='".$rowid."'");
+    $query_user = mysqli_query($connect,"SELECT username from q_user WHERE rowid='".$user."'");
 }
 
 //validamos el score en base a los resultados
@@ -131,24 +132,12 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $re
                         <i class="fa fa-globe"></i> <?=$name;?>
                         <small class="pull-right">Creada: <?=$date_Create;?></small>
                     </h2>
+                    <h2>
+                        Usuario: <?=mysqli_fetch_array($query_user)[0];?>
+                    </h2>
                 </div><!-- /.col -->
             </div>
             <!-- info row -->
-
-<!--            --><?php
-//            //todo: only debug
-//            echo ' only debug ';
-//            echo '<br> Resultado <br>';
-//            echo $puntaje_resultado;
-//            echo '<br> Ganar <br>';
-//            echo $puntaje_ganar;
-//            echo '<br> Empate <br>';
-//            echo $puntaje_empate;
-//            echo '<br> Perder <br>';
-//            echo $puntaje_perder;
-//            echo '<br> 30 , 30 , 11 , 11 , 15 , 15 , 16 , 16 , 1 , 1 , 1 , 1 , 16 , 16 , 3 , 3 , 1 , 1 , T , T , , , F , F , 0000-00-00 , 0000-00-00 , 12:00:00 , 12:00:00 , 0 , 0 , 2 , 2 , 2020-09-13 14:41:42 , 2020-09-13 14:41:42 , Futbol , Futbol <br>
-//                            31 , 31 , 11 , 11 , 15 , 15 , 19 , 19 , 1 , 1 , 3 , 3 , 18 , 18 , 1 , 1 , 4 , 4 , T , T , , , F , F , 0000-00-00 , 0000-00-00 , 12:00:00 , 12:00:00 , 0 , 0 , 2 , 2 , 2020-09-13 14:41:42 , 2020-09-13 14:41:42 , Futbol , Futbol <br>';
-//            ?>
 
             <!-- Table row -->
             <div class="row">

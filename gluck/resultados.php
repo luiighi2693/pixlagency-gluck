@@ -344,7 +344,7 @@ if(isset($_REQUEST['rowid']) and $_REQUEST['submit']!=''){
 
                                 <div class="col-md-2"> 
 
-                                   <input type="text" class="form-control" name="result_fk_team_1_<?php echo $i;?>" value="<?=team_pools_result_total($_SESSION['user']['rowid'], $connect, $array_content['rowid'], $array_content['fk_team_1'], 1, $array_content['date_Sport'], $array_content['hour']);?>">
+                                   <input type="text" onchange="changeLabel('resultType<?php echo $i;?>', 'fk_team_1_<?php echo $i;?>', 'fk_team_2_<?php echo $i;?>');" class="form-control" name="result_fk_team_1_<?php echo $i;?>" id="fk_team_1_<?php echo $i;?>" value="<?=team_pools_result_total($_SESSION['user']['rowid'], $connect, $array_content['rowid'], $array_content['fk_team_1'], 1, $array_content['date_Sport'], $array_content['hour']);?>">
 
                                  </div>
 
@@ -364,9 +364,9 @@ if(isset($_REQUEST['rowid']) and $_REQUEST['submit']!=''){
 
                                 </div>
 
-                                <div class="col-md-2">                                  
+                                <div class="col-md-2">
 
-                                   <input type="text" class="form-control" name="result_fk_team_2_<?php echo $i;?>" value="<?=team_pools_result_total($_SESSION['user']['rowid'], $connect, $array_content['rowid'], $array_content['fk_team_2'], 2, $array_content['date_Sport'], $array_content['hour']);?>">
+                                   <input type="text" onchange="changeLabel('resultType<?php echo $i;?>', 'fk_team_1_<?php echo $i;?>', 'fk_team_2_<?php echo $i;?>');" class="form-control" name="result_fk_team_2_<?php echo $i;?>" id="fk_team_2_<?php echo $i;?>" value="<?=team_pools_result_total($_SESSION['user']['rowid'], $connect, $array_content['rowid'], $array_content['fk_team_2'], 2, $array_content['date_Sport'], $array_content['hour']);?>">
 
                                 </div>
 
@@ -374,13 +374,25 @@ if(isset($_REQUEST['rowid']) and $_REQUEST['submit']!=''){
 
                               <div class="col-md-2">
 
-                                  <select class="form-control select2" name="result_<?php echo $i;?>" style="width: 100%;">
+                                  <?php
+                                    $result1 = team_pools_result_total($_SESSION['user']['rowid'], $connect, $array_content['rowid'], $array_content['fk_team_1'], 1, $array_content['date_Sport'], $array_content['hour']);
+                                    $result2 = team_pools_result_total($_SESSION['user']['rowid'], $connect, $array_content['rowid'], $array_content['fk_team_2'], 2, $array_content['date_Sport'], $array_content['hour']);
+                                    $resultLabel = '';
 
-                                    <option value="E" <?=team_pools_result_total_select($_SESSION['user']['rowid'], $connect, $array_content['rowid'],  $array_content['fk_team_1'] , $array_content['fk_team_2'],'E');?> > Empate </option>
+                                    if ($result1 != '' && $result2 != '') {
+                                        $resultLabel = $result1 == $result2 ? 'Empate' : 'Resultado';
+                                    }
+                                  ?>
 
-                                    <option value="F" <?=team_pools_result_total_select($_SESSION['user']['rowid'], $connect, $array_content['rowid'],  $array_content['fk_team_1'] , $array_content['fk_team_2'],'F');?> > Finalizado </option>
+                                  <span id="resultType<?php echo $i;?>"><?php echo $resultLabel;?></span>
 
-                                  </select>
+<!--                                  <select class="form-control select2" name="result_--><?php //echo $i;?><!--" style="width: 100%;">-->
+<!---->
+<!--                                    <option value="E" --><?//=team_pools_result_total_select($_SESSION['user']['rowid'], $connect, $array_content['rowid'],  $array_content['fk_team_1'] , $array_content['fk_team_2'],'E');?><!-- > Empate </option>-->
+<!---->
+<!--                                    <option value="F" --><?//=team_pools_result_total_select($_SESSION['user']['rowid'], $connect, $array_content['rowid'],  $array_content['fk_team_1'] , $array_content['fk_team_2'],'F');?><!-- > Finalizado </option>-->
+<!---->
+<!--                                  </select>-->
 
                               </div>
 
@@ -473,6 +485,22 @@ if(isset($_REQUEST['rowid']) and $_REQUEST['submit']!=''){
     <!-- AdminLTE for demo purposes -->
 
     <script src="dist/js/demo.js"></script>
+
+  <script>
+      function changeLabel(labelId, id1, id2) {
+        console.log(labelId, id1, id2);
+
+        const result1 = $('#' + id1).val();
+        const result2 = $('#' + id2).val();
+        let result = '';
+
+        if ( (result1 !== '') && (result2 !== '')) {
+            result = (result1 === result2) ? 'Empate' : 'Resultado';
+        }
+
+          $('#'+ labelId).text(result);
+      }
+  </script>
 
   </body>
 

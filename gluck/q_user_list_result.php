@@ -241,6 +241,7 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $re
                         <?php }?>
 
                         <th>Puntuaci&oacute;n</th>
+                        <th>Goles Acertados</th>
 
                         <?php if ($_SESSION['user']['type']==0) { ?>
 
@@ -266,7 +267,7 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $re
 
                       //if($query = mysqli_query($connect,"SELECT DISTINCT u.name, u.email,u.phone,u.ranking,u.date_Access, u.rowid as rowid_user, r.fk_q_pools as result FROM q_user u, q_result_pools r WHERE u.rowid=r.fk_q_user AND r.fk_q_pools = ".$fk_q_pools." GROUP BY r.fk_q_pools ORDER BY r.rowid  DESC")){
 
-                        if($query = mysqli_query($connect,"SELECT DISTINCT u.rowid as userId, u.name,u.lastname,u.email,u.phone,(SELECT sum(qrp.hits) FROM q_result_pools qrp where qrp.fk_q_user=u.rowid and qrp.fk_q_pools=r.fk_q_pools) ranking,u.date_Access, u.rowid as rowid_user, r.fk_q_pools as result FROM q_user u, q_result_pools r WHERE u.rowid=r.fk_q_user AND r.fk_q_pools = ".$fk_q_pools."  ORDER BY r.rowid DESC")){
+                        if($query = mysqli_query($connect,"SELECT DISTINCT u.rowid as userId, u.name,u.lastname,u.email,u.phone,(SELECT sum(qrp.hits) FROM q_result_pools qrp where qrp.fk_q_user=u.rowid and qrp.fk_q_pools=r.fk_q_pools) ranking, (SELECT sum(qrp.team__result_1) FROM q_result_pools qrp where qrp.fk_q_user=u.rowid and qrp.fk_q_pools=r.fk_q_pools and qrp.team__result_1 = qrp.team__result_1_admin) goles1, (SELECT sum(qrp.team__result_2) FROM q_result_pools qrp where qrp.fk_q_user=u.rowid and qrp.fk_q_pools=r.fk_q_pools and qrp.team__result_2 = qrp.team__result_2_admin) goles2, u.date_Access, u.rowid as rowid_user, r.fk_q_pools as result FROM q_user u, q_result_pools r WHERE u.rowid=r.fk_q_user AND r.fk_q_pools = ".$fk_q_pools."  ORDER BY r.rowid DESC")){
 
                         //if($query = mysqli_query($connect,"SELECT DISTINCT u.name, u.email,u.phone,(SELECT sum(qrp.hits) FROM q_result_pools qrp where qrp.fk_q_user=u.rowid and qrp.fk_q_pools=r.fk_q_pools) ranking,u.date_Access, u.rowid as rowid_user, r.fk_q_pools as result FROM q_user u, q_result_pools r WHERE r.fk_q_pools = ".$fk_q_pools."  ORDER BY r.rowid DESC")){
 
@@ -279,6 +280,11 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $re
 //                            echo "SELECT qrp.rowid, qrp.fk_q_user,qrp.fk_q_pools,qrp.fk_team_1,qrp.team__result_1,qrp.team__result_1_admin,qrp.fk_team_2,qrp.team__result_2,qrp.team__result_2_admin,qrp.status,qrp.comment,qrp.result_admin,qrp.date_Sport,qrp.hour, qrp.hits,qrp.close,qrp.date_Create , (select name from q_sport where qrp.fk_q_user=rowid) as sport FROM q_result_pools qrp WHERE qrp.fk_q_pools = '".$fk_q_pools."' AND qrp.fk_q_user = '".$array['userId']."'";
 
 //                            echo "\n\n";
+
+                            $goles1 = $array['goles1'] == null ? 0 : $array['goles1'];
+                            $goles2 = $array['goles2'] == null ? 0 : $array['goles2'];
+
+                            $sumResFinalGoles = $goles1 + $goles2;
 
                             $query_result_points = mysqli_query($connect,"SELECT qrp.rowid, qrp.fk_q_user,qrp.fk_q_pools,qrp.fk_team_1,qrp.team__result_1,qrp.team__result_1_admin,qrp.fk_team_2,qrp.team__result_2,qrp.team__result_2_admin,qrp.status,qrp.comment,qrp.result_admin,qrp.date_Sport,qrp.hour, qrp.hits,qrp.close,qrp.date_Create , (select name from q_sport where qrp.fk_q_user=rowid) as sport,(SELECT result FROM q_pools_details WHERE fk_pools = '".$_REQUEST['rowid']."' AND fk_team_1 = qrp.fk_team_1 AND fk_team_2 = qrp.fk_team_2) as result FROM q_result_pools qrp WHERE qrp.fk_q_pools = '".$fk_q_pools."' AND qrp.fk_q_user = '".$array['userId']."'");
 
@@ -317,6 +323,7 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $re
                          <?php }?>
 
                         <td><?=$sumResFinal;?></td>
+                        <td><?=$sumResFinalGoles;?></td>
 
                         <?php if ($_SESSION['user']['type']==0) { ?>
 
@@ -438,7 +445,11 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $re
 
       $(function () {
 
-        $("#example1").DataTable();
+        $("#example1").DataTable(
+            {
+                "order": [[ 3, "desc" ]]
+            }
+        );
 
         $('#example2').DataTable({
 

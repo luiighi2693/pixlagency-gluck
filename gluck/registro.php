@@ -93,7 +93,9 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                         <h4>Actualizaci&oacute;n Exitosa!</h4>
                         <p>Su proceso fue realizado exitosamente.</p>
                       </div>';
-                      header( "refresh:3;url=index.php" );
+
+            phpAlert('Actualización Exitosa!');
+            phpRedirect('http://getgluck.com/');
         }else{
           $result = '<div class="callout callout-danger">
                         <h4>Fallo al Actualizar!</h4>
@@ -178,7 +180,9 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                         <h4>Actualizaci&oacute;n Exitosa!</h4>
                         <p>Su proceso fue realizado exitosamente.</p>
                       </div>';
-                      header( "refresh:3;url=index.php" );
+
+          phpAlert('Actualización Exitosa!');
+            phpRedirect('http://getgluck.com/');
         }else{
           $result = '<div class="callout callout-danger">
                         <h4>Fallo al Actualizar!</h4>
@@ -191,6 +195,17 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 }
 ?>
 
+
+<?php
+function phpAlert($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+}
+?>
+<?php
+function phpRedirect($msg) {
+    echo '<script type="text/javascript">window.location.href = "' . $msg . '";</script>';
+}
+?>
 
 <!DOCTYPE html>
 <head>

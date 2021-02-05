@@ -1310,7 +1310,9 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
         $( document ).ready(function() {
 
-          $("#example1").DataTable();
+          $("#example1").DataTable({
+              "lengthMenu": [ [100, 250, -1], [100, 250, "All"] ]
+          });
 
         $('#example2').DataTable({
 
