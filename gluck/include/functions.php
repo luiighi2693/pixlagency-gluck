@@ -369,6 +369,42 @@ function quinielas_activas( $connect){
 
 }
 
+function quinielas_activas_nombres( $connect){
+
+	if($query = mysqli_query($connect,"SELECT name FROM q_pools WHERE status = 1 ")){
+
+        $option='';
+
+        while ($array=mysqli_fetch_array($query)) {
+
+            $option.='<option value='.$array['rowid'].'>'.$array['name'].'</option>';
+
+        }
+
+	}
+
+	return $option;
+
+}
+
+function quinielas_nombres( $connect){
+
+	if($query = mysqli_query($connect,"SELECT name FROM q_pools")){
+
+        $option='';
+
+        while ($array=mysqli_fetch_array($query)) {
+
+            $option.='<option value='.$array['rowid'].'>'.$array['name'].'</option>';
+
+        }
+
+	}
+
+	return $option;
+
+}
+
 
 function user_home( $connect){
 
@@ -379,6 +415,25 @@ function user_home( $connect){
 	}
 
 	return $rowCount;
+
+}
+
+
+function users_active( $connect){
+
+	if($query = mysqli_query($connect,"SELECT * FROM q_user WHERE status = 1 ")){
+
+        $option='';
+
+        while ($array=mysqli_fetch_array($query)) {
+
+            $option.='<option value='.$array['rowid'].'>'.$array['username'].'</option>';
+
+        }
+
+    }
+
+    return $option;
 
 }
 
