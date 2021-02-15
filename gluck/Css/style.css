@@ -237,3 +237,43 @@ tr{
 .login {
     margin-top: 20%;
 }
+
+
+@media (max-width: 400px) {
+.paddinsito{
+	padding-top: 15%;
+}
+}
+
+@media (min-width: 400px) {
+.paddinsito{
+	padding-top: 10%;
+}
+}
+
+@media (min-width: 800px) {
+.paddinsito{
+	padding-top: 5%;
+}
+}
+
+.bg-amarillo{
+	background-color: #e6fe08;
+}
+
+.bg-gris{
+	background-color: #9e9e9e;
+}
+
+.bg-amarilloos{
+	background-color: #d9f70e;
+}
+
+.bg-grisos{
+	background-color: #383b3c;
+	color: #fff !important;
+}
+
+.blanco{
+	color: #fff;
+}

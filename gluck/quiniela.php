@@ -49,6 +49,12 @@ require('include/redirect.php');
     <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
      <link rel="stylesheet" href="Css/style.css">
 
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="assets/css/demo.css" rel="stylesheet" />
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -90,24 +96,52 @@ require('include/redirect.php');
         <!-- Main content -->
         <section class="content">
 
+<!--            <div class="modal fade" id="reglas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"-->
+<!--                 style="top: 0%;">-->
+<!--                <div class="modal-xl modal-dialog" role="document">-->
+<!--                    <div class="modal-content">-->
+<!--                        <div class="modal-header">-->
+<!---->
+<!--                            <h5 class="modal-title" id="exampleModalLabel">Reglas: </h5>-->
+<!--                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                                <span aria-hidden="true">&times;</span>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <div class="modal-body">-->
+<!---->
+<!--                            <h5>Imagen de las reglas aca</h5>-->
+<!---->
+<!---->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
           <div class="row">
                 <div class="box-body">
                   <?php 
                         $and='';
+
+                  $arrayUserPools=array();
+
                       if ($_SESSION['user']['type']==1) {
                         $result='';
                         $query_POO = mysqli_query($connect,"SELECT p.rowid FROM q_user_pools u, q_pools p WHERE p.rowid=u.fk_q_pools AND u.fk_q_user = ".$_SESSION['user']['rowid']);
                          while ($array_POO=mysqli_fetch_array($query_POO)) {
                             $result.= $array_POO['rowid'].',';
+                            array_push($arrayUserPools, $array_POO['rowid']);
                          }
                         $result=substr($result, 0,-1);
                         $and=' AND p.rowid IN ( '.$result.' )';
 
 
-                          if($query = mysqli_query($connect,"SELECT p.rowid,p.name,p.date_Create,p.fk_sport,p.color,p.quantity FROM q_pools p, q_pools_details d  WHERE p.rowid=d.fk_pools AND p.status=1 ".$and." GROUP BY d.fk_pools ORDER BY p.date_Create DESC ")){
+//                          if($query = mysqli_query($connect,"SELECT p.rowid,p.name,p.date_Create,p.fk_sport,p.color,p.quantity FROM q_pools p, q_pools_details d  WHERE p.rowid=d.fk_pools AND p.status=1 ".$and." GROUP BY d.fk_pools ORDER BY p.date_Create DESC ")){
+                          if($query = mysqli_query($connect,"SELECT p.rowid,p.name,p.date_Create,p.fk_sport,p.color,p.quantity FROM q_pools p, q_pools_details d  WHERE p.rowid=d.fk_pools AND p.status=1 GROUP BY d.fk_pools ORDER BY p.date_Create DESC ")){
                             $row=mysqli_num_rows($query);
                             if($row>0){
+                                $i = 0;
                                while ($array=mysqli_fetch_array($query)) {
+                                   $i = $i + 1;
                               $now = time(); // or your date as well
                               $your_date = strtotime($array['date_Create']);
                               $datediff = $now - $your_date;
@@ -116,18 +150,50 @@ require('include/redirect.php');
                                 <!-- small box -->
                                 <div class="small-box" style="color: #ffffff; background-color: <?=$array['color'];?>">
                                   <div class="inner">
+                                     <a class="nav-link buscadores" data-toggle="modal" data-target="#reglas-<?=$_SESSION['user']['type'].'-'.$i;?>"> <button type="submit" class="btn btn-info btn-fill">Reglas </button></a>
+                                     <br>
                                     <h4><?=$array['name'];?></h4>
                                     <p><?=sport($array['fk_sport'], $connect, 1);?></p>
                                     <p><?=$array['quantity'];?> (Partidos)</p>
+<!--                                    <p>--><?//=json_encode($arrayUserPools);?><!--</p>-->
+<!--                                    <p>--><?//=$array['rowid'];?><!--</p>-->
+<!--                                    <p>--><?//=in_array($array['rowid'], $arrayUserPools) ? 'T' : 'F';?><!--</p>-->
+
                                   </div>
                                   <div class="icon">
                                     <i class="fa fa-calendar"></i>
                                   </div>
-                                  <a href="resultados.php?rowid=<?=$array['rowid'];?>&param=1" class="small-box-footer">
+                                  <a href="resultados.php?rowid=<?=$array['rowid'];?>&param=1" class="small-box-footer" style="display: <?=in_array($array['rowid'], $arrayUserPools) ? 'block;' : 'none;';?>">
                                     Editar Resultados &nbsp;<i class="fa fa-arrow-circle-right"></i>
                                   </a>
+                                  <div class="small-box-footer" style="display: <?=!in_array($array['rowid'], $arrayUserPools) ? 'block;' : 'none;';?>">
+                                    <input type="password" placeholder="clave de la quiniela..." id="clave-<?=$_SESSION['user']['type'].'-'.$i;?>" style="color: black;">
+                                      <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right" style="color: white;" onclick="registerPool(<?=$_SESSION['user']['rowid'];?>, <?=$array['rowid'];?>, <?=$array['password'] == null ? '\'\'' : $array['password'];?>, <?='\'clave-'.$_SESSION['user']['type'].'-'.$i.'\'';?>, <?='\'http://getgluck.com/resultados.php?rowid='.$array['rowid'].'&param=1\'';?>);"></i></a>
+                                  </div>
                                 </div>
                               </div><!-- ./col -->
+
+                                   <div class="modal fade" id="reglas-<?=$_SESSION['user']['type'].'-'.$i;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                        style="top: 0%;">
+                                       <div class="modal-xl modal-dialog" role="document">
+                                           <div class="modal-content">
+                                               <div class="modal-header">
+
+                                                   <h5 class="modal-title" id="exampleModalLabel">Reglas: </h5>
+                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                       <span aria-hidden="true">&times;</span>
+                                                   </button>
+                                               </div>
+                                               <div class="modal-body">
+
+                                                   <?php $images=($array['img']!='')?$array['rules']:'logo.png';?>
+                                                   <img src="images/clients/<?=$images;?>" class="img-circle" alt="User Image" style="width: 100%;">
+
+
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
                           <?php
                               }
                               }else{
@@ -159,6 +225,7 @@ require('include/redirect.php');
                                 <!-- small box -->
                                 <div class="small-box" style="color: #ffffff; background-color: <?=$array['color'];?>">
                                   <div class="inner">
+                                    <a class="nav-link buscadores" data-toggle="modal" data-target="#reglas-<?=$_SESSION['user']['type'].'-'.$i;?>"> <button type="submit" class="btn btn-info btn-fill">Reglas </button></a>
                                     <h4><?=$array['name'];?></h4>
                                     <p><?=sport($array['fk_sport'], $connect, 1);?></p>
                                     <p><?=$array['quantity'];?> (Partidos)</p>
@@ -168,6 +235,28 @@ require('include/redirect.php');
                                   </div>
                                 </div>
                               </div><!-- ./col -->
+
+                                   <div class="modal fade" id="reglas-<?=$_SESSION['user']['type'].'-'.$i;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                        style="top: 0%;">
+                                       <div class="modal-xl modal-dialog" role="document">
+                                           <div class="modal-content">
+                                               <div class="modal-header">
+
+                                                   <h5 class="modal-title" id="exampleModalLabel">Reglas: </h5>
+                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                       <span aria-hidden="true">&times;</span>
+                                                   </button>
+                                               </div>
+                                               <div class="modal-body">
+
+                                                   <?php $images=($array['img']!='')?$array['rules']:'logo.png';?>
+                                                   <img src="images/clients/<?=$images;?>" class="img-circle" alt="User Image" style="width: 100%;">
+
+
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
                           <?php
                               }
                               }else{
@@ -176,6 +265,7 @@ require('include/redirect.php');
                       }
                       ?>
               </div><!-- /.row -->
+
           </div><!-- /.row -->
 
 
@@ -200,5 +290,48 @@ require('include/redirect.php');
     <script src="dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
+    <!--   Core JS Files   -->
+<script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="assets/js/plugins/bootstrap-switch.js"></script>
+     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/mfn.menu.js"></script>
+    <script type="text/javascript" src="js/jquery.plugins.js"></script>
+    <script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
+    <script type="text/javascript" src="js/animations/animations.js"></script>
+    <script type="text/javascript" src="js/email.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
+
+  <script>
+      function registerPool(userId, poolId, password, userPasswordId, url) {
+          console.log(userId, poolId, password, $('#' + userPasswordId).val(), url);
+
+          if (password !== $('#' + userPasswordId).val()) {
+              alert('Clave incorrecta!');
+          } else {
+              $.ajax({
+                  url : 'external/actions.php',
+                  data : { rowid : poolId, userId : userId, type: '3' },
+                  type : 'POST',
+
+                  success : function(json) {
+                      console.log(json);
+
+                      window.location.href = url;
+                  },
+
+                  error : function(xhr, status) {
+                      alert('Disculpe, existió un problema');
+                  },
+
+                  complete : function(xhr, status) {
+                      console.log('Petición realizada');
+                  }
+              });
+          }
+      }
+  </script>
   </body>
 </html>

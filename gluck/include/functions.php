@@ -88,6 +88,16 @@ function team_list( $rowid, $connect){
 
 
 
+function inserUserPool( $rowid, $userId, $connect){
+
+    mysqli_query($connect,"INSERT INTO q_user_pools (fk_q_user, fk_q_pools) VALUES ('".$userId."','".$rowid."') ");
+
+	return 'Done!';
+
+}
+
+
+
 function array_random($arr, $num = 1) {
 
     shuffle($arr);

@@ -97,6 +97,7 @@ if (isset($_REQUEST['submit'])) {
 //    $varible = implode(",", $a_result);
     $cabeceras = 'MIME-Version: 1.0' . "\r\n";
     $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $cabeceras .= 'From: Gluck';
 
 $result=mail($emails, $subject, $message, $cabeceras);
 }
