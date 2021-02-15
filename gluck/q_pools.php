@@ -19,7 +19,9 @@ require('include/functions.php');
 $result = "";
 
 $box = array("box box-danger", "box box-primary", "box box-success", "box box-info");
- 
+
+$currentDirectory = getcwd();
+$uploadDirectory = "/images/clients/";
 
 if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
@@ -54,6 +56,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
         $status   = $_REQUEST['status'];
 
         $name     = $_REQUEST['name']; 
+        $password     = $_REQUEST['password'];
 
         $puntaje_empate= $_REQUEST['puntaje_empate'];
 
@@ -71,13 +74,56 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
               phpAlert("No puede ingresar mas de $limit_user usuarios");
               phpRedirect("http://getgluck.com/q_pools.php?rowid=$rowid&param=edit");
           } else {
-              if($query_i = mysqli_query($connect,"UPDATE q_pools SET name = '".$name."', fk_sport = '".$fk_sport."', color = '".$color."' , status = '".$status."', quantity = '".$quantity."', limit_user = '".$limit_user."', penalty = '".$penalty."', puntaje_empate = '".$puntaje_empate."', puntaje_ganar = '".$puntaje_ganar."', puntaje_perder = '".$puntaje_perder."', puntaje_resultado = '".$puntaje_resultado."' WHERE rowid = '".$rowid."'")){
+              if($query_i = mysqli_query($connect,"UPDATE q_pools SET name = '".$name."', password = '".$password."', fk_sport = '".$fk_sport."', color = '".$color."' , status = '".$status."', quantity = '".$quantity."', limit_user = '".$limit_user."', penalty = '".$penalty."', puntaje_empate = '".$puntaje_empate."', puntaje_ganar = '".$puntaje_ganar."', puntaje_perder = '".$puntaje_perder."', puntaje_resultado = '".$puntaje_resultado."' WHERE rowid = '".$rowid."'")){
 
 
+                  $errors = []; // Store errors here
+
+                  $fileExtensionsAllowed = ['jpeg','jpg','png']; // These will be the only file extensions allowed
+                  $RandomAccountNumber = uniqid();
+
+                  $fileName = $_FILES['rules']['name'];
+                  $fileSize = $_FILES['rules']['size'];
+                  $fileTmpName  = $_FILES['rules']['tmp_name'];
+                  $fileType = $_FILES['rules']['type'];
+                  $fileExtension = @strtolower(end(explode('.',$fileName)));
+
+                  $uploadPath = $currentDirectory . $uploadDirectory . basename($RandomAccountNumber.'.'.$fileExtension);
+
+                  $rules = null;
+
+                  if (! in_array($fileExtension,$fileExtensionsAllowed)) {
+                      $errors[] = "This file extension is not allowed. Please upload a JPEG or PNG file";
+                  }
+
+                  if ($fileSize > 400000000) {
+                      $errors[] = "File exceeds maximum size (4MB)";
+                  }
+
+                  if (empty($errors)) {
+                      $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
+
+                      if ($didUpload) {
+                          $errors[] = "The file " . basename($fileName) . " has been uploaded";
+                          $rules = $RandomAccountNumber.'.'.$fileExtension;
+
+                      } else {
+                          $errors[] = "An error occurred. Please contact the administrator.";
+                      }
+                  } else {
+                      foreach ($errors as $error) {
+                          $errors[] = "These are the errors" . "\n";
+                      }
+                  }
 
                   mysqli_query($connect,"UPDATE q_pools_details SET penalty = '".$penalty."', label='". $label."', puntaje_empate = '".$puntaje_empate."' WHERE fk_pools = '".$rowid."'");
 
+                  phpConsole(json_encode($errors));
 
+                  if ($rules != null) {
+                      mysqli_query($connect,"UPDATE q_pools SET rules = '".$rules."' WHERE rowid = '".$rowid."'");
+                      phpConsole("UPDATE q_pools SET rules = '".$rules."' WHERE rowid = '".$rowid."'");
+                  }
 
                   for ($i=1; $i <= $quantity; $i++) {
 
@@ -249,6 +295,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
         $status   = $_REQUEST['status'];
 
         $name   = $_REQUEST['name'];
+        $password   = $_REQUEST['password'];
 
         $penalty = $_REQUEST['penalty'];
 
@@ -268,7 +315,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
               phpAlert("No puede ingresar mas de $limit_user usuarios");
               phpRedirect("http://getgluck.com/q_pools.php?rowid=$rowid&param=edit");
           } else {
-              if($query_i = mysqli_query($connect,"INSERT INTO q_pools (name,fk_sport, quantity, limit_user, color, status,penalty, puntaje_empate, puntaje_ganar, puntaje_perder, puntaje_resultado) VALUES ( '".$name."', '".$fk_sport."', '".$quantity."', '".$limit_user."', '".$color."' , '".$status."' , '".$penalty."', '".$puntaje_empate."', '".$puntaje_ganar."', '".$puntaje_perder."', '".$puntaje_resultado."')")){
+              if($query_i = mysqli_query($connect,"INSERT INTO q_pools (name,password,fk_sport, quantity, limit_user, color, status,penalty, puntaje_empate, puntaje_ganar, puntaje_perder, puntaje_resultado) VALUES ( '".$name."', '".$password."', '".$fk_sport."', '".$quantity."', '".$limit_user."', '".$color."' , '".$status."' , '".$penalty."', '".$puntaje_empate."', '".$puntaje_ganar."', '".$puntaje_perder."', '".$puntaje_resultado."')")){
 
                   $rowid=mysqli_insert_id($connect);
 
@@ -332,6 +379,12 @@ function phpAlert($msg) {
 <?php
 function phpRedirect($msg) {
     echo '<script type="text/javascript">window.location.href = "' . $msg . '";</script>';
+}
+?>
+
+<?php
+function phpConsole($msg) {
+    echo '<script type="text/javascript">console.log("' . $msg . '");</script>';
 }
 ?>
 
@@ -464,7 +517,7 @@ function phpRedirect($msg) {
 
           <?=$result;?>
 
-          <form role="form" method="post" name="quiniela">
+          <form role="form" method="post" name="quiniela" enctype="multipart/form-data">
 
             <section class="content">
 
@@ -679,8 +732,51 @@ function phpRedirect($msg) {
                               </div><!-- /.col (right) -->
 
 
+                            <div class="col-xs-6">
+
+                                <div class="box box-primary">
+
+                                    <div class="box-header">
+
+                                        <h3 class="box-title">Clave</h3>
+
+                                    </div>
+
+                                    <input type="password" class="form-control" placeholder="Clave" name="password" value="<?=$array['password'];?>" max="20">
+
+                                </div>
+
+                            </div>
 
 
+                            <div class="col-xs-6" style="display: <?= $rowid>0 ? 'block' : 'none'?>;">
+
+                                <div class="box box-info">
+
+                                    <div class="box-header">
+
+                                        <h3 class="box-title">Reglas</h3>
+
+                                    </div>
+
+
+
+                                    <div class="box-body">
+
+                                        <div class="form-group">
+                                            <input type="file" id="exampleInputFile" name="rules">
+                                            <p class="help-block">
+                                                <?php $images=($array['rules']!='')?$array['rules']:'logo.png';?>
+                                                <img width="250px" src="images/clients/<?=$array['rules'];?>" class="img-circle" alt="Rule Image">
+                                            </p>
+                                        </div>
+
+                                    </div><!-- /.box-body -->
+
+                                </div>
+
+
+                            </div>
 
                                <div class="col-xs-6">
 
