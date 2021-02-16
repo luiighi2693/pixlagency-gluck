@@ -1635,7 +1635,10 @@ function phpConsole($msg) {
 
         $(".timepicker").timepicker({
 
-          showInputs: false
+          showInputs: false,
+            showSeconds: true,
+            showMeridian: false,
+            defaultTime: false
 
         });
 
