@@ -151,6 +151,7 @@ require('include/redirect.php');
                                 <div class="small-box" style="color: #ffffff; background-color: <?=$array['color'];?>">
                                   <div class="inner">
                                      <a class="nav-link buscadores" data-toggle="modal" data-target="#reglas-<?=$_SESSION['user']['type'].'-'.$i;?>"> <button type="submit" class="btn btn-info btn-fill">Reglas </button></a>
+                                     <a class="nav-link buscadores" data-toggle="modal" data-target="#participantes-<?=$_SESSION['user']['type'].'-'.$i;?>"> <button type="submit" class="btn btn-info btn-fill">Participantes </button></a>
                                      <br>
                                     <h4><?=$array['name'];?></h4>
                                     <p><?=sport($array['fk_sport'], $connect, 1);?></p>
@@ -193,6 +194,40 @@ require('include/redirect.php');
                                            </div>
                                        </div>
                                    </div>
+
+                                   <div class="modal fade" id="participantes-<?=$_SESSION['user']['type'].'-'.$i;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                        style="top: 0%;">
+                                       <div class="modal-xl modal-dialog" role="document">
+                                           <div class="modal-content">
+                                               <div class="modal-header">
+
+                                                   <h5 class="modal-title" id="exampleModalLabel">Participantes: </h5>
+                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                       <span aria-hidden="true">&times;</span>
+                                                   </button>
+                                               </div>
+                                               <div class="modal-body">
+
+                                                   <ul>
+                                                       <?php
+
+                                                       $rowid=$array['rowid'];
+                                                       $queryUsers = mysqli_query($connect,"SELECT qu.username FROM q_user_pools qup left join q_user qu on qup.fk_q_user = qu.rowid WHERE fk_q_pools = ".$rowid);
+                                                       if($query){
+                                                           $i=1;$j=1;
+                                                           while ($array_content_users=mysqli_fetch_array($queryUsers)) {
+                                                               ?>
+                                                               <li class="box-title"><?=$array_content_users['username'];?></li>
+                                                               <?php
+                                                               $i++; }
+                                                       }
+                                                       ?>
+                                                   </ul>
+
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
                           <?php
                               }
                               }else{
@@ -225,7 +260,9 @@ require('include/redirect.php');
                                 <div class="small-box" style="color: #ffffff; background-color: <?=$array['color'];?>">
                                   <div class="inner">
                                     <a class="nav-link buscadores" data-toggle="modal" data-target="#reglas-<?=$_SESSION['user']['type'].'-'.$i;?>"> <button type="submit" class="btn btn-info btn-fill">Reglas </button></a>
-                                    <h4><?=$array['name'];?></h4>
+                                      <a class="nav-link buscadores" data-toggle="modal" data-target="#participantes-<?=$_SESSION['user']['type'].'-'.$i;?>"> <button type="submit" class="btn btn-info btn-fill">Participantes </button></a>
+
+                                      <h4><?=$array['name'];?></h4>
                                     <p><?=sport($array['fk_sport'], $connect, 1);?></p>
                                     <p><?=$array['quantity'];?> (Partidos)</p>
                                   </div>
@@ -251,6 +288,40 @@ require('include/redirect.php');
                                                    <?php $images=($array['img']!='')?$array['rules']:'logo.png';?>
                                                    <img src="images/clients/<?=$images;?>" class="img-circle" alt="User Image" style="width: 100%;">
 
+
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
+
+                                   <div class="modal fade" id="participantes-<?=$_SESSION['user']['type'].'-'.$i;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                        style="top: 0%;">
+                                       <div class="modal-xl modal-dialog" role="document">
+                                           <div class="modal-content">
+                                               <div class="modal-header">
+
+                                                   <h5 class="modal-title" id="exampleModalLabel">Participantes: </h5>
+                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                       <span aria-hidden="true">&times;</span>
+                                                   </button>
+                                               </div>
+                                               <div class="modal-body">
+
+                                                   <ul>
+                                                       <?php
+
+                                                       $rowid=$array['rowid'];
+                                                       $queryUsers = mysqli_query($connect,"SELECT qu.username FROM q_user_pools qup left join q_user qu on qup.fk_q_user = qu.rowid WHERE fk_q_pools = ".$rowid);
+                                                       if($query){
+                                                           $i=1;$j=1;
+                                                           while ($array_content_users=mysqli_fetch_array($queryUsers)) {
+                                                               ?>
+                                                               <li class="box-title"><?=$array_content_users['username'];?></li>
+                                                               <?php
+                                                               $i++; }
+                                                       }
+                                                       ?>
+                                                   </ul>
 
                                                </div>
                                            </div>
