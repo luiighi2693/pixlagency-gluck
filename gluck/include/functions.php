@@ -98,6 +98,22 @@ function inserUserPool( $rowid, $userId, $connect){
 
 
 
+function getByUsername( $username, $connect){
+
+    if($query = mysqli_query($connect,"SELECT * FROM q_user WHERE username = '".$username."'")){
+
+
+        $array=mysqli_fetch_array($query);
+
+        return json_encode($array);
+    }
+
+    return null;
+
+}
+
+
+
 function array_random($arr, $num = 1) {
 
     shuffle($arr);

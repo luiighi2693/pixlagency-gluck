@@ -285,7 +285,7 @@ function phpRedirect($msg) {
                           <?php $readonly='  '; if($_SESSION['user']['type']==1) { 
                                 $readonly=' readonly="readonly" '; 
                              } ?>
-                             <input type="text" class="form-control" placeholder="Usuario" name="username" required="required">
+                             <input type="text" class="form-control" placeholder="Usuario" name="username" required="required" id="username" onchange="verifyUser()">
                    </div>
 
                   <div class="col-md-6 col-xs-12">
@@ -389,7 +389,7 @@ function phpRedirect($msg) {
                   </div><!-- /.box-body -->
 
                   <div class="box-footer botonregistro" style="border-top: 0px solid #f4f4f4; background-color: transparent;">
-                    <button type="submit" name="submit" class="btn btn-primary">Enviar</button>
+                    <button type="submit" name="submit" class="btn btn-primary" id="submit" disabled>Enviar</button>
                     <input type="hidden" name="rowid" value="<?=$array['rowid'];?>">
                     <input type="hidden" name="param" value="<?=$array['param'];?>">
                   </div>
@@ -427,6 +427,32 @@ function phpRedirect($msg) {
 
         $("[data-mask]").inputmask();
       });
+
+      function verifyUser() {
+          let username = $('#username').val();
+          console.log(username);
+
+          $.ajax({
+              url : 'external/actions.php',
+              data : { username: username, type: '4' },
+              type : 'POST',
+
+              success : function(json) {
+                  console.log(json);
+                  json = JSON.parse(json);
+
+                  $('#submit').prop('disabled', json !== null);
+              },
+
+              error : function(xhr, status) {
+                  alert('Disculpe, existió un problema');
+              },
+
+              complete : function(xhr, status) {
+                  console.log('Petición realizada');
+              }
+          });
+      }
     </script>
     <!-- page script -->
 </body>
