@@ -136,7 +136,7 @@ require('include/redirect.php');
 
 
 //                          if($query = mysqli_query($connect,"SELECT p.rowid,p.name,p.date_Create,p.fk_sport,p.color,p.quantity FROM q_pools p, q_pools_details d  WHERE p.rowid=d.fk_pools AND p.status=1 ".$and." GROUP BY d.fk_pools ORDER BY p.date_Create DESC ")){
-                          if($query = mysqli_query($connect,"SELECT p.rowid,p.name,p.date_Create,p.fk_sport,p.color,p.quantity FROM q_pools p, q_pools_details d  WHERE p.rowid=d.fk_pools AND p.status=1 GROUP BY d.fk_pools ORDER BY p.date_Create DESC ")){
+                          if($query = mysqli_query($connect,"SELECT p.rowid,p.name,p.date_Create,p.fk_sport,p.color,p.quantity, p.rules, p.password FROM q_pools p, q_pools_details d  WHERE p.rowid=d.fk_pools AND p.status=1 GROUP BY d.fk_pools ORDER BY p.date_Create DESC ")){
                             $row=mysqli_num_rows($query);
                             if($row>0){
                                 $i = 0;
@@ -185,8 +185,7 @@ require('include/redirect.php');
                                                    </button>
                                                </div>
                                                <div class="modal-body">
-
-                                                   <?php $images=($array['img']!='')?$array['rules']:'logo.png';?>
+                                                   <?php $images=($array['rules']!=null)?$array['rules']:'logo.png';?>
                                                    <img src="images/clients/<?=$images;?>" class="img-circle" alt="User Image" style="width: 100%;">
 
 
@@ -307,6 +306,8 @@ require('include/redirect.php');
   <script>
       function registerPool(userId, poolId, password, userPasswordId, url) {
           console.log(userId, poolId, password, $('#' + userPasswordId).val(), url);
+
+          password = password == null ? "" : password.toString();
 
           if (password !== $('#' + userPasswordId).val()) {
               alert('Clave incorrecta!');
