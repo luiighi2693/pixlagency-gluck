@@ -480,6 +480,10 @@ function phpRedirect($msg)
                 json = JSON.parse(json);
 
                 $('#submit').prop('disabled', json !== null);
+
+                if (json !== null) {
+                    alert("El usuario ingresado ya existe en el sistema!, ingrese uno diferente");
+                }
             },
 
             error: function (xhr, status) {
