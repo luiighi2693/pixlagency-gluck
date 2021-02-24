@@ -169,7 +169,7 @@ require('include/redirect.php');
                                   </a>
                                   <div class="small-box-footer" style="display: <?=!in_array($array['rowid'], $arrayUserPools) ? 'block;' : 'none;';?>">
                                     <input type="password" placeholder="clave de la quiniela..." id="clave-<?=$_SESSION['user']['type'].'-'.$i;?>" style="color: black;">
-                                      <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right" style="color: white;" onclick="registerPool(<?=$_SESSION['user']['rowid'];?>, <?=$array['rowid'];?>, <?=$array['password'] == null ? '\'\'' : $array['password'];?>, <?='\'clave-'.$_SESSION['user']['type'].'-'.$i.'\'';?>, <?='\'http://getgluck.com/resultados.php?rowid='.$array['rowid'].'&param=1\'';?>);"></i></a>
+                                      <a href="#" class="small-box-footer" id="registerPoolButton"><i class="fa fa-arrow-circle-right" style="color: white;" onclick="registerPool(<?=$_SESSION['user']['rowid'];?>, <?=$array['rowid'];?>, <?=$array['password'] == null ? '\'\'' : '\''.$array['password'].'\'';?>, <?='\'clave-'.$_SESSION['user']['type'].'-'.$i.'\'';?>, <?='\'http://getgluck.com/resultados.php?rowid='.$array['rowid'].'&param=1\'';?>);"></i></a>
                                   </div>
                                 </div>
                               </div><!-- ./col -->
@@ -383,6 +383,8 @@ require('include/redirect.php');
           if (password !== $('#' + userPasswordId).val()) {
               alert('Clave incorrecta!');
           } else {
+              $('#registerPoolButton').hide();
+
               $.ajax({
                   url : 'external/actions.php',
                   data : { rowid : poolId, userId : userId, type: '3' },
@@ -392,6 +394,8 @@ require('include/redirect.php');
                       console.log(json);
 
                       window.location.href = url;
+
+                      $('#registerPoolButton').show();
                   },
 
                   error : function(xhr, status) {
