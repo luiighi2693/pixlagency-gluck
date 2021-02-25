@@ -168,8 +168,8 @@ require('include/redirect.php');
                                     Editar Resultados &nbsp;<i class="fa fa-arrow-circle-right"></i>
                                   </a>
                                   <div class="small-box-footer" style="display: <?=!in_array($array['rowid'], $arrayUserPools) ? 'block;' : 'none;';?>">
-                                    <input type="password" placeholder="clave de la quiniela..." id="clave-<?=$_SESSION['user']['type'].'-'.$i;?>" style="color: black;">
-                                      <a href="#" class="small-box-footer" id="registerPoolButton"><i class="fa fa-arrow-circle-right" style="color: white;" onclick="registerPool(<?=$_SESSION['user']['rowid'];?>, <?=$array['rowid'];?>, <?=$array['password'] == null ? '\'\'' : '\''.$array['password'].'\'';?>, <?='\'clave-'.$_SESSION['user']['type'].'-'.$i.'\'';?>, <?='\'http://getgluck.com/resultados.php?rowid='.$array['rowid'].'&param=1\'';?>);"></i></a>
+                                    <input type="password" placeholder="clave de la quiniela..." id="clave-<?=$_SESSION['user']['type'].'-'.$i;?>" style="color: black;" onkeypress="enterRegisterPool(event, 'boton-clave-<?=$_SESSION['user']['type'].'-'.$i.'\'';?>)" >
+                                      <a id="boton-clave-<?=$_SESSION['user']['type'].'-'.$i;?>" href="#" class="small-box-footer" onclick="registerPool(<?=$_SESSION['user']['rowid'];?>, <?=$array['rowid'];?>, <?=$array['password'] == null ? '\'\'' : '\''.$array['password'].'\'';?>, <?='\'clave-'.$_SESSION['user']['type'].'-'.$i.'\'';?>, <?='\'http://getgluck.com/resultados.php?rowid='.$array['rowid'].'&param=1\'';?>, <?='\'boton-clave-'.$_SESSION['user']['type'].'-'.$i.'\'';?>);"><i class="fa fa-arrow-circle-right" style="color: white;"></i></a>
                                   </div>
                                 </div>
                               </div><!-- ./col -->
@@ -375,15 +375,15 @@ require('include/redirect.php');
     <script type="text/javascript" src="js/scripts.js"></script>
 
   <script>
-      function registerPool(userId, poolId, password, userPasswordId, url) {
-          console.log(userId, poolId, password, $('#' + userPasswordId).val(), url);
+      function registerPool(userId, poolId, password, userPasswordId, url, botonClaveId) {
+          console.log(userId, poolId, password, $('#' + userPasswordId).val(), url, botonClaveId);
 
           password = password == null ? "" : password.toString();
 
           if (password !== $('#' + userPasswordId).val()) {
               alert('Clave incorrecta!');
           } else {
-              $('#registerPoolButton').hide();
+              $('#' + botonClaveId).hide();
 
               $.ajax({
                   url : 'external/actions.php',
@@ -395,7 +395,7 @@ require('include/redirect.php');
 
                       window.location.href = url;
 
-                      $('#registerPoolButton').show();
+                      $('#' + botonClaveId).show();
                   },
 
                   error : function(xhr, status) {
@@ -406,6 +406,12 @@ require('include/redirect.php');
                       console.log('Petición realizada');
                   }
               });
+          }
+      }
+
+      function enterRegisterPool(event, botonClaveId) {
+          if (event.key === "Enter") {
+              $('#' + botonClaveId).click()
           }
       }
   </script>

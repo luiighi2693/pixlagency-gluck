@@ -259,7 +259,7 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $re
 
                     </thead>
 
-                    <tbody>
+                    <tbody id="table1">
 
                       <?php 
 
@@ -443,30 +443,51 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $re
 
     <script>
 
-      $(function () {
+      // $(function () {
 
-        $("#example1").DataTable(
-            {
-                "order": [[ 3, "desc" ]]
-            }
-        );
+        // $("#example1").DataTable(
+        //     {
+        //         "order": [[ 3, "asc" ]]
+        //     }
+        // );
 
-        $('#example2').DataTable({
+        // $('#example2').DataTable({
+        //
+        //   "paging": true,
+        //
+        //   "lengthChange": false,
+        //
+        //   "searching": false,
+        //
+        //   "ordering": true,
+        //
+        //   "info": true,
+        //
+        //   "autoWidth": false
+        //
+        // });
 
-          "paging": true,
+      // });
 
-          "lengthChange": false,
+      function sort_rows()
+      {
+          console.log('sort');
+          var tbody =$('#table1');
 
-          "searching": false,
+          tbody.find('tr').sort(function(a, b)
+          {
+              return $('td:eq(1)', b).text().localeCompare($('td:eq(1)', a).text());
+          }).appendTo(tbody);
 
-          "ordering": true,
+          tbody.find('tr').sort(function(a, b)
+          {
+              return $('td:eq(2)', b).text().localeCompare($('td:eq(2)', a).text());
+          }).appendTo(tbody);
+      }
 
-          "info": true,
-
-          "autoWidth": false
-
-        });
-
+      $( document ).ready(function() {
+          console.log('presort')
+          sort_rows();
       });
 
     </script>
