@@ -474,15 +474,22 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $re
           console.log('sort');
           var tbody =$('#table1');
 
-          tbody.find('tr').sort(function(a, b)
-          {
-              return $('td:eq(1)', b).text().localeCompare($('td:eq(1)', a).text());
-          }).appendTo(tbody);
+          // tbody.find('tr').sort(function(a, b)
+          // {
+          //     return $('td:eq(3)', b).text().localeCompare($('td:eq(3)', a).text());
+          // }).appendTo(tbody);
 
-          tbody.find('tr').sort(function(a, b)
-          {
-              return $('td:eq(2)', b).text().localeCompare($('td:eq(2)', a).text());
-          }).appendTo(tbody);
+
+          $("#example1").DataTable(
+              {
+                  "order": [[ 3, "desc" ], [ 4, "desc" ]]
+              }
+          );
+
+          // tbody.find('tr').sort(function(a, b)
+          // {
+          //     return $('td:eq(2)', b).text().localeCompare($('td:eq(2)', a).text());
+          // }).appendTo(tbody);
       }
 
       $( document ).ready(function() {
