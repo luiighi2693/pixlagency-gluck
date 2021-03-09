@@ -479,12 +479,30 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $re
           //     return $('td:eq(3)', b).text().localeCompare($('td:eq(3)', a).text());
           // }).appendTo(tbody);
 
+          <?php if ($_SESSION['user']['type']==1) { ?>
+
+          tbody.find('tr').sort(function(a, b)
+          {
+              return $('td:eq(2)', b).text().localeCompare($('td:eq(2)', a).text());
+          }).appendTo(tbody);
+
+          tbody.find('tr').sort(function(a, b)
+          {
+              return $('td:eq(1)', b).text().localeCompare($('td:eq(1)', a).text());
+          }).appendTo(tbody);
+
+          <?php }?>
+
+          <?php if ($_SESSION['user']['type']==0) { ?>
 
           $("#example1").DataTable(
               {
                   "order": [[ 3, "desc" ], [ 4, "desc" ]]
               }
           );
+
+          <?php }?>
+
 
           // tbody.find('tr').sort(function(a, b)
           // {
