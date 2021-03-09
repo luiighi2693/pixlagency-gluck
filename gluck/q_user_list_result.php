@@ -255,6 +255,12 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $re
 
                         <?php }?>
 
+                        <?php if ($_SESSION['user']['type']==1) { ?>
+
+                        <th>Acciones</th>
+
+                        <?php }?>
+
                       </tr>
 
                     </thead>
@@ -474,6 +480,8 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $re
           console.log('sort');
           var tbody =$('#table1');
 
+          console.log(<?php $_SESSION['user']['type']?>);
+
           // tbody.find('tr').sort(function(a, b)
           // {
           //     return $('td:eq(3)', b).text().localeCompare($('td:eq(3)', a).text());
@@ -481,15 +489,21 @@ function getResult($resultUser1, $resultUser2, $resultAdmin1, $resultAdmin2, $re
 
           <?php if ($_SESSION['user']['type']==1) { ?>
 
-          tbody.find('tr').sort(function(a, b)
-          {
-              return $('td:eq(2)', b).text().localeCompare($('td:eq(2)', a).text());
-          }).appendTo(tbody);
+          // tbody.find('tr').sort(function(a, b)
+          // {
+          //     return $('td:eq(2)', b).text().localeCompare($('td:eq(2)', a).text());
+          // }).appendTo(tbody);
+          //
+          // tbody.find('tr').sort(function(a, b)
+          // {
+          //     return $('td:eq(1)', b).text().localeCompare($('td:eq(1)', a).text());
+          // }).appendTo(tbody);
 
-          tbody.find('tr').sort(function(a, b)
-          {
-              return $('td:eq(1)', b).text().localeCompare($('td:eq(1)', a).text());
-          }).appendTo(tbody);
+          $("#example1").DataTable(
+              {
+                  "order": [[ 1, "desc" ], [ 2, "desc" ]]
+              }
+          );
 
           <?php }?>
 
