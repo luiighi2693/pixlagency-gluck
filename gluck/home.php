@@ -58,6 +58,8 @@ $result=mail($varible, $subject, $message, $cabeceras);
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="bootstrap4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap4/css/bootstrap.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -118,79 +120,96 @@ $result=mail($varible, $subject, $message, $cabeceras);
         <section class="content">
           <!-- Small boxes (Stat box) -->
           <div class="row">
-            <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-amarillo">
-                <div class="inner">
-                  <h3><?=quinielas_activas( $connect );?></h3>
+            
                   <?php
                 if ($_SESSION['user']['type']==1) {
                 ?>
+                <a href="quiniela.php" class="small-box-footer" style="color: #000 !important;">
+                <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-amarillo" style="box-shadow: 1px 1px 1px 9px #9e9999;
+                 border-radius: 9px; text-align: center;">
+                <div class="inner">
+                  <h3><?=quinielas_activas( $connect );?></h3>
                   <p>Quinielas Disponibles para entrar</p> 
                   <?php } ?>
                   <?php
                 if ($_SESSION['user']['type']==0) {
                 ?>
+                <a href="quiniela.php" class="small-box-footer" style="color: #000 !important;">
+                <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-amarillo" style="box-shadow: 1px 1px 1px 9px #9e9999;
+               border-radius: 9px; text-align: center;">
+                <div class="inner">
+                  <h3><?=quinielas_activas( $connect );?></h3>
                   <p>Quinielas Activas</p> 
                   <?php } ?>
                 </div>
-                   <a href="quiniela.php" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
               </div>
+           </a>
             </div><!-- ./col -->
             <?php if ($_SESSION['user']['type']==0) { ?>
+              <a href="q_user_list.php" class="small-box-footer" style="color: #000 !important;">
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-gris">
+              <div class="small-box bg-gris" style="box-shadow: 1px 1px 1px 9px #b5b2b2;
+               border-radius: 9px; text-align: center;">
                 <div class="inner">
                   <h3><?=user_home( $connect );?></h3>
                   <p>Usuarios Activos</p>
                 </div>
-                   <a href="q_user_list.php" class="small-box-footer">Detalles <i class="fa fa-arrow-circle-right"></i></a>
               </div>
+              </a>
             </div><!-- ./col -->
             <?php }else{?>
-
+               <a href="q_pools_list_result.php" class="small-box-footer"  style="color: #000 !important;">
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-gris">
+              <div class="small-box bg-gris" style="box-shadow: 1px 1px 1px 9px #b5b2b2;
+                  border-radius: 9px;text-align: center;">
                 <div class="inner">
-                  <h3><?=ranking( $connect , $_SESSION['user']['rowid']);?></h3>
-                  <p>Resultados (Quinielas Cerradas)</p>
+                  <i class="fa fa-table" style="font-size: 20px;"></i>
+                 <p>Resultados (Quinielas Cerradas)</p>
                 </div>
                 
-                   <a href="q_pools_list_result.php" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
+          </a>
 
             <?php }?>
 
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-amarilloos">
-                <div class="inner">
-                  <h3><?=team_home( $connect );?></h3>
-                  <p>Partidos Activos</p>
+              <a href="q_calendario.php" class="small-box-footer" style="color: #000 !important;">
+              	<div class="small-box bg-amarilloos" style="box-shadow: 1px 1px 1px 9px #9e9999;
+    border-radius: 9px; text-align: center;">
+                <div class="inner" style="text-align: center;">
+                  <i class="fa fa-calendar" style="font-size: 20px;"></i>
+                  <p>Calendario</p>
                 </div>
-                
+                <!--
                 <?php if ($_SESSION['user']['type']==0) { ?>
-                   <a href="q_pools_list.php" class="small-box-footer">Detalles <i class="fa fa-arrow-circle-right"></i></a>
+                   <a href="q_calendario.php" class="small-box-footer">Detalles <i class="fa fa-arrow-circle-right"></i></a>
                 <?php }else{?>
-                   <a href="quiniela.php" class="small-box-footer">Detalles <i class="fa fa-arrow-circle-right"></i></a>
-                <?php }?>
+                   <a href="q_calendario.php" class="small-box-footer">Detalles <i class="fa fa-arrow-circle-right"></i></a>
+                <?php }?> -->
               </div>
+          </a>
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-grisos">
+              <div class="small-box bg-grisos" style="box-shadow: 1px 1px 1px 9px #9e9999;
+    border-radius: 9px; text-align: center;">
                 <div class="inner">
-                  <h3><?=sport_home( $connect );?></h3>
-                  <p>Deportes Activos</p>
+                  <i class="fa fa-play-circle" style="font-size: 20px;"></i></a>
+                  <p>Tutoriales</p>
                 </div>
                 
                 <?php if ($_SESSION['user']['type']==0) { ?>
-                   <a href="q_sport_list.php" class="small-box-footer">Detalles <i class="fa fa-arrow-circle-right"></i></a>
+                   <a href="#" class="small-box-footer">Próximamente <i class="fa fa-arrow-circle-right"></i></a>
                 <?php }else{?>
-                   <a href="quiniela.php" class="small-box-footer">Detalles <i class="fa fa-arrow-circle-right"></i></a>
+                   <a href="#" class="small-box-footer">Próximamente <i class="fa fa-arrow-circle-right"></i></a>
                 <?php }?>                
               </div>
             </div><!-- ./col -->
@@ -419,7 +438,7 @@ $result=mail($varible, $subject, $message, $cabeceras);
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="plugins/jQuery/jquery-3.6.0.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -429,6 +448,7 @@ $result=mail($varible, $subject, $message, $cabeceras);
 
     <!-- Bootstrap 3.3.5 -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap4/js/bootstrap.min.js"></script>
     <!-- Morris.js charts -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>       
 

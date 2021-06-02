@@ -60,7 +60,7 @@
 
 			border-radius: 50%;
 
-			background: #60a3bc;
+			background: #D9F70E;
 
 			padding: 10px;
 
@@ -139,7 +139,31 @@
 		}
 
 .content-wrapper{
-    background-color: #000 !important;
+    background-image: url("gluck-wallpaper.jpg") !important;
+}
+.backgroundfilter{
+    background-image: url("gluck-wallpaper.jpg") !important;
+}
+.botonsitoregistro{
+	    display: inline-block;
+    padding: 10px 80px;
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }
 
 .content-header {
@@ -276,4 +300,8 @@ tr{
 
 .blanco{
 	color: #fff;
+}
+
+.box.box-primary {
+	border-radius: 15px;
 }

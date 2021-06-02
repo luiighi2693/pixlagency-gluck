@@ -336,6 +336,34 @@ require('include/redirect.php');
                       ?>
               </div><!-- /.row -->
 
+
+
+              <style>
+                  .container {
+                      position: relative;
+                      overflow: hidden;
+                      width: 100%;
+                      padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+                  }
+
+                  /* Then style the iframe to fit in the container div with full height and width */
+                  .responsive-iframe {
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      bottom: 0;
+                      right: 0;
+                      width: 100%;
+                      height: 100%;
+                  }
+              </style>
+
+
+              <div class="container">
+                  <iframe class="responsive-iframe" src="http://getgluck.com/quiniela2.php"></iframe>
+              </div>
+
+
           </div><!-- /.row -->
 
 
@@ -347,6 +375,8 @@ require('include/redirect.php');
 
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
+
+
 
     <!-- jQuery 2.1.4 -->
     <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
