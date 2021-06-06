@@ -12,6 +12,9 @@
 
 
 		}
+		.negro{
+			color: #000;
+		}
 
 		.user_card {
 
@@ -568,4 +571,56 @@ border-radius: 0em !important;
 
 .fondonegro{
 	background: #000;
+}
+
+
+@media (max-width: 1300px) {
+.formulario{
+	display: flex !important; 
+	align-content: stretch; 
+	flex-wrap: nowrap;
+	flex-direction: row;
+    justify-content: center;
+    flex: auto;
+}
+}
+
+@media (min-width: 991px) {
+.bordeformulario{
+	border-left: 1px solid #000;
+}
+}
+
+.inputquiniela{
+	width: 40px;
+	 height: 40px;
+	  float: left; 
+	  color: #000;
+
+}
+
+.vsquiniela{
+	float: left; 
+	padding-left: 2%; 
+	padding-right: 2%;
+}
+
+hr.quinielarellenar{
+
+border: 2px solid grey;
+width:90%
+
+}
+
+.botonregistro{
+	display: flex !important; 
+	align-content: stretch; 
+	flex-wrap: nowrap;
+	flex-direction: row;
+    justify-content: center;
+    flex: auto;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+
 }

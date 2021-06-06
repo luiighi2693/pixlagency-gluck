@@ -347,3 +347,7 @@
 [18-May-2021 21:41:47 UTC] PHP Notice:  Undefined index: rowid in /home/tendkdxmxad4/public_html/getgluck.com/new/external/actions.php on line 7
 [18-May-2021 21:41:47 UTC] PHP Notice:  Undefined index: userId in /home/tendkdxmxad4/public_html/getgluck.com/new/external/actions.php on line 8
 [18-May-2021 21:41:47 UTC] PHP Notice:  Undefined index: fk_team in /home/tendkdxmxad4/public_html/getgluck.com/new/external/actions.php on line 10
+[03-Jun-2021 02:45:00 UTC] PHP Notice:  Undefined index: userId in /home/tendkdxmxad4/public_html/getgluck.com/new/external/actions.php on line 8
+[03-Jun-2021 02:45:00 UTC] PHP Notice:  Undefined index: username in /home/tendkdxmxad4/public_html/getgluck.com/new/external/actions.php on line 9
+[03-Jun-2021 02:45:00 UTC] PHP Notice:  Undefined index: fk_team in /home/tendkdxmxad4/public_html/getgluck.com/new/external/actions.php on line 10
+[03-Jun-2021 02:45:00 UTC] PHP Notice:  Undefined index: type in /home/tendkdxmxad4/public_html/getgluck.com/new/external/actions.php on line 11

@@ -141,13 +141,41 @@ $result=mail($varible, $subject, $message, $cabeceras);
                              <h5>Costo:</h5>
                              <h5>Premio:</h5>
                              <h5>Participantes:</h5>
+                             <a class="nav-link buscadores" data-toggle="modal" data-target="#llenaquiniela">
                              <button type="submit" name="submit" class="registro btn" id="submit">REGISTRAR</button>
+                           </a>
                              <button type="submit" name="submit" class="registro btn" id="submit">REGLAS</button>
 
 	                       </div>
                          </div>
 	                   </div>
 	               </div>
+              </div>
+            </div>
+
+            <div class="modal fade" id="llenaquiniela" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="top: 0%;">
+              <div class="modal-xl modal-dialog" role="document">
+                     <div class="modal-content fondonegro" style="height: 100%; padding-bottom: 20%; padding-top:20%;""> 
+                      <div class="modal-header sinbordes">
+
+                             <button type="button" class="close amarillo" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true" class="amarillo">&times;</span>
+                             </button>
+
+                             <h4 class="modal-title centrado amarillo" id="exampleModalLabel"><b>¡TE HAS REGISTRADO SATISFACTORIAMENTE!</b></h2> 
+
+                         </div>
+                         <div class="row">
+                         <div class="modal-body">
+                          <div class="col-lg-12 col-xs-12 blanco">
+                             <h2 class="centrado blanco">¡GET GLUCK!</h2>
+                             <a href="llenarquiniela.php" class="nav-link buscadores">
+                             <button type="submit" name="submit" class="registro btn botonregistro" id="submit">LLENA TU QUINIELA</button>
+                           </a>
+                         </div>
+                         </div>
+                     </div>
+                 </div>
               </div>
             </div>
           <!-- Small boxes (Stat box) -->
