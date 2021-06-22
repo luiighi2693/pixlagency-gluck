@@ -226,15 +226,15 @@ require('include/redirect.php');
         }
     </style>
 
-    <div _ngcontent-lhe-c136="" class="container-fluid">
-        <div _ngcontent-lhe-c136="" class="row mb-2">
-            <div _ngcontent-lhe-c136="" class="col p-0 d-flex flex-column">
-                <div _ngcontent-lhe-c136="" class="step-title">
-                    <p _ngcontent-lhe-c136="">Round of 16<br _ngcontent-lhe-c136="">August 28</p>
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col p-0 d-flex flex-column">
+                <div class="step-title">
+                    <p>Round of 16<br>August 28</p>
                 </div>
-                <div _ngcontent-lhe-c136="" class="container-step-1">
-                    <div _ngcontent-lhe-c136="">
-                        <app-battle-home-step _ngcontent-lhe-c136="" _nghost-lhe-c135="" ng-reflect-match="[object Object]">
+                <div class="container-step-1">
+                    <div>
+                        <app-battle-home-step ng-reflect-match="[object Object]">
                             <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
                                 <div _ngcontent-lhe-c135="" class="rival"><img _ngcontent-lhe-c135="" alt="flag" src="https://www.countryflags.io/AM/flat/24.png">
                                     <!--bindings={
@@ -255,8 +255,8 @@ require('include/redirect.php');
                             </div>
                         </app-battle-home-step>
                     </div>
-                    <div _ngcontent-lhe-c136="">
-                        <app-battle-home-step _ngcontent-lhe-c136="" _nghost-lhe-c135="" ng-reflect-match="[object Object]">
+                    <div>
+                        <app-battle-home-step ng-reflect-match="[object Object]">
                             <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
                                 <div _ngcontent-lhe-c135="" class="rival"><img _ngcontent-lhe-c135="" alt="flag" src="https://www.countryflags.io/AM/flat/24.png">
                                     <!--bindings={
@@ -277,8 +277,8 @@ require('include/redirect.php');
                             </div>
                         </app-battle-home-step>
                     </div>
-                    <div _ngcontent-lhe-c136="">
-                        <app-battle-home-step _ngcontent-lhe-c136="" _nghost-lhe-c135="" ng-reflect-match="[object Object]">
+                    <div>
+                        <app-battle-home-step ng-reflect-match="[object Object]">
                             <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
                                 <div _ngcontent-lhe-c135="" class="rival"><img _ngcontent-lhe-c135="" alt="flag" src="https://www.countryflags.io/AD/flat/24.png">
                                     <!--bindings={
@@ -299,8 +299,8 @@ require('include/redirect.php');
                             </div>
                         </app-battle-home-step>
                     </div>
-                    <div _ngcontent-lhe-c136="">
-                        <app-battle-home-step _ngcontent-lhe-c136="" _nghost-lhe-c135="" ng-reflect-match="[object Object]">
+                    <div>
+                        <app-battle-home-step ng-reflect-match="[object Object]">
                             <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
                                 <div _ngcontent-lhe-c135="" class="rival"><img _ngcontent-lhe-c135="" alt="flag" src="https://www.countryflags.io/AL/flat/24.png">
                                     <!--bindings={
@@ -321,8 +321,8 @@ require('include/redirect.php');
                             </div>
                         </app-battle-home-step>
                     </div>
-                    <div _ngcontent-lhe-c136="">
-                        <app-battle-home-step _ngcontent-lhe-c136="" _nghost-lhe-c135="" ng-reflect-match="[object Object]">
+                    <div>
+                        <app-battle-home-step ng-reflect-match="[object Object]">
                             <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
                                 <div _ngcontent-lhe-c135="" class="rival"><img _ngcontent-lhe-c135="" alt="flag" src="https://www.countryflags.io/US/flat/24.png">
                                     <!--bindings={
@@ -343,8 +343,8 @@ require('include/redirect.php');
                             </div>
                         </app-battle-home-step>
                     </div>
-                    <div _ngcontent-lhe-c136="">
-                        <app-battle-home-step _ngcontent-lhe-c136="" _nghost-lhe-c135="" ng-reflect-match="[object Object]">
+                    <div>
+                        <app-battle-home-step ng-reflect-match="[object Object]">
                             <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
                                 <div _ngcontent-lhe-c135="" class="rival"><img _ngcontent-lhe-c135="" alt="flag" src="https://www.countryflags.io/TN/flat/24.png">
                                     <!--bindings={
@@ -365,8 +365,8 @@ require('include/redirect.php');
                             </div>
                         </app-battle-home-step>
                     </div>
-                    <div _ngcontent-lhe-c136="">
-                        <app-battle-home-step _ngcontent-lhe-c136="" _nghost-lhe-c135="" ng-reflect-match="[object Object]">
+                    <div>
+                        <app-battle-home-step ng-reflect-match="[object Object]">
                             <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
                                 <div _ngcontent-lhe-c135="" class="rival"><img _ngcontent-lhe-c135="" alt="flag" src="https://www.countryflags.io/IT/flat/24.png">
                                     <!--bindings={
@@ -387,8 +387,8 @@ require('include/redirect.php');
                             </div>
                         </app-battle-home-step>
                     </div>
-                    <div _ngcontent-lhe-c136="">
-                        <app-battle-home-step _ngcontent-lhe-c136="" _nghost-lhe-c135="" ng-reflect-match="[object Object]">
+                    <div>
+                        <app-battle-home-step ng-reflect-match="[object Object]">
                             <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
                                 <div _ngcontent-lhe-c135="" class="rival"><img _ngcontent-lhe-c135="" alt="flag" src="https://www.countryflags.io/WF/flat/24.png">
                                     <!--bindings={
@@ -417,87 +417,87 @@ require('include/redirect.php');
             <!--bindings={
         "ng-reflect-ng-if": "[object Object]"
       }-->
-            <div _ngcontent-lhe-c136="" class="separation left">
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136="" class="line-bottom"></div>
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
+            <div class="separation left">
+                <div>
+                    <div class="line-bottom"></div>
+                    <div class="line-right"></div>
                 </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136="" class="line-right-bottom"></div>
-                    <div _ngcontent-lhe-c136=""></div>
+                <div>
+                    <div class="line-right-bottom"></div>
+                    <div></div>
                 </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136="" class="line-bottom"></div>
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
+                <div>
+                    <div class="line-bottom"></div>
+                    <div class="line-right"></div>
                 </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136="" class="line-right-bottom"></div>
-                    <div _ngcontent-lhe-c136=""></div>
+                <div>
+                    <div class="line-right-bottom"></div>
+                    <div></div>
                 </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136="" class="line-bottom"></div>
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
+                <div>
+                    <div class="line-bottom"></div>
+                    <div class="line-right"></div>
                 </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136="" class="line-right-bottom"></div>
-                    <div _ngcontent-lhe-c136=""></div>
+                <div>
+                    <div class="line-right-bottom"></div>
+                    <div></div>
                 </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136="" class="line-bottom"></div>
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
+                <div>
+                    <div class="line-bottom"></div>
+                    <div class="line-right"></div>
                 </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136="" class="line-right-bottom"></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-            </div>
-            <!--bindings={
-        "ng-reflect-ng-if": "[object Object]"
-      }-->
-            <div _ngcontent-lhe-c136="" class="separation right">
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136="" class="line-bottom"></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136="" class="line-bottom"></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136="" class="line-bottom"></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136="" class="line-bottom"></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
+                <div>
+                    <div class="line-right-bottom"></div>
+                    <div></div>
                 </div>
             </div>
             <!--bindings={
         "ng-reflect-ng-if": "[object Object]"
       }-->
-            <div _ngcontent-lhe-c136="" class="col p-0 d-flex flex-column">
-                <div _ngcontent-lhe-c136="" class="step-title">
-                    <p _ngcontent-lhe-c136="">Quarterfinals<br _ngcontent-lhe-c136="">May 11</p>
+            <div class="separation right">
+                <div>
+                    <div></div>
+                    <div class="line-bottom"></div>
                 </div>
-                <div _ngcontent-lhe-c136="" class="col container-step-2">
-                    <div _ngcontent-lhe-c136="" class="container-rival-par">
-                        <app-battle-home-step _ngcontent-lhe-c136="" _nghost-lhe-c135="" ng-reflect-match="[object Object]">
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div class="line-bottom"></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div class="line-bottom"></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div class="line-bottom"></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <!--bindings={
+        "ng-reflect-ng-if": "[object Object]"
+      }-->
+            <div class="col p-0 d-flex flex-column">
+                <div class="step-title">
+                    <p>Quarterfinals<br>May 11</p>
+                </div>
+                <div class="col container-step-2">
+                    <div class="container-rival-par">
+                        <app-battle-home-step ng-reflect-match="[object Object]">
                             <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
                                 <div _ngcontent-lhe-c135="" class="rival">
                                     <!--bindings={}--><span _ngcontent-lhe-c135="" class="cursor-pointer pl-2"></span>
@@ -514,8 +514,8 @@ require('include/redirect.php');
                             </div>
                         </app-battle-home-step>
                     </div>
-                    <div _ngcontent-lhe-c136="" class="container-rival-par">
-                        <app-battle-home-step _ngcontent-lhe-c136="" _nghost-lhe-c135="" ng-reflect-match="[object Object]">
+                    <div class="container-rival-par">
+                        <app-battle-home-step ng-reflect-match="[object Object]">
                             <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
                                 <div _ngcontent-lhe-c135="" class="rival">
                                     <!--bindings={}--><span _ngcontent-lhe-c135="" class="cursor-pointer pl-2"></span>
@@ -532,8 +532,8 @@ require('include/redirect.php');
                             </div>
                         </app-battle-home-step>
                     </div>
-                    <div _ngcontent-lhe-c136="" class="container-rival-par">
-                        <app-battle-home-step _ngcontent-lhe-c136="" _nghost-lhe-c135="" ng-reflect-match="[object Object]">
+                    <div class="container-rival-par">
+                        <app-battle-home-step ng-reflect-match="[object Object]">
                             <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
                                 <div _ngcontent-lhe-c135="" class="rival">
                                     <!--bindings={}--><span _ngcontent-lhe-c135="" class="cursor-pointer pl-2"></span>
@@ -550,131 +550,8 @@ require('include/redirect.php');
                             </div>
                         </app-battle-home-step>
                     </div>
-                    <div _ngcontent-lhe-c136="" class="container-rival-par">
-                        <app-battle-home-step _ngcontent-lhe-c136="" _nghost-lhe-c135="" ng-reflect-match="[object Object]">
-                            <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
-                                <div _ngcontent-lhe-c135="" class="rival">
-                                    <!--bindings={}--><span _ngcontent-lhe-c135="" class="cursor-pointer pl-2"></span>
-                                </div>
-                                <div _ngcontent-lhe-c135="" class="score float-right">
-                                    <!--bindings={}-->
-                                </div>
-                            </div>
-                            <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
-                                <div _ngcontent-lhe-c135="" class="rival">
-                                    <!--bindings={}--><span _ngcontent-lhe-c135="" class="cursor-pointer pl-2"></span>
-                                </div>
-                                <div _ngcontent-lhe-c135="" class="score float-right"> </div>
-                            </div>
-                        </app-battle-home-step>
-                    </div>
-                    <!--bindings={
-            "ng-reflect-ng-for-of": "[object Object],[object Object"
-          }-->
-                </div>
-            </div>
-            <!--bindings={
-        "ng-reflect-ng-if": "[object Object]"
-      }-->
-            <div _ngcontent-lhe-c136="" class="separation left">
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136="" class="line-bottom"></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
-                    <div _ngcontent-lhe-c136="" class="line-right-bottom"></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136="" class="line-bottom"></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
-                    <div _ngcontent-lhe-c136="" class="line-right-bottom"></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-            </div>
-            <!--bindings={
-        "ng-reflect-ng-if": "[object Object]"
-      }-->
-            <div _ngcontent-lhe-c136="" class="separation right">
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136="" class="line-bottom"></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136="" class="line-bottom"></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-            </div>
-            <!--bindings={
-        "ng-reflect-ng-if": "[object Object]"
-      }-->
-            <div _ngcontent-lhe-c136="" class="col p-0 d-flex flex-column">
-                <div _ngcontent-lhe-c136="" class="step-title">
-                    <p _ngcontent-lhe-c136="">Semifinals<br _ngcontent-lhe-c136="">May 11</p>
-                </div>
-                <div _ngcontent-lhe-c136="" class="col container-step-3">
-                    <div _ngcontent-lhe-c136="" class="container-rival-par">
-                        <app-battle-home-step _ngcontent-lhe-c136="" _nghost-lhe-c135="" ng-reflect-match="[object Object]">
-                            <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
-                                <div _ngcontent-lhe-c135="" class="rival">
-                                    <!--bindings={}--><span _ngcontent-lhe-c135="" class="cursor-pointer pl-2"></span>
-                                </div>
-                                <div _ngcontent-lhe-c135="" class="score float-right">
-                                    <!--bindings={}-->
-                                </div>
-                            </div>
-                            <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
-                                <div _ngcontent-lhe-c135="" class="rival">
-                                    <!--bindings={}--><span _ngcontent-lhe-c135="" class="cursor-pointer pl-2"></span>
-                                </div>
-                                <div _ngcontent-lhe-c135="" class="score float-right"> </div>
-                            </div>
-                        </app-battle-home-step>
-                    </div>
-                    <div _ngcontent-lhe-c136="" class="container-rival-par">
-                        <app-battle-home-step _ngcontent-lhe-c136="" _nghost-lhe-c135="" ng-reflect-match="[object Object]">
+                    <div class="container-rival-par">
+                        <app-battle-home-step ng-reflect-match="[object Object]">
                             <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
                                 <div _ngcontent-lhe-c135="" class="rival">
                                     <!--bindings={}--><span _ngcontent-lhe-c135="" class="cursor-pointer pl-2"></span>
@@ -699,87 +576,210 @@ require('include/redirect.php');
             <!--bindings={
         "ng-reflect-ng-if": "[object Object]"
       }-->
-            <div _ngcontent-lhe-c136="" class="separation left">
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
+            <div class="separation left">
+                <div>
+                    <div></div>
+                    <div class="line-bottom"></div>
                 </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136="" class="line-bottom"></div>
+                <div>
+                    <div class="line-right"></div>
+                    <div class="line-right"></div>
                 </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
+                <div>
+                    <div class="line-right"></div>
+                    <div class="line-right-bottom"></div>
                 </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
+                <div>
+                    <div></div>
+                    <div></div>
                 </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
+                <div>
+                    <div></div>
+                    <div class="line-bottom"></div>
                 </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136="" class="line-right"></div>
-                    <div _ngcontent-lhe-c136="" class="line-right-bottom"></div>
+                <div>
+                    <div class="line-right"></div>
+                    <div class="line-right"></div>
                 </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
+                <div>
+                    <div class="line-right"></div>
+                    <div class="line-right-bottom"></div>
                 </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-            </div>
-            <!--bindings={
-        "ng-reflect-ng-if": "[object Object]"
-      }-->
-            <div _ngcontent-lhe-c136="" class="separation right">
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136="" class="line-bottom"></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
-                </div>
-                <div _ngcontent-lhe-c136="">
-                    <div _ngcontent-lhe-c136=""></div>
-                    <div _ngcontent-lhe-c136=""></div>
+                <div>
+                    <div></div>
+                    <div></div>
                 </div>
             </div>
             <!--bindings={
         "ng-reflect-ng-if": "[object Object]"
       }-->
-            <div _ngcontent-lhe-c136="" class="col p-0 d-flex flex-column">
-                <div _ngcontent-lhe-c136="" class="step-title">
-                    <p _ngcontent-lhe-c136="">Final<br _ngcontent-lhe-c136="">May 11</p>
+            <div class="separation right">
+                <div>
+                    <div></div>
+                    <div></div>
                 </div>
-                <div _ngcontent-lhe-c136="" class="col container-step-4">
-                    <div _ngcontent-lhe-c136="" class="container-rival-par">
-                        <app-battle-home-step _ngcontent-lhe-c136="" _nghost-lhe-c135="" ng-reflect-match="[object Object]">
+                <div>
+                    <div></div>
+                    <div class="line-bottom"></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div class="line-bottom"></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <!--bindings={
+        "ng-reflect-ng-if": "[object Object]"
+      }-->
+            <div class="col p-0 d-flex flex-column">
+                <div class="step-title">
+                    <p>Semifinals<br>May 11</p>
+                </div>
+                <div class="col container-step-3">
+                    <div class="container-rival-par">
+                        <app-battle-home-step ng-reflect-match="[object Object]">
+                            <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
+                                <div _ngcontent-lhe-c135="" class="rival">
+                                    <!--bindings={}--><span _ngcontent-lhe-c135="" class="cursor-pointer pl-2"></span>
+                                </div>
+                                <div _ngcontent-lhe-c135="" class="score float-right">
+                                    <!--bindings={}-->
+                                </div>
+                            </div>
+                            <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
+                                <div _ngcontent-lhe-c135="" class="rival">
+                                    <!--bindings={}--><span _ngcontent-lhe-c135="" class="cursor-pointer pl-2"></span>
+                                </div>
+                                <div _ngcontent-lhe-c135="" class="score float-right"> </div>
+                            </div>
+                        </app-battle-home-step>
+                    </div>
+                    <div class="container-rival-par">
+                        <app-battle-home-step ng-reflect-match="[object Object]">
+                            <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
+                                <div _ngcontent-lhe-c135="" class="rival">
+                                    <!--bindings={}--><span _ngcontent-lhe-c135="" class="cursor-pointer pl-2"></span>
+                                </div>
+                                <div _ngcontent-lhe-c135="" class="score float-right">
+                                    <!--bindings={}-->
+                                </div>
+                            </div>
+                            <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
+                                <div _ngcontent-lhe-c135="" class="rival">
+                                    <!--bindings={}--><span _ngcontent-lhe-c135="" class="cursor-pointer pl-2"></span>
+                                </div>
+                                <div _ngcontent-lhe-c135="" class="score float-right"> </div>
+                            </div>
+                        </app-battle-home-step>
+                    </div>
+                    <!--bindings={
+            "ng-reflect-ng-for-of": "[object Object],[object Object"
+          }-->
+                </div>
+            </div>
+            <!--bindings={
+        "ng-reflect-ng-if": "[object Object]"
+      }-->
+            <div class="separation left">
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div class="line-bottom"></div>
+                </div>
+                <div>
+                    <div class="line-right"></div>
+                    <div class="line-right"></div>
+                </div>
+                <div>
+                    <div class="line-right"></div>
+                    <div class="line-right"></div>
+                </div>
+                <div>
+                    <div class="line-right"></div>
+                    <div class="line-right"></div>
+                </div>
+                <div>
+                    <div class="line-right"></div>
+                    <div class="line-right-bottom"></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <!--bindings={
+        "ng-reflect-ng-if": "[object Object]"
+      }-->
+            <div class="separation right">
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div class="line-bottom"></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <!--bindings={
+        "ng-reflect-ng-if": "[object Object]"
+      }-->
+            <div class="col p-0 d-flex flex-column">
+                <div class="step-title">
+                    <p>Final<br>May 11</p>
+                </div>
+                <div class="col container-step-4">
+                    <div class="container-rival-par">
+                        <app-battle-home-step ng-reflect-match="[object Object]">
                             <div _ngcontent-lhe-c135="" class="d-flex" ng-reflect-ng-class="[object Object]">
                                 <div _ngcontent-lhe-c135="" class="rival">
                                     <!--bindings={}--><span _ngcontent-lhe-c135="" class="cursor-pointer pl-2"></span>

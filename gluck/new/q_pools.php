@@ -54,6 +54,10 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
         $penalty = $_REQUEST['penalty'];
 
         $status   = $_REQUEST['status'];
+        $poolType   = $_REQUEST['poolType'];
+        $league   = $_REQUEST['league'];
+        $groups   = $_REQUEST['groups'];
+        $groupsTeam   = $_REQUEST['groupsTeam'];
 
         $name     = $_REQUEST['name']; 
         $password     = $_REQUEST['password'];
@@ -74,7 +78,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
               phpAlert("No puede ingresar mas de $limit_user usuarios");
               phpRedirect("http://getgluck.com/q_pools.php?rowid=$rowid&param=edit");
           } else {
-              if($query_i = mysqli_query($connect,"UPDATE q_pools SET name = '".$name."', password = '".$password."', fk_sport = '".$fk_sport."', color = '".$color."' , status = '".$status."', quantity = '".$quantity."', limit_user = '".$limit_user."', penalty = '".$penalty."', puntaje_empate = '".$puntaje_empate."', puntaje_ganar = '".$puntaje_ganar."', puntaje_perder = '".$puntaje_perder."', puntaje_resultado = '".$puntaje_resultado."' WHERE rowid = '".$rowid."'")){
+              if($query_i = mysqli_query($connect,"UPDATE q_pools SET name = '".$name."', password = '".$password."', fk_sport = '".$fk_sport."', color = '".$color."' , status = '".$status."', quantity = '".$quantity."', limit_user = '".$limit_user."', penalty = '".$penalty."', puntaje_empate = '".$puntaje_empate."', puntaje_ganar = '".$puntaje_ganar."', puntaje_perder = '".$puntaje_perder."', puntaje_resultado = '".$puntaje_resultado."', pool_type = '".$poolType."', league = '".$league."', groups = '".$groups."', groupsTeam = '".$groupsTeam."' WHERE rowid = '".$rowid."'")){
 
 
                   $errors = []; // Store errors here
@@ -254,8 +258,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
                   header( trim("refresh:1;url=q_pools.php?rowid=".$rowid."&param=".$_REQUEST['param']));
 
               }else{
-
-                  $result = '<div class="callout callout-danger">
+                      $result = '<div class="callout callout-danger">
 
                         <h4>Fallo al Actualizar!</h4>
 
@@ -294,6 +297,11 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
 
         $status   = $_REQUEST['status'];
 
+          $poolType   = $_REQUEST['poolType'];
+          $league   = $_REQUEST['league'];
+          $groups   = $_REQUEST['groups'];
+          $groupsTeam   = $_REQUEST['groupsTeam'];
+
         $name   = $_REQUEST['name'];
         $password   = $_REQUEST['password'];
 
@@ -315,7 +323,7 @@ if(isset($_REQUEST['rowid']) and isset($_REQUEST['param'])){
               phpAlert("No puede ingresar mas de $limit_user usuarios");
               phpRedirect("http://getgluck.com/q_pools.php?rowid=$rowid&param=edit");
           } else {
-              if($query_i = mysqli_query($connect,"INSERT INTO q_pools (name,password,fk_sport, quantity, limit_user, color, status,penalty, puntaje_empate, puntaje_ganar, puntaje_perder, puntaje_resultado) VALUES ( '".$name."', '".$password."', '".$fk_sport."', '".$quantity."', '".$limit_user."', '".$color."' , '".$status."' , '".$penalty."', '".$puntaje_empate."', '".$puntaje_ganar."', '".$puntaje_perder."', '".$puntaje_resultado."')")){
+              if($query_i = mysqli_query($connect,"INSERT INTO q_pools (name,password,fk_sport, quantity, limit_user, color, status,penalty, puntaje_empate, puntaje_ganar, puntaje_perder, puntaje_resultado, pool_type, league, groups, groupsTeam) VALUES ( '".$name."', '".$password."', '".$fk_sport."', '".$quantity."', '".$limit_user."', '".$color."' , '".$status."' , '".$penalty."', '".$puntaje_empate."', '".$puntaje_ganar."', '".$puntaje_perder."', '".$puntaje_resultado."', '".$poolType."', '".$league."', '".$groups."', '".$groupsTeam."')")){
 
                   $rowid=mysqli_insert_id($connect);
 
@@ -531,6 +539,7 @@ function phpConsole($msg) {
 
                       <li class="active"><a href="#activity" data-toggle="tab">Configuraci&oacute;n</a></li>
 
+                      <li><a href="#timeline2" data-toggle="tab">Grupos (<?=($array['groups']>0)?$array['groups']:0;?>)</a></li>
                       <li><a href="#timeline" data-toggle="tab">Partidos (<?=($array['quantity']>0)?$array['quantity']:0;?>)</a></li>
 
                       <li><a href="#user" data-toggle="tab">Usuarios (<?=count_user(@$fk_sport_pools, $connect);?>)</a></li>
@@ -571,7 +580,7 @@ function phpConsole($msg) {
 
                         <div class="row">
 
-                          <div class="col-md-4">
+                          <div class="col-md-2">
 
                             <div class="box box-info">
 
@@ -605,7 +614,7 @@ function phpConsole($msg) {
 
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-1">
 
                               <div class="box box-info">
 
@@ -629,7 +638,7 @@ function phpConsole($msg) {
 
                               </div>
 
- <div class="col-md-2">
+ <div class="col-md-1">
 
                               <div class="box box-info">
 
@@ -655,7 +664,7 @@ function phpConsole($msg) {
 
 
 
-                              <div class="col-md-2">
+                              <div class="col-md-1">
 
                                 <div class="box box-info">
 
@@ -693,7 +702,7 @@ function phpConsole($msg) {
 
 
 
-                              <div class="col-md-2">
+                              <div class="col-md-1">
 
                                 <div class="box box-info">
 
@@ -728,6 +737,128 @@ function phpConsole($msg) {
                                 </div><!-- /.box -->
 
                               </div><!-- /.col (right) -->
+
+
+                            <div class="col-md-1">
+
+                                <div class="box box-info">
+
+                                    <div class="box-header">
+
+                                        <h3 class="box-title">Grupos</h3>
+
+                                    </div>
+
+                                    <div class="box-body">
+
+                                        <div class="form-group">
+
+                                            <input type="number" name="groups" min="1" value="<?=$array['groups'];?>" class="form-control">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-1">
+
+                                <div class="box box-info">
+
+                                    <div class="box-header">
+
+                                        <h3 class="box-title">Equipos x Grupos</h3>
+
+                                    </div>
+
+                                    <div class="box-body">
+
+                                        <div class="form-group">
+
+                                            <input type="number" name="groupsTeam" min="1" value="<?=$array['groupsTeam'];?>" class="form-control">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-2">
+
+                                <div class="box box-info">
+
+                                    <div class="box-header">
+
+                                        <h3 class="box-title">Tipo de Quiniela</h3>
+
+                                    </div>
+
+
+
+                                    <div class="box-body">
+
+                                        <div class="form-group">
+
+                                            <div class="input-group">
+
+                                                <select class="form-control select2" style="width: 100%;" name="poolType">
+                                                    <option value="1 Vs. 1" <?php if($array['poolType']=='1 Vs. 1'){?>selected="selected"<?php }?>>1 Vs. 1</option>
+                                                    <option value="QUINIELAS SEMANALES" <?php if($array['poolType']=='QUINIELAS SEMANALES'){?>selected="selected"<?php }?>>QUINIELAS SEMANALES</option>
+                                                    <option value="QUINIELAS MENSUALES" <?php if($array['poolType']=='QUINIELAS MENSUALES'){?>selected="selected"<?php }?>>QUINIELAS MENSUALES</option>
+                                                    <option value="QUINIELAS PRIVADAS" <?php if($array['poolType']=='QUINIELAS PRIVADAS'){?>selected="selected"<?php }?>>QUINIELAS PRIVADAS</option>
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div><!-- /.box-body -->
+
+                                </div><!-- /.box -->
+
+                            </div><!-- /.col (right) -->
+
+                            <div class="col-md-2">
+
+                                <div class="box box-info">
+
+                                    <div class="box-header">
+
+                                        <h3 class="box-title">Liga - Torneo</h3>
+
+                                    </div>
+
+
+
+                                    <div class="box-body">
+
+                                        <div class="form-group">
+
+                                            <div class="input-group">
+
+                                                <select class="form-control select2" style="width: 100%;" name="league">
+                                                    <option value="La Liga" <?php if($array['league']=='La Liga'){?>selected="selected"<?php }?>>La Liga</option>
+                                                    <option value="Premier League" <?php if($array['league']=='Premier League'){?>selected="selected"<?php }?>>Premier League</option>
+                                                    <option value="BundesLiga" <?php if($array['league']=='BundesLiga'){?>selected="selected"<?php }?>>BundesLiga</option>
+                                                    <option value="Serie A" <?php if($array['league']=='Serie A'){?>selected="selected"<?php }?>>Serie A</option>
+                                                    <option value="Ligue 1" <?php if($array['league']=='Ligue 1'){?>selected="selected"<?php }?>>Ligue 1</option>
+                                                    <option value="Champios League" <?php if($array['league']=='Champios League'){?>selected="selected"<?php }?>>Champios League</option>
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div><!-- /.box-body -->
+
+                                </div><!-- /.box -->
+
+                            </div><!-- /.col (right) -->
 
 
                             <div class="col-xs-6">
@@ -799,8 +930,168 @@ function phpConsole($msg) {
                       </div><!-- /.tab-pane -->
 
 
+                        <!-- GROUPS -->
+                        <div class="tab-pane" id="timeline2">
 
 
+
+                            <?php
+
+                            $i=0;
+
+                            if($array['groups'] != null){
+
+                                while ($i < +$array['groups']) {
+
+                                    ?>
+
+
+                                    <div class="<?php echo  array_random($box) ;?>">
+
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+
+                                                    <div class="box-header">
+
+                                                        <h3 class="box-title">Equipo #1</h3>
+
+                                                    </div>
+
+                                                    <div class="box-body">
+
+                                                        <div class="col-md-8">
+
+                                                            <select class="form-control select2" name="fk_team_1_<?php echo $array_details['number_pools'];?>" id="teams1" style="width: 100%;">
+
+                                                                <option value="0">Seleccione</option>
+
+                                                                <?=team_pools($array['fk_sport'], $connect,1,$array_details['fk_team_1']);?>
+
+                                                            </select>
+
+                                                        </div>
+
+                                                        <div class="col-md-2">
+
+                                                            <input type="text" class="form-control" name="result_team_1_<?php echo $array_details['number_pools'];?>" value="<?=$array_details['result_team_1'];?>">
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div><!-- /.col -->
+
+                                        </div><!-- /.row -->
+
+
+
+                                        <div class="row">
+
+                                            <div class="col-md-3">
+
+                                                <div class="form-group">
+
+                                                    <div class="box-header">
+
+                                                        <h3 class="box-title">Estatus</h3>
+
+                                                    </div>
+
+                                                    <div class="box-body">
+
+                                                        <select class="form-control select2" name="status_sport_<?php echo $array_details['number_pools'];?>" style="width: 100%;">
+
+                                                            <option value="1" <?=($array_details['status']==1)?'selected="selected"':'';?>>Activo</option>
+
+                                                            <option value="0" <?=($array_details['status']==0)?'selected="selected"':'';?>>Inactivo</option>
+
+                                                        </select>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-3">
+
+                                                <div class="form-group">
+
+                                                    <div class="box-header">
+
+                                                        <h3 class="box-title">Resultado</h3>
+
+                                                    </div>
+
+                                                    <div class="box-body">
+
+                                                        <div class="form-group">
+
+                                                            <div class="input-group">
+
+                                                                <select class="form-control select2" name="result_<?php echo $array_details['number_pools'];?>" style="width: 100%;">
+
+                                                                    <option value="C" <?=($array_details['result']=="C")?'selected="selected"':'';?>>Sin Comenzar</option>
+
+                                                                    <option value="F" <?=($array_details['result']=="F")?'selected="selected"':'';?>>Resultado Final</option>
+
+                                                                    <option value="S" <?=($array_details['result']=="S")?'selected="selected"':'';?>>Suspendido</option>
+
+                                                                </select>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <?php
+
+                                    $i++;
+
+                                }
+                            }
+
+                            ?>
+
+                            <div class="row">
+
+                                <div class="col-xs-6">
+
+                                    <button type="submit" name="submit" class="btn btn-primary btn-block btn-flat">Registrar</button>
+
+                                    <input type="hidden" name="rowid" value="<?=($array['rowid']!='')?$array['rowid']:0;?>">
+
+                                </div>
+
+
+
+                                <div class="col-xs-6">
+
+                                    <button type="reset" class="btn btn-primary btn-block btn-flat">Limpiar</button>
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+                        </div>
 
                       <div class="tab-pane" id="timeline">
 

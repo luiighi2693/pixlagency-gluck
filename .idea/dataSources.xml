@@ -13,5 +13,11 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://pixlagency.com:3306/quinieladb_testing</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="MySQL - gluck_new@pixlagency.com" uuid="b021ee95-2742-4230-ab16-40b2a797032b">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://pixlagency.com:3306/gluck_new</jdbc-url>
+    </data-source>
   </component>
 </project>

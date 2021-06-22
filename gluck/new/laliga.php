@@ -207,7 +207,7 @@ $result=mail($varible, $subject, $message, $cabeceras);
                       <?php 
                       $and='';
                       if (isset($_REQUEST['fk_sport'])) {
-                         $and=' AND fk_sport = '.$_REQUEST['fk_sport'];
+                         $and=' AND pool_type = "1 Vs. 1" AND league = "La Liga" fk_sport = '.$_REQUEST['fk_sport'];
                       }   
 
                       if ($_SESSION['user']['type']==1) {
@@ -220,7 +220,7 @@ $result=mail($varible, $subject, $message, $cabeceras);
                         $and.=' AND rowid IN ( '.$result.' )';
                       }
 
-                      if($query = mysqli_query($connect,"SELECT * FROM q_pools WHERE status = 1 ".$and." ORDER BY date_Create DESC")){
+                      if($query = mysqli_query($connect,"SELECT * FROM q_pools WHERE status = 1 AND pool_type = '1 Vs. 1' AND league = 'La Liga' ORDER BY date_Create DESC")){
                         while ($array=mysqli_fetch_array($query)) {
                       ?>
                       <tr>
@@ -284,8 +284,93 @@ $result=mail($varible, $subject, $message, $cabeceras);
                                                         <span class="num"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></span> <h4> <b>QUINIELAS SEMANALES</b></h4>
                                                     </div>
                                                     <div class="answer">
-                                                        <p>
-                                                        </p>
+                                                        <div class="table-responsive">
+                                                            <table id="example1" class="table table-striped">
+                                                                <thead style="background-color: #9E9E9E !important; margin-bottom: 20px;">
+                                                                <tr>
+                                                                    <th style="width: 50%">Nombre</th>
+                                                                    <th>Costo</th>
+                                                                    <th>Costo</th>
+                                                                    <th>Premio</th>
+                                                                    <th>Participantes</th>
+                                                                    <th>Tiempo Restante</th>
+                                                                    <th> </th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody style="margin-top: 65px;">
+                                                                <?php
+                                                                $and='';
+                                                                if (isset($_REQUEST['fk_sport'])) {
+                                                                    $and=' AND pool_type = "QUINIELAS SEMANALES" AND league = "La Liga" fk_sport = '.$_REQUEST['fk_sport'];
+                                                                }
+
+                                                                if ($_SESSION['user']['type']==1) {
+                                                                    $result='';
+                                                                    $query_POO = mysqli_query($connect,"SELECT p.rowid FROM q_user_pools u, q_pools p WHERE p.rowid=u.fk_q_pools AND u.fk_q_user = ".$_SESSION['user']['rowid']." AND p.status <> 3");
+                                                                    while ($array_POO=mysqli_fetch_array($query_POO)) {
+                                                                        $result.= $array_POO['rowid'].',';
+                                                                    }
+                                                                    $result=substr($result, 0,-1);
+                                                                    $and.=' AND rowid IN ( '.$result.' )';
+                                                                }
+
+                                                                if($query = mysqli_query($connect,"SELECT * FROM q_pools WHERE status = 1 AND pool_type = 'QUINIELAS SEMANALES' AND league = 'La Liga' ORDER BY date_Create DESC")){
+                                                                    while ($array=mysqli_fetch_array($query)) {
+                                                                        ?>
+                                                                        <tr>
+                                                                            <td><?=$array['name'];?></td>
+                                                                            <td><a href="q_pools_list.php?fk_sport=<?=$array['fk_sport'];?>"><?=sport($array['fk_sport'], $connect, 1);?></a></td>
+                                                                            <td><?=($array['status']==1)?'<small class="label label-success">Activo</small>':'<small class="label label-danger">Inactivo</small>';?></td>
+                                                                            <td><?=date('d-m-Y',strtotime($array['date_Create']));?></td>
+                                                                            <td style="text-align: center;">
+                                                                                <?php if($_SESSION['user']['type']==0) {  ?>
+                                                                                    <a href="q_pools.php?rowid=<?=$array['rowid'];?>&param=edit"><i title="edit" class="fa fa-fw fa-edit"></i></a>
+                                                                                <?php }else{ ?>
+                                                                                    <a href="quiniela.php?rowid=<?=$array['rowid'];?>"><i class="fa fa-plus"></i></a>
+                                                                                <?php } ?>
+                                                                            </td>
+                                                                            <td style="text-align: center;">
+                                                                                <?php if($_SESSION['user']['type']==0) {  ?>
+                                                                                    <a href="#" data-toggle="modal" data-target="#Modal<?=$array['rowid'];?>"><i title="delete" class="fa fa-eraser"></i></a>
+                                                                                <?php }else{ ?>
+                                                                                    <a href="quiniela.php?rowid=<?=$array['rowid'];?>"><i class="fa fa-plus"></i></a>
+                                                                                <?php } ?>
+                                                                            </td>
+                                                                            <td >
+                                                                            </td>
+                                                                            <td>
+                                                                                <a class="nav-link buscadores" data-toggle="modal" data-target="#entrar"><button data-target="entrar">entrar</button> </a> </td>
+                                                                        </tr>
+
+                                                                        <div id="Modal<?=$array['rowid'];?>" class="modal fade" role="dialog">
+                                                                            <div class="modal-dialog" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header" style="color:white;  background-color: <?=$array['color'];?>">
+                                                                                        <h5 class="modal-title">Eliminar Quiniela</h5>
+                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <p><?=$array['name'];?></p>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-primary">
+                                                                                            <a href="q_pools_list.php?rowid=<?=$array['rowid'];?>&param=delete" style="color: white;">Eliminar</a>
+                                                                                        </button>
+                                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                ?>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="question">
@@ -293,8 +378,93 @@ $result=mail($varible, $subject, $message, $cabeceras);
                                                         <span class="num"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></span> <h4> <b>QUINIELAS MENSUALES</b></h4>
                                                     </div>
                                                     <div class="answer">
-                                                        <p>
-                                                        </p>
+                                                        <div class="table-responsive">
+                                                            <table id="example1" class="table table-striped">
+                                                                <thead style="background-color: #9E9E9E !important; margin-bottom: 20px;">
+                                                                <tr>
+                                                                    <th style="width: 50%">Nombre</th>
+                                                                    <th>Costo</th>
+                                                                    <th>Costo</th>
+                                                                    <th>Premio</th>
+                                                                    <th>Participantes</th>
+                                                                    <th>Tiempo Restante</th>
+                                                                    <th> </th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody style="margin-top: 65px;">
+                                                                <?php
+                                                                $and='';
+                                                                if (isset($_REQUEST['fk_sport'])) {
+                                                                    $and=' AND pool_type = "QUINIELAS MENSUALES" AND league = "La Liga" fk_sport = '.$_REQUEST['fk_sport'];
+                                                                }
+
+                                                                if ($_SESSION['user']['type']==1) {
+                                                                    $result='';
+                                                                    $query_POO = mysqli_query($connect,"SELECT p.rowid FROM q_user_pools u, q_pools p WHERE p.rowid=u.fk_q_pools AND u.fk_q_user = ".$_SESSION['user']['rowid']." AND p.status <> 3");
+                                                                    while ($array_POO=mysqli_fetch_array($query_POO)) {
+                                                                        $result.= $array_POO['rowid'].',';
+                                                                    }
+                                                                    $result=substr($result, 0,-1);
+                                                                    $and.=' AND rowid IN ( '.$result.' )';
+                                                                }
+
+                                                                if($query = mysqli_query($connect,"SELECT * FROM q_pools WHERE status = 1 AND pool_type = 'QUINIELAS MENSUALES' AND league = 'La Liga' ORDER BY date_Create DESC")){
+                                                                    while ($array=mysqli_fetch_array($query)) {
+                                                                        ?>
+                                                                        <tr>
+                                                                            <td><?=$array['name'];?></td>
+                                                                            <td><a href="q_pools_list.php?fk_sport=<?=$array['fk_sport'];?>"><?=sport($array['fk_sport'], $connect, 1);?></a></td>
+                                                                            <td><?=($array['status']==1)?'<small class="label label-success">Activo</small>':'<small class="label label-danger">Inactivo</small>';?></td>
+                                                                            <td><?=date('d-m-Y',strtotime($array['date_Create']));?></td>
+                                                                            <td style="text-align: center;">
+                                                                                <?php if($_SESSION['user']['type']==0) {  ?>
+                                                                                    <a href="q_pools.php?rowid=<?=$array['rowid'];?>&param=edit"><i title="edit" class="fa fa-fw fa-edit"></i></a>
+                                                                                <?php }else{ ?>
+                                                                                    <a href="quiniela.php?rowid=<?=$array['rowid'];?>"><i class="fa fa-plus"></i></a>
+                                                                                <?php } ?>
+                                                                            </td>
+                                                                            <td style="text-align: center;">
+                                                                                <?php if($_SESSION['user']['type']==0) {  ?>
+                                                                                    <a href="#" data-toggle="modal" data-target="#Modal<?=$array['rowid'];?>"><i title="delete" class="fa fa-eraser"></i></a>
+                                                                                <?php }else{ ?>
+                                                                                    <a href="quiniela.php?rowid=<?=$array['rowid'];?>"><i class="fa fa-plus"></i></a>
+                                                                                <?php } ?>
+                                                                            </td>
+                                                                            <td >
+                                                                            </td>
+                                                                            <td>
+                                                                                <a class="nav-link buscadores" data-toggle="modal" data-target="#entrar"><button data-target="entrar">entrar</button> </a> </td>
+                                                                        </tr>
+
+                                                                        <div id="Modal<?=$array['rowid'];?>" class="modal fade" role="dialog">
+                                                                            <div class="modal-dialog" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header" style="color:white;  background-color: <?=$array['color'];?>">
+                                                                                        <h5 class="modal-title">Eliminar Quiniela</h5>
+                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <p><?=$array['name'];?></p>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-primary">
+                                                                                            <a href="q_pools_list.php?rowid=<?=$array['rowid'];?>&param=delete" style="color: white;">Eliminar</a>
+                                                                                        </button>
+                                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                ?>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="question">
@@ -302,8 +472,93 @@ $result=mail($varible, $subject, $message, $cabeceras);
                                                         <span class="num"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></span><h4><b>QUINIELAS PRIVADAS</b> </h4>
                                                     </div>
                                                     <div class="answer">
-                                                        <p>
-                                                        </p>
+                                                        <div class="table-responsive">
+                                                            <table id="example1" class="table table-striped">
+                                                                <thead style="background-color: #9E9E9E !important; margin-bottom: 20px;">
+                                                                <tr>
+                                                                    <th style="width: 50%">Nombre</th>
+                                                                    <th>Costo</th>
+                                                                    <th>Costo</th>
+                                                                    <th>Premio</th>
+                                                                    <th>Participantes</th>
+                                                                    <th>Tiempo Restante</th>
+                                                                    <th> </th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody style="margin-top: 65px;">
+                                                                <?php
+                                                                $and='';
+                                                                if (isset($_REQUEST['fk_sport'])) {
+                                                                    $and=' AND pool_type = "QUINIELAS PRIVADAS" AND league = "La Liga" fk_sport = '.$_REQUEST['fk_sport'];
+                                                                }
+
+                                                                if ($_SESSION['user']['type']==1) {
+                                                                    $result='';
+                                                                    $query_POO = mysqli_query($connect,"SELECT p.rowid FROM q_user_pools u, q_pools p WHERE p.rowid=u.fk_q_pools AND u.fk_q_user = ".$_SESSION['user']['rowid']." AND p.status <> 3");
+                                                                    while ($array_POO=mysqli_fetch_array($query_POO)) {
+                                                                        $result.= $array_POO['rowid'].',';
+                                                                    }
+                                                                    $result=substr($result, 0,-1);
+                                                                    $and.=' AND rowid IN ( '.$result.' )';
+                                                                }
+
+                                                                if($query = mysqli_query($connect,"SELECT * FROM q_pools WHERE status = 1 AND pool_type = 'QUINIELAS PRIVADAS' AND league = 'La Liga' ORDER BY date_Create DESC")){
+                                                                    while ($array=mysqli_fetch_array($query)) {
+                                                                        ?>
+                                                                        <tr>
+                                                                            <td><?=$array['name'];?></td>
+                                                                            <td><a href="q_pools_list.php?fk_sport=<?=$array['fk_sport'];?>"><?=sport($array['fk_sport'], $connect, 1);?></a></td>
+                                                                            <td><?=($array['status']==1)?'<small class="label label-success">Activo</small>':'<small class="label label-danger">Inactivo</small>';?></td>
+                                                                            <td><?=date('d-m-Y',strtotime($array['date_Create']));?></td>
+                                                                            <td style="text-align: center;">
+                                                                                <?php if($_SESSION['user']['type']==0) {  ?>
+                                                                                    <a href="q_pools.php?rowid=<?=$array['rowid'];?>&param=edit"><i title="edit" class="fa fa-fw fa-edit"></i></a>
+                                                                                <?php }else{ ?>
+                                                                                    <a href="quiniela.php?rowid=<?=$array['rowid'];?>"><i class="fa fa-plus"></i></a>
+                                                                                <?php } ?>
+                                                                            </td>
+                                                                            <td style="text-align: center;">
+                                                                                <?php if($_SESSION['user']['type']==0) {  ?>
+                                                                                    <a href="#" data-toggle="modal" data-target="#Modal<?=$array['rowid'];?>"><i title="delete" class="fa fa-eraser"></i></a>
+                                                                                <?php }else{ ?>
+                                                                                    <a href="quiniela.php?rowid=<?=$array['rowid'];?>"><i class="fa fa-plus"></i></a>
+                                                                                <?php } ?>
+                                                                            </td>
+                                                                            <td >
+                                                                            </td>
+                                                                            <td>
+                                                                                <a class="nav-link buscadores" data-toggle="modal" data-target="#entrar"><button data-target="entrar">entrar</button> </a> </td>
+                                                                        </tr>
+
+                                                                        <div id="Modal<?=$array['rowid'];?>" class="modal fade" role="dialog">
+                                                                            <div class="modal-dialog" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header" style="color:white;  background-color: <?=$array['color'];?>">
+                                                                                        <h5 class="modal-title">Eliminar Quiniela</h5>
+                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <p><?=$array['name'];?></p>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-primary">
+                                                                                            <a href="q_pools_list.php?rowid=<?=$array['rowid'];?>&param=delete" style="color: white;">Eliminar</a>
+                                                                                        </button>
+                                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                ?>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
